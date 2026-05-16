@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Arwen ✦ Kit Visual da Marca</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Anton&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lilac: #9D4EDD;
+    --lilac-dark: #5A189A;
+    --lilac-light: #E0BBE4;
+    --lilac-bg: #F3E8FF;
+    --black: #1A1A1A;
+    --off-white: #F5F1E8;
+    --white: #FFFFFF;
+    --shadow: 0 8px 32px rgba(90, 24, 154, 0.15);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--off-white);
+    color: var(--black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, var(--lilac-dark) 0%, var(--lilac) 100%);
+    color: var(--off-white);
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before { content: '✦'; position: absolute; font-size: 12rem; opacity: 0.08; top: -2rem; left: 3%; }
+  header::after { content: '✧'; position: absolute; font-size: 10rem; opacity: 0.08; bottom: -2rem; right: 5%; }
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.8rem, 7vw, 5rem);
+    letter-spacing: 4px;
+    line-height: 1;
+  }
+  header .sub {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    color: var(--lilac-light);
+  }
+
+  main { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; }
+
+  section { margin-bottom: 4rem; }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--lilac-dark);
+    letter-spacing: 2px;
+    margin-bottom: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+  .section-title .num {
+    background: var(--lilac);
+    color: var(--off-white);
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+  .section-desc {
+    color: var(--lilac-dark);
+    font-style: italic;
+    margin-bottom: 1.8rem;
+    padding-left: 3.6rem;
+  }
+
+  /* COLOR SWATCHES */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+  .swatch {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background: var(--white);
+  }
+  .swatch-color { height: 110px; position: relative; }
+  .swatch-info { padding: 0.9rem; }
+  .swatch-info .name { font-weight: 700; font-size: 0.95rem; }
+  .swatch-info .hex {
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: var(--lilac-dark);
+    margin: 0.2rem 0;
+  }
+  .swatch-info .use { font-size: 0.78rem; color: #777; }
+
+  /* PROPORTION BAR */
+  .proportion {
+    display: flex;
+    height: 60px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  .proportion div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+
+  /* FONTS */
+  .font-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 1.8rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+    border-left: 6px solid var(--lilac);
+  }
+  .font-card .label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--lilac);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .font-sample-bebas { font-family: 'Bebas Neue', sans-serif; font-size: 3rem; letter-spacing: 2px; color: var(--lilac-dark); line-height: 1; }
+  .font-sample-anton { font-family: 'Anton', sans-serif; font-size: 2.6rem; color: var(--lilac-dark); line-height: 1.1; }
+  .font-sample-poppins { font-family: 'Poppins', sans-serif; font-size: 1.4rem; color: var(--black); }
+  .font-sample-playfair { font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.6rem; color: var(--lilac-dark); }
+  .font-card .meta { font-size: 0.85rem; color: #777; margin-top: 0.6rem; }
+
+  /* MOTIFS */
+  .motif-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+  }
+  .motif-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+  }
+  .motif-visual {
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    color: var(--lilac);
+    margin-bottom: 0.8rem;
+  }
+  .motif-card h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    color: var(--lilac-dark);
+    letter-spacing: 1px;
+  }
+  .motif-card p { font-size: 0.85rem; color: #666; }
+
+  /* DO / DONT */
+  .dodont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+  .do, .dont {
+    border-radius: 16px;
+    padding: 1.8rem;
+    box-shadow: var(--shadow);
+  }
+  .do { background: #ECFDF3; border: 2px solid #4ADE80; }
+  .dont { background: #FEF2F2; border: 2px solid #F87171; }
+  .do h3, .dont h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+  }
+  .do h3 { color: #16A34A; }
+  .dont h3 { color: #DC2626; }
+  .do ul, .dont ul { list-style: none; }
+  .do li, .dont li {
+    padding: 0.5rem 0;
+    padding-left: 1.6rem;
+    position: relative;
+    font-size: 0.9rem;
+  }
+  .do li::before { content: '✓'; position: absolute; left: 0; color: #16A34A; font-weight: bold; }
+  .dont li::before { content: '✕'; position: absolute; left: 0; color: #DC2626; font-weight: bold; }
+
+  /* APPLICATION */
+  .app-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.2rem;
+  }
+  .app-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow);
+  }
+  .app-card h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    color: var(--lilac-dark);
+    letter-spacing: 1px;
+    margin-bottom: 0.6rem;
+  }
+  .app-card p { font-size: 0.88rem; color: #555; }
+  .app-card .tag {
+    display: inline-block;
+    background: var(--lilac-light);
+    color: var(--lilac-dark);
+    font-size: 0.72rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    margin-top: 0.6rem;
+    font-weight: 600;
+  }
+
+  /* MOOD */
+  .mood-words {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+    margin-top: 1rem;
+  }
+  .mood-words span {
+    background: var(--white);
+    border: 2px solid var(--lilac);
+    color: var(--lilac-dark);
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.9rem;
+  }
+  .mood-words span.anti {
+    border-color: #F87171;
+    color: #DC2626;
+    text-decoration: line-through;
+    opacity: 0.7;
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: var(--lilac-dark);
+    color: var(--off-white);
+    padding: 2rem;
+    border-radius: 20px;
+    margin-top: 2rem;
+  }
+  .callout h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+  }
+  .callout p { font-size: 0.95rem; }
+
+  footer {
+    background: var(--black);
+    color: var(--lilac-light);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.85rem;
+  }
+  footer span { color: var(--lilac); }
+
+  @media (max-width: 640px) {
+    .dodont { grid-template-columns: 1fr; }
+    .section-desc { padding-left: 0; }
+    main { padding: 2rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>KIT VISUAL ✦ ARWEN</h1>
+  <p class="sub">a identidade da marca em um só lugar</p>
+</header>
+
+<main>
+
+<!-- 1. PALETA -->
+<section>
+  <h2 class="section-title"><span class="num">1</span> PALETA DE CORES</h2>
+  <p class="section-desc">As cores oficiais da marca. Use os HEX exatos — sempre.</p>
+  <div class="swatch-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#9D4EDD;"></div>
+      <div class="swatch-info">
+        <div class="name">Lilás Principal</div>
+        <div class="hex">#9D4EDD</div>
+        <div class="use">Destaques, botões, links, acentos</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#5A189A;"></div>
+      <div class="swatch-info">
+        <div class="name">Lilás Escuro</div>
+        <div class="hex">#5A189A</div>
+        <div class="use">Títulos, fundos sólidos, contraste</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#E0BBE4;"></div>
+      <div class="swatch-info">
+        <div class="name">Lilás Claro</div>
+        <div class="hex">#E0BBE4</div>
+        <div class="use">Backgrounds suaves, badges, acentos</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#F3E8FF;"></div>
+      <div class="swatch-info">
+        <div class="name">Lilás BG</div>
+        <div class="hex">#F3E8FF</div>
+        <div class="use">Fundos muito leves, seções alternadas</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#1A1A1A;"></div>
+      <div class="swatch-info">
+        <div class="name">Preto Profundo</div>
+        <div class="hex">#1A1A1A</div>
+        <div class="use">Texto principal, fundos de contraste</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#F5F1E8; border-bottom:1px solid #ddd;"></div>
+      <div class="swatch-info">
+        <div class="name">Off-White</div>
+        <div class="hex">#F5F1E8</div>
+        <div class="use">Fundo neutro principal</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#FFFFFF; border-bottom:1px solid #ddd;"></div>
+      <div class="swatch-info">
+        <div class="name">Branco Puro</div>
+        <div class="hex">#FFFFFF</div>
+        <div class="use">Cards, highlights, contraste máximo</div>
+      </div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:2rem; font-family:'Bebas Neue'; font-size:1.4rem; color:var(--lilac-dark); letter-spacing:1px;">Proporção de uso (regra 50-30-15-5)</h3>
+  <div class="proportion">
+    <div style="background:#F5F1E8; width:50%; color:#1A1A1A;">50% OFF-WHITE</div>
+    <div style="background:#9D4EDD; width:30%; color:#F5F1E8;">30% LILÁS</div>
+    <div style="background:#1A1A1A; width:15%; color:#F5F1E8;">15% PRETO</div>
+    <div style="background:#E0BBE4; width:5%; color:#5A189A;">5%</div>
+  </div>
+</section>
+
+<!-- 2. TIPOGRAFIA -->
+<section>
+  <h2 class="section-title"><span class="num">2</span> TIPOGRAFIA</h2>
+  <p class="section-desc">2 fontes principais + 1 de apoio. Não use outras — consistência é identidade.</p>
+
+  <div class="font-card">
+    <div class="label">Títulos & Impacto — opção 1</div>
+    <div class="font-sample-bebas">BEBAS NEUE ✦ SURTO GEEK</div>
+    <div class="meta">Gratuita no Canva, Google Fonts. Use em: títulos, capas de Reel, nomes de seção, destaques grandes.</div>
+  </div>
+
+  <div class="font-card">
+    <div class="label">Títulos & Impacto — opção 2 (alternativa)</div>
+    <div class="font-sample-anton">ANTON ✦ ARWEN JOGA</div>
+    <div class="meta">Gratuita. Mais "pesada" que a Bebas. Use quando quiser ainda mais impacto. Escolha UMA das duas e mantenha.</div>
+  </div>
+
+  <div class="font-card">
+    <div class="label">Corpo de texto & Subtítulos</div>
+    <div class="font-sample-poppins">Poppins — texto corrido, legendas, descrições, captions.</div>
+    <div class="meta">Gratuita. Use os pesos: Regular (texto), SemiBold (subtítulo), Bold (ênfase).</div>
+  </div>
+
+  <div class="font-card">
+    <div class="label">Detalhe & Charme (uso pontual)</div>
+    <div class="font-sample-playfair">Playfair Display Italic — frases curtas, taglines, "oi, eu sou a Arwen"</div>
+    <div class="meta">Gratuita. Use só em frases curtas decorativas. Nunca em texto longo.</div>
+  </div>
+</section>
+
+<!-- 3. MOTIVOS VISUAIS -->
+<section>
+  <h2 class="section-title"><span class="num">3</span> MOTIVOS VISUAIS</h2>
+  <p class="section-desc">Os elementos que se repetem em TODO conteúdo — é o que torna a marca reconhecível.</p>
+  <div class="motif-grid">
+    <div class="motif-card">
+      <div class="motif-visual">✦</div>
+      <h4>A Estrela ✦</h4>
+      <p>Sua assinatura visual. Aparece em capas, no nome, separando textos. É o "logo" da Arwen.</p>
+    </div>
+    <div class="motif-card">
+      <div class="motif-visual">✧ ✦ ✧</div>
+      <h4>Sparkles</h4>
+      <p>Espalhados nos cantos de capas e materiais. Dão a vibe maximalist sem poluir.</p>
+    </div>
+    <div class="motif-card">
+      <div class="motif-visual" style="font-size:1.5rem;">▭ ▢ ▭</div>
+      <h4>Blocos coloridos</h4>
+      <p>Cores em blocos sólidos (lilás, preto, off-white). Estrutura visual cheia mas organizada.</p>
+    </div>
+    <div class="motif-card">
+      <div class="motif-visual"><span style="background:#9D4EDD;color:#F5F1E8;padding:0 .4rem;transform:rotate(-3deg);display:inline-block;font-family:'Bebas Neue';">DESTAQUE</span></div>
+      <h4>Texto em bloco rotacionado</h4>
+      <p>Palavra-chave dentro de um retângulo de cor, levemente girado. Marca registrada de capa.</p>
+    </div>
+    <div class="motif-card">
+      <div class="motif-visual">●</div>
+      <h4>Círculos & formas</h4>
+      <p>Círculos lilás de fundo, ícones dentro de círculos. Suaviza o maximalismo.</p>
+    </div>
+    <div class="motif-card">
+      <div class="motif-visual">💜</div>
+      <h4>O coração lilás</h4>
+      <p>Fechamento de textos, captions, assinaturas. "bora pra cima 💜"</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. MOOD -->
+<section>
+  <h2 class="section-title"><span class="num">4</span> MOOD DA MARCA</h2>
+  <p class="section-desc">Como a marca SE SENTE. Use essas palavras como bússola pra qualquer decisão visual.</p>
+  <h3 style="font-family:'Bebas Neue'; font-size:1.3rem; color:#16A34A; letter-spacing:1px;">A marca É:</h3>
+  <div class="mood-words">
+    <span>Maximalist</span>
+    <span>Colorida</span>
+    <span>Chamativa</span>
+    <span>Autêntica</span>
+    <span>Cheia mas organizada</span>
+    <span>Geek de verdade</span>
+    <span>Opinião forte</span>
+    <span>Desinibida</span>
+    <span>Intencional</span>
+  </div>
+  <h3 style="font-family:'Bebas Neue'; font-size:1.3rem; color:#DC2626; letter-spacing:1px; margin-top:1.5rem;">A marca NÃO É:</h3>
+  <div class="mood-words">
+    <span class="anti">Neutra / clean</span>
+    <span class="anti">Pasteurizada</span>
+    <span class="anti">Apagada</span>
+    <span class="anti">Genérica</span>
+    <span class="anti">Caótica sem propósito</span>
+    <span class="anti">Minimalista</span>
+    <span class="anti">Corporativa</span>
+  </div>
+</section>
+
+<!-- 5. DO / DONT -->
+<section>
+  <h2 class="section-title"><span class="num">5</span> FAZER & NÃO FAZER</h2>
+  <p class="section-desc">As regras práticas pra manter a marca consistente em qualquer material.</p>
+  <div class="dodont">
+    <div class="do">
+      <h3>✓ FAZER</h3>
+      <ul>
+        <li>Usar os HEX exatos da paleta, sempre</li>
+        <li>Aplicar a regra 50-30-15-5 de proporção de cor</li>
+        <li>Manter a estrela ✦ como assinatura recorrente</li>
+        <li>Capa de Reel customizada (nunca a automática)</li>
+        <li>Mesma fonte de título em todos os materiais</li>
+        <li>Setup/fundo cheio e geek nas fotos e vídeos</li>
+        <li>Legenda em todo vídeo (off-white ou lilás)</li>
+        <li>Filtro consistente em todo o feed</li>
+        <li>Sparkles nos cantos pra dar vida</li>
+      </ul>
+    </div>
+    <div class="dont">
+      <h3>✕ NÃO FAZER</h3>
+      <ul>
+        <li>Fundo branco/neutro vazio (não é a marca)</li>
+        <li>Mais de 2 fontes diferentes num material</li>
+        <li>Cores fora da paleta (verde, laranja aleatórios)</li>
+        <li>Capa de Reel automática do Instagram</li>
+        <li>Texto pequeno demais nos vídeos (mín. 36pt)</li>
+        <li>Grid sem coesão (cada post de um jeito)</li>
+        <li>Transições bregas de edição (fade mole)</li>
+        <li>Maximalismo virar bagunça sem hierarquia</li>
+        <li>Copiar estética de outro creator</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 6. APLICAÇÃO -->
+<section>
+  <h2 class="section-title"><span class="num">6</span> GUIA DE APLICAÇÃO</h2>
+  <p class="section-desc">Como a identidade se aplica em cada peça que você cria.</p>
+  <div class="app-grid">
+    <div class="app-card">
+      <h4>Capa de Reel</h4>
+      <p>Fundo lilás OU foto sua. Título grande em Bebas Neue (off-white ou preto). 4-5 palavras máximo. Estrela ✦ presente.</p>
+      <span class="tag">1080x1920</span>
+    </div>
+    <div class="app-card">
+      <h4>Carrossel</h4>
+      <p>Slide 1 = capa com título. Slides internos alternam off-white e lilás. Numeração visível. Último slide = CTA.</p>
+      <span class="tag">1080x1350</span>
+    </div>
+    <div class="app-card">
+      <h4>Stories</h4>
+      <p>Fundo da paleta. Texto Poppins. Enquetes e caixinhas com cor lilás. Mantém a vibe mesmo no casual.</p>
+      <span class="tag">1080x1920</span>
+    </div>
+    <div class="app-card">
+      <h4>Highlights</h4>
+      <p>Capas padronizadas (ver CAPAS_HIGHLIGHTS.html). Ícone centralizado, mesma família visual.</p>
+      <span class="tag">1080x1920</span>
+    </div>
+    <div class="app-card">
+      <h4>Legendas de vídeo</h4>
+      <p>Off-white com contorno preto OU lilás vibrante. Bebas Neue pra impacto, Poppins pra corpo. Nunca pequeno.</p>
+      <span class="tag">mín. 36pt</span>
+    </div>
+    <div class="app-card">
+      <h4>Materiais pra marca</h4>
+      <p>Media kit, portfólio, propostas: paleta completa, tom mais profissional, mas mantém estrela e fontes.</p>
+      <span class="tag">PDF / Canva</span>
+    </div>
+  </div>
+</section>
+
+<!-- 7. ASSINATURA -->
+<section>
+  <h2 class="section-title"><span class="num">7</span> ASSINATURA & VOZ</h2>
+  <p class="section-desc">Os elementos verbais que acompanham o visual.</p>
+  <div class="app-grid">
+    <div class="app-card">
+      <h4>Assinatura padrão</h4>
+      <p>"Arwen ✦ @by.arwenn" — sempre com a estrela entre o nome e o handle.</p>
+    </div>
+    <div class="app-card">
+      <h4>Fechamento de texto</h4>
+      <p>"bora pra cima 💜" / "partiu surto geek ✦" / "💜" — energia + estrela ou coração.</p>
+    </div>
+    <div class="app-card">
+      <h4>Vocabulário da marca</h4>
+      <p>"surto", "geek de verdade", "maximalist", "sem filtro", "bora", "traição contra X".</p>
+    </div>
+    <div class="app-card">
+      <h4>Tom</h4>
+      <p>Direta, com humor, tecnicamente competente, vulnerável quando precisa. Nunca genérica.</p>
+    </div>
+  </div>
+</section>
+
+<div class="callout">
+  <h3>💜 ESSE KIT É A BÚSSOLA</h3>
+  <p>Toda vez que for criar QUALQUER coisa — post, vídeo, capa, e-mail, material pra marca — passa por aqui. Consistência visual é o que faz 1.2k seguidores parecerem uma marca profissional. É o que faz a marca te reconhecer no feed. É o que justifica seu preço. Mantém firme.</p>
+</div>
+
+</main>
+
+<footer>
+  <p>© 2026 Arwen ✦ @by.arwenn — Kit Visual da Marca · feito com <span>💜</span></p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Arwen ✦ Capas de Highlights — Prontas pra Baixar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lilac: #9D4EDD;
+    --lilac-dark: #5A189A;
+    --lilac-light: #E0BBE4;
+    --lilac-bg: #F3E8FF;
+    --black: #1A1A1A;
+    --off-white: #F5F1E8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--off-white);
+    color: var(--black);
+    padding: 2rem 1rem;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--lilac-dark);
+    letter-spacing: 2px;
+  }
+  header p {
+    color: var(--lilac-dark);
+    max-width: 600px;
+    margin: 0.5rem auto;
+    font-size: 0.95rem;
+  }
+  .instructions {
+    background: var(--lilac-bg);
+    border-left: 5px solid var(--lilac);
+    border-radius: 0 12px 12px 0;
+    padding: 1.2rem 1.5rem;
+    max-width: 700px;
+    margin: 0 auto 2.5rem;
+    font-size: 0.9rem;
+  }
+  .instructions strong { color: var(--lilac-dark); }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .cover-card {
+    background: white;
+    border-radius: 20px;
+    padding: 1.2rem;
+    box-shadow: 0 8px 32px rgba(90, 24, 154, 0.15);
+    text-align: center;
+  }
+  .cover-preview {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+    background: var(--off-white);
+  }
+  .cover-preview svg {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .circle-hint {
+    font-size: 0.7rem;
+    color: var(--lilac);
+    margin-bottom: 0.8rem;
+    font-style: italic;
+  }
+  .cover-card h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    color: var(--lilac-dark);
+    letter-spacing: 1px;
+  }
+  .cover-card .name-tip {
+    font-size: 0.78rem;
+    color: #888;
+    margin-bottom: 0.8rem;
+  }
+  .btn {
+    background: var(--lilac-dark);
+    color: var(--off-white);
+    border: none;
+    padding: 0.6rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.25s;
+    font-family: 'Poppins', sans-serif;
+  }
+  .btn:hover {
+    background: var(--lilac);
+    transform: translateY(-2px);
+  }
+  .download-all {
+    display: block;
+    margin: 2.5rem auto 0;
+    background: var(--lilac);
+    font-size: 1rem;
+    padding: 0.9rem 2.5rem;
+  }
+  footer {
+    text-align: center;
+    margin-top: 3rem;
+    color: var(--lilac-dark);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>CAPAS DE HIGHLIGHTS ✦</h1>
+  <p>7 capas prontas na identidade da Arwen — paleta lilás + preto + off-white. Clica em "Baixar PNG" em cada uma.</p>
+</header>
+
+<div class="instructions">
+  <strong>Como usar:</strong> baixa as capas em PNG (1080×1920). No Instagram, vai em Destaques → Editar → Editar capa → escolhe a imagem. O Instagram mostra um <strong>círculo</strong> — o ícone tá centralizado pra caber certinho nele. A linha pontilhada no preview mostra a área do círculo.
+</div>
+
+<div class="grid" id="grid"></div>
+
+<button class="btn download-all" onclick="downloadAll()">⬇ Baixar todas as 7 capas</button>
+
+<footer>
+  <p>© 2026 Arwen ✦ @by.arwenn — capas geradas na identidade da marca 💜</p>
+</footer>
+
+<script>
+  // ───────── DEFINIÇÃO DAS CAPAS ─────────
+  // Cada capa: 1080x1920. Ícone centralizado em y=960 (centro), dentro da safe zone do círculo.
+  const W = 1080, H = 1920, CX = 540, CY = 860;
+
+  // Ícones desenhados em SVG (path/shapes), centralizados em (CX, CY)
+  const icons = {
+    sobre: `
+      <g transform="translate(${CX},${CY})">
+        <path d="M 0,-130 L 38,-38 L 135,-38 L 56,20 L 86,115 L 0,58 L -86,115 L -56,20 L -135,-38 L -38,-38 Z"
+              fill="ICONCOLOR"/>
+        <circle cx="0" cy="0" r="26" fill="BGCOLOR"/>
+      </g>`,
+    games: `
+      <g transform="translate(${CX},${CY})">
+        <rect x="-150" y="-70" width="300" height="150" rx="75" fill="ICONCOLOR"/>
+        <circle cx="-80" cy="5" r="22" fill="BGCOLOR"/>
+        <rect x="-95" y="-10" width="30" height="0" fill="BGCOLOR"/>
+        <path d="M -95,5 L -65,5 M -80,-10 L -80,20" stroke="BGCOLOR" stroke-width="14" stroke-linecap="round"/>
+        <circle cx="68" cy="-12" r="16" fill="BGCOLOR"/>
+        <circle cx="100" cy="20" r="16" fill="BGCOLOR"/>
+      </g>`,
+    livros: `
+      <g transform="translate(${CX},${CY})">
+        <path d="M 0,-100 C -50,-130 -130,-120 -150,-105 L -150,95 C -130,80 -50,70 0,100 Z" fill="ICONCOLOR"/>
+        <path d="M 0,-100 C 50,-130 130,-120 150,-105 L 150,95 C 130,80 50,70 0,100 Z" fill="ICONCOLOR"/>
+        <path d="M 0,-100 L 0,100" stroke="BGCOLOR" stroke-width="10"/>
+        <path d="M -120,-80 L -30,-65 M -120,-40 L -30,-25 M -120,0 L -30,15" stroke="BGCOLOR" stroke-width="9" stroke-linecap="round"/>
+        <path d="M 120,-80 L 30,-65 M 120,-40 L 30,-25 M 120,0 L 30,15" stroke="BGCOLOR" stroke-width="9" stroke-linecap="round"/>
+      </g>`,
+    make: `
+      <g transform="translate(${CX},${CY})">
+        <rect x="-32" y="-30" width="64" height="150" rx="14" fill="ICONCOLOR"/>
+        <rect x="-32" y="-30" width="64" height="36" fill="BGCOLOR" opacity="0.35"/>
+        <path d="M -30,-30 C -30,-95 -10,-135 0,-135 C 10,-135 30,-95 30,-30 Z" fill="ICONCOLOR"/>
+        <ellipse cx="0" cy="-30" rx="30" ry="10" fill="BGCOLOR" opacity="0.3"/>
+        <path d="M 75,40 L 95,-130 L 115,40 Z" fill="ICONCOLOR"/>
+        <ellipse cx="95" cy="40" rx="20" ry="8" fill="ICONCOLOR"/>
+        <path d="M 90,-130 L 100,-130 L 95,-150 Z" fill="ICONCOLOR"/>
+      </g>`,
+    eventos: `
+      <g transform="translate(${CX},${CY})">
+        <path d="M -150,-60 L 150,-60 L 150,-10 A 35,35 0 0 0 150,60 L 150,110 L -150,110 L -150,60 A 35,35 0 0 0 -150,-10 Z" fill="ICONCOLOR"/>
+        <path d="M 10,-60 L 10,110" stroke="BGCOLOR" stroke-width="10" stroke-dasharray="18 14"/>
+        <path d="M -70,5 L -55,38 L -20,38 L -48,60 L -38,95 L -70,73 L -102,95 L -92,60 L -120,38 L -85,38 Z"
+              fill="BGCOLOR" transform="scale(0.7) translate(-30,-20)"/>
+      </g>`,
+    parcerias: `
+      <g transform="translate(${CX},${CY})">
+        <path d="M -30,-20 C -30,-70 -110,-70 -110,-15 C -110,35 -30,90 -30,90 C -30,90 50,35 50,-15 C 50,-70 -30,-70 -30,-20 Z"
+              fill="ICONCOLOR" transform="translate(-15,-10) scale(0.95)"/>
+        <path d="M 0,-130 L 16,-90 L 58,-90 L 24,-62 L 38,-20 L 0,-46 L -38,-20 L -24,-62 L -58,-90 L -16,-90 Z"
+              fill="ICONCOLOR" transform="translate(70,75) scale(0.7)"/>
+      </g>`,
+    ugc: `
+      <g transform="translate(${CX},${CY})">
+        <rect x="-150" y="-85" width="210" height="170" rx="28" fill="ICONCOLOR"/>
+        <path d="M 60,-30 L 150,-80 L 150,80 L 60,30 Z" fill="ICONCOLOR"/>
+        <path d="M -70,-15 L -70,40 L -20,12 Z" fill="BGCOLOR"/>
+      </g>`
+  };
+
+  const covers = [
+    { id: 'sobre',     title: '✦ SOBRE',      igName: 'no IG: "✦ Sobre"',      bg: 'lilac-dark', icon: 'off' },
+    { id: 'games',     title: '🎮 GAMES',     igName: 'no IG: "🎮 Games"',     bg: 'off',        icon: 'lilac-dark' },
+    { id: 'livros',    title: '📚 LIVROS',    igName: 'no IG: "📚 Livros"',    bg: 'lilac',      icon: 'off' },
+    { id: 'make',      title: '💄 MAKE',      igName: 'no IG: "💄 Make"',      bg: 'off',        icon: 'lilac' },
+    { id: 'eventos',   title: '🎪 EVENTOS',   igName: 'no IG: "🎪 Eventos"',   bg: 'lilac-dark', icon: 'off' },
+    { id: 'parcerias', title: '🤝 PARCERIAS', igName: 'no IG: "🤝 Parcerias"', bg: 'lilac',      icon: 'off' },
+    { id: 'ugc',       title: '🎬 UGC',       igName: 'no IG: "🎬 UGC"',       bg: 'off',        icon: 'lilac-dark' }
+  ];
+
+  const palette = {
+    'lilac':      '#9D4EDD',
+    'lilac-dark': '#5A189A',
+    'lilac-light':'#E0BBE4',
+    'off':        '#F5F1E8',
+    'black':      '#1A1A1A'
+  };
+
+  function buildSVG(cover) {
+    const bgColor = palette[cover.bg] || palette[cover.bg.replace('lilac-dark','lilac-dark')];
+    const bgHex = cover.bg === 'off' ? palette['off'] : (cover.bg === 'lilac' ? palette['lilac'] : palette['lilac-dark']);
+    const iconHex = cover.icon === 'off' ? palette['off'] : (cover.icon === 'lilac' ? palette['lilac'] : palette['lilac-dark']);
+    const accentHex = cover.bg === 'off' ? palette['lilac-light'] : 'rgba(255,255,255,0.18)';
+
+    let iconSVG = icons[cover.id]
+      .replace(/ICONCOLOR/g, iconHex)
+      .replace(/BGCOLOR/g, bgHex);
+
+    // sparkles decorativos nos cantos
+    const sparkle = (x, y, s) => `<path d="M 0,-20 L 6,-6 L 20,0 L 6,6 L 0,20 L -6,6 L -20,0 L -6,-6 Z"
+        fill="${iconHex}" opacity="0.45" transform="translate(${x},${y}) scale(${s})"/>`;
+
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">
+      <rect width="${W}" height="${H}" fill="${bgHex}"/>
+      <circle cx="${CX}" cy="${CY}" r="430" fill="${accentHex}" opacity="0.5"/>
+      <circle cx="${CX}" cy="${CY}" r="340" fill="none" stroke="${iconHex}" stroke-width="6" stroke-dasharray="3 26" opacity="0.6"/>
+      ${sparkle(180, 380, 1.8)}
+      ${sparkle(900, 480, 1.3)}
+      ${sparkle(160, 1350, 1.5)}
+      ${sparkle(920, 1420, 1.9)}
+      ${iconSVG}
+      <text x="${CX}" y="1300" font-family="Bebas Neue, Arial, sans-serif" font-size="115"
+            fill="${iconHex}" text-anchor="middle" letter-spacing="6">${cover.title.replace(/[^\wÀ-ÿ ]/g,'').trim().toUpperCase()}</text>
+      <text x="${CX}" y="1380" font-family="Poppins, Arial, sans-serif" font-size="40"
+            fill="${iconHex}" text-anchor="middle" opacity="0.7" letter-spacing="3">@by.arwenn</text>
+    </svg>`;
+  }
+
+  // Renderiza preview com indicador de círculo
+  function buildPreviewSVG(cover) {
+    let svg = buildSVG(cover);
+    // adiciona círculo guia pontilhado no preview
+    svg = svg.replace('</svg>',
+      `<circle cx="${CX}" cy="${CY}" r="330" fill="none" stroke="#9D4EDD" stroke-width="5" stroke-dasharray="20 16" opacity="0.9"/></svg>`);
+    return svg;
+  }
+
+  const grid = document.getElementById('grid');
+  covers.forEach(cover => {
+    const card = document.createElement('div');
+    card.className = 'cover-card';
+    card.innerHTML = `
+      <div class="cover-preview">${buildPreviewSVG(cover)}</div>
+      <div class="circle-hint">↑ círculo pontilhado = o que aparece no IG</div>
+      <h3>${cover.title}</h3>
+      <div class="name-tip">${cover.igName}</div>
+      <button class="btn" data-id="${cover.id}">⬇ Baixar PNG</button>
+    `;
+    card.querySelector('button').addEventListener('click', () => downloadCover(cover));
+    grid.appendChild(card);
+  });
+
+  function downloadCover(cover) {
+    const svgString = buildSVG(cover); // versão limpa, sem círculo guia
+    const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+    const url = URL.createObjectURL(svgBlob);
+    const img = new Image();
+    img.onload = function() {
+      const canvas = document.createElement('canvas');
+      canvas.width = W;
+      canvas.height = H;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, W, H);
+      URL.revokeObjectURL(url);
+      canvas.toBlob(function(blob) {
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `arwen_highlight_${cover.id}.png`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+      }, 'image/png');
+    };
+    img.src = url;
+  }
+
+  function downloadAll() {
+    covers.forEach((cover, i) => {
+      setTimeout(() => downloadCover(cover), i * 600);
+    });
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ARWEN — Manual Completo da Influenciadora</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #07050f;
+  --bg2: #0d0a1a;
+  --bg3: #120f22;
+  --lil: #c4a8ff;
+  --lil2: #9b72f5;
+  --pink: #ff3fa4;
+  --cyan: #00ffe1;
+  --gold: #ffd166;
+  --orange: #ff6b35;
+  --green: #00ff88;
+  --red: #ff4060;
+  --cream: #f0eaff;
+  --muted: #6b5f8a;
+  --text: #c4b8e0;
+  --border: rgba(255,255,255,0.06);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  overflow-x: hidden;
+}
+body::before {
+  content:''; position:fixed; inset:0;
+  background: radial-gradient(ellipse 80% 50% at 20% 0%, rgba(155,114,245,0.06), transparent),
+              radial-gradient(ellipse 60% 40% at 80% 100%, rgba(255,63,164,0.04), transparent);
+  pointer-events:none; z-index:0;
+}
+
+/* ── HERO ── */
+.hero {
+  position:relative; z-index:1;
+  padding:64px 24px 32px; max-width:1000px; margin:0 auto; text-align:center;
+}
+.hero-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2.5px;
+  color:var(--cyan); border:1px solid rgba(0,255,225,0.25);
+  background:rgba(0,255,225,0.04); padding:6px 18px; border-radius:3px;
+  margin-bottom:24px; text-transform:uppercase;
+}
+.hero h1 {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(52px,10vw,100px); line-height:0.9; letter-spacing:2px;
+  margin-bottom:12px;
+}
+.hero h1 .l1 { color:var(--cream); display:block; }
+.hero h1 .l2 {
+  background:linear-gradient(90deg, var(--pink) 0%, var(--lil) 50%, var(--cyan) 100%);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; display:block;
+}
+.hero-sub { font-size:13px; color:var(--muted); max-width:520px; margin:12px auto 0; line-height:1.7; }
+.hero-sub strong { color:var(--lil); }
+
+/* ── MARQUEE ── */
+.mq-wrap {
+  overflow:hidden; border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+  padding:10px 0; margin:32px 0; background:rgba(155,114,245,0.04); position:relative; z-index:1;
+}
+.mq-track {
+  display:flex; gap:36px; width:max-content;
+  animation:mq 25s linear infinite;
+}
+@keyframes mq { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+.mq-i { font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:3px; color:var(--muted); white-space:nowrap; }
+.mq-i span { color:var(--pink); margin:0 6px; }
+
+/* ── NAV TABS ── */
+.nav-wrap {
+  position:sticky; top:0; z-index:50;
+  background:rgba(7,5,15,0.9); backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border); padding:10px 0;
+}
+.nav { display:flex; gap:5px; justify-content:center; flex-wrap:wrap; max-width:1000px; margin:0 auto; padding:0 16px; }
+.nav-btn {
+  background:transparent; border:1px solid rgba(255,255,255,0.07);
+  color:var(--muted); font-family:'Syne',sans-serif;
+  font-size:11px; font-weight:600; padding:6px 14px; border-radius:3px;
+  cursor:pointer; transition:all 0.15s; white-space:nowrap; letter-spacing:0.5px;
+}
+.nav-btn:hover { color:var(--lil); border-color:rgba(196,168,255,0.3); }
+.nav-btn.on { background:var(--lil2); border-color:var(--lil2); color:#fff; }
+
+/* ── SECTIONS ── */
+.sec { display:none; animation:si 0.2s ease both; }
+.sec.on { display:block; }
+@keyframes si { from{opacity:0;transform:translateY(5px)} to{opacity:1;transform:translateY(0)} }
+
+/* ── WRAP ── */
+.wrap { max-width:1000px; margin:0 auto; padding:36px 20px 80px; position:relative; z-index:1; }
+
+/* ── SECTION HEADER ── */
+.sh { margin-bottom:20px; margin-top:44px; }
+.sh:first-child { margin-top:0; }
+.sh-top { display:flex; align-items:center; gap:12px; margin-bottom:4px; }
+.sh-num {
+  font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:2px;
+  color:var(--pink); background:rgba(255,63,164,0.1); border:1px solid rgba(255,63,164,0.2);
+  padding:2px 10px; border-radius:2px;
+}
+.sh-tag { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px; color:var(--cyan); text-transform:uppercase; }
+.sh-title {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(26px,3.5vw,40px); letter-spacing:1px; color:var(--cream); line-height:1;
+}
+.sh-title em {
+  background:linear-gradient(90deg, var(--pink), var(--lil));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text; font-style:normal;
+}
+
+/* ── CARD ── */
+.card {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:14px; padding:22px 24px; margin-bottom:12px;
+  transition:border-color 0.2s;
+}
+.card:hover { border-color:rgba(196,168,255,0.15); }
+.card-h {
+  font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:0.5px;
+  color:var(--cream); margin-bottom:12px; display:flex; align-items:center; gap:8px;
+}
+
+/* ── CALLOUTS ── */
+.call { border-radius:10px; padding:13px 16px; font-size:13px; line-height:1.7; margin:10px 0; }
+.c-lil { background:rgba(196,168,255,0.07); border:1px solid rgba(196,168,255,0.2); color:#e0d5ff; }
+.c-lil strong { color:var(--lil); }
+.c-pink { background:rgba(255,63,164,0.07); border:1px solid rgba(255,63,164,0.2); color:#ffd5ef; }
+.c-pink strong { color:var(--pink); }
+.c-cyan { background:rgba(0,255,225,0.06); border:1px solid rgba(0,255,225,0.18); color:#c8fff8; }
+.c-cyan strong { color:var(--cyan); }
+.c-gold { background:rgba(255,209,102,0.07); border:1px solid rgba(255,209,102,0.2); color:#fff3c0; }
+.c-gold strong { color:var(--gold); }
+.c-green { background:rgba(0,255,136,0.06); border:1px solid rgba(0,255,136,0.18); color:#c0fff0; }
+.c-green strong { color:var(--green); }
+.c-red { background:rgba(255,64,96,0.07); border:1px solid rgba(255,64,96,0.2); color:#ffd5db; }
+.c-red strong { color:var(--red); }
+
+/* ── DOTS ── */
+.dots { list-style:none; }
+.dots li {
+  display:flex; align-items:flex-start; gap:10px;
+  padding:8px 0; border-bottom:1px solid rgba(255,255,255,0.03);
+  font-size:13px; color:var(--muted); line-height:1.65;
+}
+.dots li:last-child { border-bottom:none; }
+.dots li::before { content:'◆'; color:var(--lil2); font-size:7px; margin-top:6px; flex-shrink:0; }
+.dots li strong { color:var(--text); }
+
+/* ── GRID ── */
+.g2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px; }
+.g3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:12px; }
+@media(max-width:680px) { .g2,.g3 { grid-template-columns:1fr; } }
+.mini { background:var(--bg3); border:1px solid var(--border); border-radius:12px; padding:18px; }
+.mini h4 { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1.5px; color:var(--lil); text-transform:uppercase; margin-bottom:8px; }
+.mini p { font-size:12.5px; color:var(--muted); line-height:1.6; }
+.mini p strong { color:var(--text); }
+
+/* ── TABLE ── */
+.tbl { width:100%; border-collapse:collapse; font-size:12.5px; }
+.tbl th { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1.5px; color:var(--lil); text-transform:uppercase; padding:10px 12px; text-align:left; border-bottom:1px solid rgba(255,255,255,0.07); }
+.tbl td { padding:9px 12px; color:var(--muted); border-bottom:1px solid rgba(255,255,255,0.03); vertical-align:top; line-height:1.55; }
+.tbl td:first-child { color:var(--text); font-weight:600; }
+.tbl tr:last-child td { border-bottom:none; }
+.tbl tr:hover td { background:rgba(255,255,255,0.015); }
+
+/* ── IDEA MASONRY ── */
+.ideas-wrap {
+  columns: 3; column-gap:12px; margin-bottom:16px;
+}
+@media(max-width:720px) { .ideas-wrap { columns:2; } }
+@media(max-width:480px) { .ideas-wrap { columns:1; } }
+.idea {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:12px; padding:16px; margin-bottom:12px;
+  break-inside:avoid; position:relative; overflow:hidden;
+  transition:border-color 0.2s, transform 0.15s;
+}
+.idea:hover { border-color:rgba(196,168,255,0.2); transform:translateY(-1px); }
+.idea-cat {
+  font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:2px;
+  text-transform:uppercase; margin-bottom:6px; display:inline-block;
+  padding:2px 8px; border-radius:2px;
+}
+.cat-g { background:rgba(0,255,225,0.08); color:var(--cyan); }
+.cat-m { background:rgba(255,63,164,0.08); color:var(--pink); }
+.cat-b { background:rgba(196,168,255,0.08); color:var(--lil); }
+.cat-mk { background:rgba(255,209,102,0.08); color:var(--gold); }
+.cat-e { background:rgba(255,107,53,0.08); color:var(--orange); }
+.cat-v { background:rgba(0,255,136,0.08); color:var(--green); }
+.cat-s { background:rgba(255,64,96,0.08); color:var(--red); }
+.cat-c { background:rgba(155,114,245,0.1); color:#b090ff; }
+.idea-title { font-size:13px; color:var(--cream); font-weight:700; margin-bottom:5px; line-height:1.3; }
+.idea-body { font-size:11.5px; color:var(--muted); line-height:1.6; }
+.idea-plat { display:flex; flex-wrap:wrap; gap:4px; margin-top:8px; }
+.plt { font-family:'JetBrains Mono',monospace; font-size:8px; padding:2px 7px; border-radius:2px; border:1px solid; }
+.plt-ig { color:var(--pink); border-color:rgba(255,63,164,0.3); }
+.plt-tk { color:var(--cyan); border-color:rgba(0,255,225,0.3); }
+.plt-yt { color:#ff7070; border-color:rgba(255,112,112,0.3); }
+.plt-lv { color:var(--gold); border-color:rgba(255,209,102,0.3); }
+
+/* ── CHECKLIST ── */
+.check { list-style:none; }
+.check li {
+  display:flex; align-items:flex-start; gap:10px;
+  padding:9px 0; border-bottom:1px solid rgba(255,255,255,0.03);
+  font-size:13px; color:var(--muted); line-height:1.6;
+  cursor:pointer;
+}
+.check li:last-child { border-bottom:none; }
+.check li .box {
+  width:16px; height:16px; border:1px solid rgba(196,168,255,0.4);
+  border-radius:3px; flex-shrink:0; margin-top:2px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px; transition:all 0.15s;
+}
+.check li.done .box { background:var(--lil2); border-color:var(--lil2); color:white; }
+.check li.done { text-decoration:line-through; color:rgba(107,95,138,0.5); }
+.check li strong { color:var(--text); }
+.check li.done strong { color:inherit; }
+
+/* ── TIMELINE ── */
+.tl { border-left:1px solid rgba(196,168,255,0.15); padding-left:24px; }
+.tl-i { position:relative; margin-bottom:22px; }
+.tl-i::before {
+  content:''; position:absolute; left:-29px; top:4px;
+  width:9px; height:9px; border-radius:50%;
+  background:var(--lil2); border:2px solid var(--bg);
+  box-shadow:0 0 6px var(--lil2);
+}
+.tl-phase { font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:1.5px; color:var(--lil2); text-transform:uppercase; margin-bottom:3px; }
+.tl-t { font-size:14px; color:var(--cream); font-weight:700; margin-bottom:5px; }
+.tl-b { font-size:12.5px; color:var(--muted); line-height:1.65; }
+
+/* ── PRIORITY CARD ── */
+.pcard {
+  background:var(--bg2); border:1px solid var(--border);
+  border-radius:14px; padding:20px 22px; margin-bottom:10px;
+  display:flex; gap:16px; align-items:flex-start;
+}
+.pcard-num {
+  font-family:'Bebas Neue',sans-serif; font-size:36px; line-height:1;
+  flex-shrink:0; width:44px; text-align:center;
+}
+.pcard-body {}
+.pcard-title { font-size:14px; color:var(--cream); font-weight:700; margin-bottom:4px; }
+.pcard-desc { font-size:12.5px; color:var(--muted); line-height:1.6; }
+
+/* ── FOOTER ── */
+.footer {
+  text-align:center; padding:48px 20px 72px;
+  position:relative; z-index:1; color:var(--muted); font-size:12px;
+}
+.footer strong { color:var(--pink); }
+.footer .big { font-family:'Bebas Neue',sans-serif; font-size:28px; color:rgba(255,255,255,0.04); letter-spacing:4px; display:block; margin-top:14px; }
+
+/* ── DIV ── */
+.div { height:1px; background:linear-gradient(to right, transparent, rgba(196,168,255,0.1), transparent); margin:20px 0; }
+
+/* ── STATUS INDICATOR ── */
+.status {
+  display:inline-flex; align-items:center; gap:6px;
+  font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:1px;
+  padding:4px 12px; border-radius:3px; margin-bottom:4px;
+}
+.st-do { background:rgba(0,255,136,0.08); color:var(--green); border:1px solid rgba(0,255,136,0.2); }
+.st-do::before { content:'●'; font-size:7px; }
+.st-now { background:rgba(255,63,164,0.08); color:var(--pink); border:1px solid rgba(255,63,164,0.2); }
+.st-now::before { content:'●'; font-size:7px; animation:blink 1s infinite; }
+@keyframes blink { 50%{opacity:0} }
+.st-soon { background:rgba(255,209,102,0.08); color:var(--gold); border:1px solid rgba(255,209,102,0.2); }
+.st-soon::before { content:'●'; font-size:7px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">✦ manual completo · agente pessoal · arwen ✦</div>
+  <h1>
+    <span class="l1">MANUAL DA</span>
+    <span class="l2">ARWEN</span>
+  </h1>
+  <p class="hero-sub">
+    Tudo que você precisa saber, criar, determinar e executar.<br>
+    <strong>150+ ideias · guia operacional · checklist · agente pessoal.</strong>
+  </p>
+</div>
+
+<div class="mq-wrap">
+  <div class="mq-track">
+    <span class="mq-i">UNBOXING<span>✦</span></span><span class="mq-i">STORYTELLING<span>✦</span></span><span class="mq-i">GAMEPLAY<span>✦</span></span><span class="mq-i">BLIND BOX<span>✦</span></span><span class="mq-i">VLOG<span>✦</span></span><span class="mq-i">RESENHA<span>✦</span></span><span class="mq-i">LORE<span>✦</span></span><span class="mq-i">WISHLIST<span>✦</span></span><span class="mq-i">GUIA<span>✦</span></span><span class="mq-i">FOFOCA GEEK<span>✦</span></span><span class="mq-i">DESAFIO<span>✦</span></span><span class="mq-i">MAKES<span>✦</span></span><span class="mq-i">CURIOSIDADES<span>✦</span></span><span class="mq-i">UNBOXING<span>✦</span></span><span class="mq-i">STORYTELLING<span>✦</span></span><span class="mq-i">GAMEPLAY<span>✦</span></span><span class="mq-i">BLIND BOX<span>✦</span></span><span class="mq-i">VLOG<span>✦</span></span><span class="mq-i">RESENHA<span>✦</span></span><span class="mq-i">LORE<span>✦</span></span><span class="mq-i">WISHLIST<span>✦</span></span>
+  </div>
+</div>
+
+<div class="nav-wrap">
+  <div class="nav">
+    <button class="nav-btn on" onclick="show('agente',this)">🦊 Agente</button>
+    <button class="nav-btn" onclick="show('setup',this)">⚙️ Setup Inicial</button>
+    <button class="nav-btn" onclick="show('ideias',this)">💡 150+ Ideias</button>
+    <button class="nav-btn" onclick="show('formatos',this)">🎬 Formatos</button>
+    <button class="nav-btn" onclick="show('algoritmo',this)">📈 Algoritmo</button>
+    <button class="nav-btn" onclick="show('checklist',this)">✅ Checklist</button>
+    <button class="nav-btn" onclick="show('parcerias',this)">🤝 Parcerias</button>
+    <button class="nav-btn" onclick="show('semana',this)">📅 Semana Tipo</button>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ══════════ AGENTE ══════════ -->
+<div id="agente" class="sec on">
+
+  <div class="sh">
+    <div class="sh-top"><span class="sh-num">01</span><span class="sh-tag">seu agente pessoal</span></div>
+    <div class="sh-title">OLÁ, <em>ARWEN</em> 🦊</div>
+  </div>
+
+  <div class="call c-pink">
+    <strong>Meu papel aqui:</strong> Sou seu agente, estrategista e banco de ideias. Quando você travar, abre esse manual. Quando não souber o que postar, vai direto em "150+ Ideias". Quando quiser saber como crescer mais rápido, vai em "Algoritmo". Quando precisar fechar uma parceria, vai em "Parcerias". Tudo que você precisa pra executar está aqui.
+  </div>
+
+  <div class="sh" style="margin-top:28px">
+    <div class="sh-title">Quem é a <em>Arwen</em></div>
+  </div>
+
+  <div class="card">
+    <p style="font-size:14px; line-height:1.8; color:var(--text)">
+      Você é a <strong style="color:var(--lil)">Arwen</strong> — criadora de conteúdo geek com identidade própria. Dev de dia, geek permanente. Você joga NTE às 2h da manhã, chora com o final de manhwas, vai na CCXP de look, faz make de personagem e debate lore como se fosse fofoca de vizinho. Seus muitos gostos <strong style="color:var(--pink)">não são um problema — são o que te diferencia.</strong> Você não é "a menina que faz make" nem "a menina que joga". Você é a Arwen, e as pessoas seguem a Arwen.
+    </p>
+  </div>
+
+  <div class="g3">
+    <div class="mini"><h4>🎯 Missão</h4><p>Criar conteúdo geek com personalidade real. Entretenimento, descoberta, reação honesta. Sem filtro. Sem personagem. Você mesma.</p></div>
+    <div class="mini"><h4>👥 Público</h4><p>Meninas e mulheres 16–28 que jogam, leem, assistem animes e séries, curtem make e querem uma amiga geek na internet.</p></div>
+    <div class="mini"><h4>🏆 Meta 12 meses</h4><p>10k+ seguidores Instagram, TikTok crescendo, primeiros contratos pagos, OnGeek alimentado pela audiência.</p></div>
+  </div>
+
+  <div class="sh" style="margin-top:32px">
+    <div class="sh-title">Regras da <em>Arwen</em></div>
+  </div>
+
+  <div class="card">
+    <ul class="dots">
+      <li><strong>Você é o conteúdo, não o assunto.</strong> A Bagi pode falar de qualquer coisa porque as pessoas seguem ela, não o tema. Busca isso.</li>
+      <li><strong>Autenticidade > produção perfeita.</strong> TikTok Next 2026 confirmou: o algoritmo recompensa conteúdo real. Seu "surto geek" às 2h vale mais que vídeo editado perfeito.</li>
+      <li><strong>Consistência bate viralização.</strong> Um viral não faz carreira. 3 posts/semana por 6 meses faz carreira.</li>
+      <li><strong>Engajamento > seguidores.</strong> 2k seguidores com 15% de engajamento fecha parceria. 20k com 1% não fecha.</li>
+      <li><strong>Responde os comentários nas primeiras 2h.</strong> O algoritmo do Instagram mede velocidade de engajamento. Cada resposta sua empurra o post pro feed de mais pessoas.</li>
+      <li><strong>Poste na onda, não depois dela.</strong> Lançou trailer? Posta hoje. Acabou episódio novo? Posta hoje. Conteúdo time-sensitive tem alcance desproporcionalmente maior.</li>
+      <li><strong>Nunca suma por mais de 5 dias.</strong> Mesmo que seja só um story. Consistência é presença, não perfeição.</li>
+    </ul>
+  </div>
+
+  <div class="sh" style="margin-top:32px">
+    <div class="sh-title">Diagnóstico do seu <em>perfil atual</em></div>
+  </div>
+
+  <div class="g2">
+    <div class="card" style="border-color:rgba(0,255,136,0.15)">
+      <div class="card-h" style="color:var(--green)">✅ Pontos fortes</div>
+      <ul class="dots">
+        <li>Verificação no Instagram — credibilidade imediata</li>
+        <li>1.172 seguidores — base real, não zero</li>
+        <li>32.1K views em 30 dias — algoritmo já te mostra</li>
+        <li>Email de parcerias visível na bio</li>
+        <li>Highlights organizados por jogo</li>
+        <li>Você aparece na câmera com naturalidade</li>
+        <li>Conteúdo visual forte (fotos com make)</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:rgba(255,64,96,0.15)">
+      <div class="card-h" style="color:var(--red)">🔧 O que corrigir agora</div>
+      <ul class="dots">
+        <li>Link na bio ainda não está lá (Beacons.ai)</li>
+        <li>TikTok e YouTube ainda não ativos</li>
+        <li>Sem highlights de Make e Livros</li>
+        <li>Frequência de posts inconsistente</li>
+        <li>Bio ainda lista assuntos em vez de identidade</li>
+        <li>Nenhum carrossel ou conteúdo salvável regular</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ SETUP INICIAL ══════════ -->
+<div id="setup" class="sec">
+
+  <div class="sh">
+    <div class="sh-top"><span class="sh-num">02</span><span class="sh-tag">o que fazer primeiro</span></div>
+    <div class="sh-title">SETUP <em>INICIAL</em></div>
+  </div>
+
+  <div class="call c-red">
+    <strong>Regra de ouro:</strong> Faça tudo nessa ordem. Não pule etapa. Setup mal feito vai precisar ser refeito depois, e é mais difícil quando você já tem audiência.
+  </div>
+
+  <div class="sh" style="margin-top:28px"><div class="sh-title">Semana 1 — <em>Infraestrutura</em></div></div>
+
+  <div class="card">
+    <ul class="check" id="chk-s1">
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Instala o Beacons.ai e configura seu link da bio</strong> — coloca Instagram, TikTok, YouTube, email. É gratuito e melhor que Linktree.</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Cria conta no TikTok com @by.arwenn</strong> — mesma foto de perfil, mesma bio adaptada. Consistência de identidade entre plataformas.</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Cria canal no YouTube com @by.arwenn</strong> — não precisa ter vídeo ainda. Configura foto, banner e descrição.</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Atualiza a bio do Instagram</strong> — usa uma das opções do guia anterior. Coloca o link do Beacons na bio.</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Muda o nome de exibição para "Arwen"</strong> no campo "nome" do Instagram. Fica em negrito no perfil.</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Cria highlights de Make e Livros</strong> no Instagram. Pega stories antigos ou cria um novo pra cada.</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Instala o CapCut</strong> e faz o tutorial básico — você precisa de: texto automático, corte por silêncio, e um template simples.</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Instala o Lightroom Mobile</strong> e cria um preset de edição de foto. Aplica em todas as fotos do feed daqui pra frente.</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Abre o Canva</strong> e cria 3 templates de stories nas suas cores (lilás + preto). Salva na pasta "Arwen".</div></li>
+    </ul>
+  </div>
+
+  <div class="sh" style="margin-top:28px"><div class="sh-title">Semana 2 — <em>Primeiros conteúdos</em></div></div>
+
+  <div class="card">
+    <ul class="check" id="chk-s2">
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Grava o Reel de apresentação</strong> ("Quem é a Arwen?") — roteiro está no guia anterior. Esse vai no Instagram + TikTok + YouTube Shorts.</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Prepara 8 posts com antecedência</strong> — 4 Reels + 2 carrosséis + 2 stories templates. Esse "estoque" evita ansiedade e garante consistência.</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Define sua frequência semanal</strong> — anota em algum lugar: quais dias você vai postar o quê. Não precisa ser todos os dias.</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Ativa o Instagram Professional Dashboard</strong> e acostuma a olhar os insights toda segunda-feira.</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Segue as 30 maiores contas do seu nicho</strong> no Instagram e TikTok — geek, BookTok, games, make. Comenta de verdade nos posts delas.</div></li>
+    </ul>
+  </div>
+
+  <div class="sh" style="margin-top:28px"><div class="sh-title">Semana 3–4 — <em>Sistemas permanentes</em></div></div>
+
+  <div class="card">
+    <ul class="check" id="chk-s3">
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Cria um Notion (ou planilha) de banco de ideias</strong> — joga uma ideia lá toda vez que tiver. Antes de começar você já tem 150+ desse manual.</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Cria calendário de conteúdo</strong> — mínimo 2 semanas à frente. Não precisa ser detalhado, só "tipo de post + dia".</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Cadastra no Amazon Afiliados</strong> — gratuito, cria links de livros/games que você recomenda. Começa a ganhar comissão desde o início.</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Monta o media kit no Canva</strong> — 1 página: nome/handle, nicho, dados de engajamento, formatos disponíveis, email. Deixa pronto pra quando chegar proposta.</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Define sua paleta definitiva e não muda por 3 meses</strong> — lilás + preto + off-white é sua identidade. Consistência = reconhecimento.</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Cria conta no Pinterest</strong> — reposte conteúdo de livros e make. Tráfego passivo gratuito por meses.</div></li>
+    </ul>
+  </div>
+
+  <div class="sh" style="margin-top:28px"><div class="sh-title">O que você <em>não precisa</em> agora</div></div>
+
+  <div class="card">
+    <ul class="dots">
+      <li><strong>Câmera profissional</strong> — seu celular resolve. Quando tiver 10k seguidores, aí pensa em upgrade.</li>
+      <li><strong>Ring light caro</strong> — qualquer ring light de R$70–100 já resolve. Ou usa janela com luz natural.</li>
+      <li><strong>Canva Pro</strong> — a versão grátis tem o suficiente pra começar.</li>
+      <li><strong>Agência ou editor contratado</strong> — você mesma no CapCut. Depois de 6 meses consistentes, aí pensa em delegar.</li>
+      <li><strong>Discord ou comunidade própria</strong> — cria quando tiver 2k+ seguidores engajados. Vazio no início é ruim.</li>
+      <li><strong>Twitch com agenda fixa</strong> — estreia quando tiver tempo e audiência pra manter. Streams esporádicos pra testar é ok.</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ══════════ 150+ IDEIAS ══════════ -->
+<div id="ideias" class="sec">
+
+  <div class="sh">
+    <div class="sh-top"><span class="sh-num">03</span><span class="sh-tag">banco completo</span></div>
+    <div class="sh-title">150+ IDEIAS DE <em>CONTEÚDO</em></div>
+  </div>
+
+  <div class="call c-lil">
+    <strong>Como usar:</strong> Quando travar, abre aqui e escolhe uma. Cada ideia tem a categoria, plataforma sugerida e uma nota rápida. Você não precisa de inspiração — você precisa de execução.
+  </div>
+
+  <!-- UNBOXING / COLECIONÁVEIS -->
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--cyan);margin:20px 0 10px;">📦 UNBOXING · COLECIONÁVEIS · BLIND BOX</div>
+  <div class="ideas-wrap">
+    <div class="idea"><span class="idea-cat cat-e">Unboxing</span><div class="idea-title">Unboxing de Funko Pop(s) novos — reação ao vivo</div><div class="idea-body">Abre na câmera sem saber o que tem. Reação real. Funciona com qualquer colecionável.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span><span class="plt plt-yt">YouTube</span></div></div>
+    <div class="idea"><span class="idea-cat cat-e">Blind Box</span><div class="idea-title">Abrindo blind box de [personagem/franquia] — acertei o raro?</div><div class="idea-body">Labubu, caixas surpresa geek, card packs. Mistério + reação = conteúdo fácil de fazer e alto engajamento.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-e">Coleção</span><div class="idea-title">Tour pela minha coleção de Funkos — ranking dos favoritos</div><div class="idea-body">Mostra cada um, conta a história de como conseguiu, ranqueia. Série de vários episódios.</div><div class="idea-plat"><span class="plt plt-yt">YouTube</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-e">Haul</span><div class="idea-title">Haul de evento geek — o que comprei na [CCXP/Bienal/etc.]</div><div class="idea-body">Mostra item por item com preço e opinião. Um dos formatos mais salvados do nicho geek.</div><div class="idea-plat"><span class="plt plt-yt">YouTube</span><span class="plt plt-tk">TikTok</span></div></div>
+    <div class="idea"><span class="idea-cat cat-e">Wishlist</span><div class="idea-title">Minha wishlist de Funkos — o que preciso ter antes de morrer</div><div class="idea-body">Carrossel ou vídeo. Conecta com quem coleciona. Gera comentários de "eu tenho esse!"</div><div class="idea-plat"><span class="plt plt-ig">Carrossel</span><span class="plt plt-tk">TikTok</span></div></div>
+    <div class="idea"><span class="idea-cat cat-e">Action Figure</span><div class="idea-title">Unboxing de action figure de [personagem] + review completa</div><div class="idea-body">Detalha qualidade, articulação, preço. Nicho de colecionáveis tem público muito fiel e engajado.</div><div class="idea-plat"><span class="plt plt-yt">YouTube</span><span class="plt plt-ig">Reels</span></div></div>
+  </div>
+
+  <!-- STORYTELLING / FOFOCA -->
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--pink);margin:20px 0 10px;">🗣️ STORYTELLING · FOFOCA GEEK · HISTÓRIAS</div>
+  <div class="ideas-wrap">
+    <div class="idea"><span class="idea-cat cat-s">Storytelling</span><div class="idea-title">Contando a lore de [jogo/anime] como se fosse fofoca de vizinho</div><div class="idea-body">Explica enredo complexo com linguagem casual. "Então basicamente ela tava saindo com o príncipe MAS aí descobriu que ele era na verdade..." Formato que explode.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-s">Make + Histórias</span><div class="idea-title">Contando história real enquanto me maquio</div><div class="idea-body">Experiência em evento, situação absurda na CCXP, viagem, coisa que aconteceu no trabalho. Make de fundo + história = audiência presa até o fim.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-yt">YouTube</span></div></div>
+    <div class="idea"><span class="idea-cat cat-s">Fofoca Geek</span><div class="idea-title">Explicando a drama por trás de [franquia/game/anime] como fofoca</div><div class="idea-body">Desenvolvimento de jogos cancelados, brigas entre estúdios, polêmicas do mundo geek. É fofoca mas é real.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-s">Teoria</span><div class="idea-title">Teoria da conspiração geek: [obra] na verdade significa [X]</div><div class="idea-body">Teorias de fãs, teorias de jogos, significados ocultos. Formato de "fofoca" funciona perfeitamente aqui.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-s">Vlog Narrativo</span><div class="idea-title">Minha experiência na [CCXP/Bienal/evento] — história completa</div><div class="idea-body">Não é só mostrar o evento — conta o que aconteceu, o que deu errado, o momento inesperado. Narrativa > imagens bonitas.</div><div class="idea-plat"><span class="plt plt-yt">YouTube</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-s">Make + Lore</span><div class="idea-title">Explicando a lore de [jogo] enquanto faço a make do personagem</div><div class="idea-body">Formatos combinados = dois públicos em um vídeo. Make geek + lore = conteúdo único.</div><div class="idea-plat"><span class="plt plt-yt">YouTube</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-s">Saga</span><div class="idea-title">A história completa de [franquia] — série em partes</div><div class="idea-body">Divide a lore em 3–5 partes. Cada parte é um vídeo. Faz as pessoas voltarem pra ver o próximo. Séries = retenção.</div><div class="idea-plat"><span class="plt plt-yt">YouTube</span><span class="plt plt-tk">TikTok</span></div></div>
+  </div>
+
+  <!-- GAMES -->
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--cyan);margin:20px 0 10px;">🎮 GAMES — JOGABILIDADE E ANÁLISE</div>
+  <div class="ideas-wrap">
+    <div class="idea"><span class="idea-cat cat-g">Terror</span><div class="idea-title">Tentando jogar jogo de terror — reação sem corte</div><div class="idea-body">Resident Evil, Silent Hill, qualquer terror. Seu pavor ao vivo é o conteúdo. Formato garantidamente viral.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-yt">YouTube</span><span class="plt plt-lv">Live</span></div></div>
+    <div class="idea"><span class="idea-cat cat-g">Guia</span><div class="idea-title">Guia completo de iniciante em [jogo]</div><div class="idea-body">NTE, Star Dive, qualquer jogo que você domina. Ensina quem está começando. Muito pesquisado e salvado.</div><div class="idea-plat"><span class="plt plt-yt">YouTube</span><span class="plt plt-tk">TikTok</span></div></div>
+    <div class="idea"><span class="idea-cat cat-g">Desafio</span><div class="idea-title">Tentando zerar [jogo] no modo mais difícil</div><div class="idea-body">Série de vídeos. Cada parte é uma sessão. Público acompanha a jornada, não só o resultado.</div><div class="idea-plat"><span class="plt plt-yt">YouTube</span><span class="plt plt-lv">Live</span></div></div>
+    <div class="idea"><span class="idea-cat cat-g">Time</span><div class="idea-title">Montando o time mais roubado de [jogo] — sem gastar nada</div><div class="idea-body">F2P team building. Comunidade do jogo compartilha pra debater. Funciona em qualquer gacha/RPG.</div><div class="idea-plat"><span class="plt plt-ig">Carrossel</span><span class="plt plt-tk">TikTok</span></div></div>
+    <div class="idea"><span class="idea-cat cat-g">Recomendação</span><div class="idea-title">Jogos p/ quem gosta de [X coisa] — curadoria por gosto</div><div class="idea-body">"Games pra quem gosta de anime", "pra quem gosta de mistério", "pra quem tem só 10 min". Altamente salvado.</div><div class="idea-plat"><span class="plt plt-ig">Carrossel</span><span class="plt plt-tk">TikTok</span></div></div>
+    <div class="idea"><span class="idea-cat cat-g">Gameplay</span><div class="idea-title">Gameplay comentado de [jogo] com dicas em tempo real</div><div class="idea-body">Não é só jogar — comenta, reage, explica. Mais entretenimento do que tutorial.</div><div class="idea-plat"><span class="plt plt-yt">YouTube</span><span class="plt plt-lv">Live</span></div></div>
+    <div class="idea"><span class="idea-cat cat-g">Avaliação</span><div class="idea-title">Avaliando personagens de [jogo] como se fossem pretendentes</div><div class="idea-body">Humor + fandom. "Esse aqui tem red flags claras mas o poder especial compensa." Viraliza fácil.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-g">Cantadas</span><div class="idea-title">Cantadas geek que funcionariam em [universo]</div><div class="idea-body">"Se eu fosse um item raro de gacha, eu te daria drop garantido." Humor geek = altíssimo compartilhamento.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-g">Takes</span><div class="idea-title">Takes impopulares sobre [game] que vou defender até o fim</div><div class="idea-body">Debate garantido. Escolhe uma opinião que muitos discordam. Os comentários são o conteúdo.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span></div></div>
+  </div>
+
+  <!-- FILMES / SÉRIES / ANIMES -->
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--pink);margin:20px 0 10px;">🎌 FILMES · SÉRIES · ANIMES</div>
+  <div class="ideas-wrap">
+    <div class="idea"><span class="idea-cat cat-m">Curiosidades</span><div class="idea-title">Curiosidades de [filme/série] que ninguém te contou</div><div class="idea-body">Bastidores, easter eggs, referências escondidas. "Talvez você não tenha percebido em [obra]..." Alta retenção.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-m">Fatos Reais</span><div class="idea-title">[Série/Filme] vs fatos reais — o que é verdade?</div><div class="idea-body">Peaky Blinders, Narcos, filmes históricos. Compara ficção com história real. Formato educativo + entretenimento.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span><span class="plt plt-yt">YouTube</span></div></div>
+    <div class="idea"><span class="idea-cat cat-m">Análise</span><div class="idea-title">A verdade por trás de [filme] — o que o diretor quis dizer</div><div class="idea-body">Análise de simbolismo, metáforas, temas. Funciona pra filmes de nicho e mainstream. Público cinéfilo ama.</div><div class="idea-plat"><span class="plt plt-yt">YouTube</span><span class="plt plt-tk">TikTok</span></div></div>
+    <div class="idea"><span class="idea-cat cat-m">Review</span><div class="idea-title">Assisti [anime/série] em 24h — valeu?</div><div class="idea-body">Opinião crua, sem spoiler no título. Reação de quem maratonou sem parar. Relatable demais.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-m">Recomendação</span><div class="idea-title">Animes/séries pra quem gosta de [X gênero]</div><div class="idea-body">"Pra quem gosta de dark fantasy", "pra quem chora fácil", "pra quem tem 20 min". Muito salvado.</div><div class="idea-plat"><span class="plt plt-ig">Carrossel</span><span class="plt plt-tk">TikTok</span></div></div>
+    <div class="idea"><span class="idea-cat cat-m">Percepção</span><div class="idea-title">"Talvez você não tenha percebido em [obra]..."</div><div class="idea-body">Detalhe visual, linha de diálogo, cena escondida. Público vai rever a obra pra confirmar. Altíssimo compartilhamento.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span></div></div>
+  </div>
+
+  <!-- MAKE / ESTÉTICA -->
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--gold);margin:20px 0 10px;">💄 MAKE · BELEZA · ESTÉTICA</div>
+  <div class="ideas-wrap">
+    <div class="idea"><span class="idea-cat cat-mk">GRWM</span><div class="idea-title">Get Ready With Me: maratonando [série] em casa</div><div class="idea-body">Make confort + o que vai assistir. Conteúdo de lifestyle que conecta todos os seus nichos naturalmente.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-mk">Teste</span><div class="idea-title">Testando make de [marca] por 1 semana — resultado honesto</div><div class="idea-body">Review longa com antes/depois real. Honestidade gera confiança. Confiança gera compra. Parceria natural depois.</div><div class="idea-plat"><span class="plt plt-yt">YouTube</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-mk">Personagem</span><div class="idea-title">Make da vilã de [manhwa/anime] — passo a passo</div><div class="idea-body">Vilãs têm aesthetics mais interessantes. Cita a obra, alcança dois fandoms. Tutorial completo no YouTube.</div><div class="idea-plat"><span class="plt plt-yt">YouTube</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-mk">Wishlist</span><div class="idea-title">Wishlist de make — o que tô querendo comprar agora</div><div class="idea-body">Carrossel ou vídeo. Ativa afiliados (Amazon). Público salva pra comprar junto.</div><div class="idea-plat"><span class="plt plt-ig">Carrossel</span><span class="plt plt-tk">TikTok</span></div></div>
+    <div class="idea"><span class="idea-cat cat-mk">Comparativo</span><div class="idea-title">Delineador R$15 vs R$150 — qual fica melhor?</div><div class="idea-body">Dupes são um dos formatos mais salvados de make. Comparativo democratiza beleza. Muito compartilhado.</div><div class="idea-plat"><span class="plt plt-ig">Reels</span><span class="plt plt-tk">TikTok</span></div></div>
+  </div>
+
+  <!-- VLOG / VIDA -->
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--green);margin:20px 0 10px;">🎥 VLOG · VIDA · EVENTOS · LUGARES</div>
+  <div class="ideas-wrap">
+    <div class="idea"><span class="idea-cat cat-v">Setup Tour</span><div class="idea-title">Tour pelo meu quarto/setup geek</div><div class="idea-body">Mostra coleção, decoração, setup de jogo. Um dos vídeos mais assistidos de canais geek. Apresenta quem você é visualmente.</div><div class="idea-plat"><span class="plt plt-yt">YouTube</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-v">Vlog Evento</span><div class="idea-title">Vlog completo da [CCXP/Bienal/evento] — do início ao fim</div><div class="idea-body">Divide em: preparação, chegada, o dia, haul, avaliação. Série de conteúdo de um evento só.</div><div class="idea-plat"><span class="plt plt-yt">YouTube</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-v">Guia de Evento</span><div class="idea-title">Guia de sobrevivência da [CCXP/Bienal] — o que ninguém te conta</div><div class="idea-body">Dicas práticas, o que levar, o que evitar, onde ir primeiro. Altamente salvado e compartilhado antes do evento.</div><div class="idea-plat"><span class="plt plt-ig">Carrossel</span><span class="plt plt-tk">TikTok</span></div></div>
+    <div class="idea"><span class="idea-cat cat-v">Info Evento</span><div class="idea-title">Eventos geek de [mês/ano] — o que tá acontecendo no Brasil</div><div class="idea-body">Calendário de eventos geek. Útil = salvado. Quadro mensal que você repete todo mês.</div><div class="idea-plat"><span class="plt plt-ig">Carrossel</span><span class="plt plt-tk">TikTok</span></div></div>
+    <div class="idea"><span class="idea-cat cat-v">Minha Vida</span><div class="idea-title">Day in my life: dev de dia, geek de noite</div><div class="idea-body">Rotina real, sem filtro. Humaniza. O público quer saber quem é a Arwen fora das telas.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-v">Lugar</span><div class="idea-title">Testando [lugar geek] em [cidade] — vale a pena?</div><div class="idea-body">Cafés temáticos, lojas especializadas, locais de eventos. Turismo geek é nicho crescente.</div><div class="idea-plat"><span class="plt plt-yt">YouTube</span><span class="plt plt-tk">TikTok</span></div></div>
+  </div>
+
+  <!-- LIVROS / MANHWAS -->
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--lil);margin:20px 0 10px;">📚 LIVROS · MANHWAS · RESENHAS</div>
+  <div class="ideas-wrap">
+    <div class="idea"><span class="idea-cat cat-b">Resenha</span><div class="idea-title">Resenha sem spoiler de [livro] em 60 segundos</div><div class="idea-body">Premissa + o que amou + quem deveria ler + nota. Formato padrão que funciona sempre.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-b">Recomendação</span><div class="idea-title">Recomendações de manhwa pra cada tipo de humor</div><div class="idea-body">"Quando quer chorar", "quando quer adrenalina", "quando quer romance". Altíssimo salvamento.</div><div class="idea-plat"><span class="plt plt-ig">Carrossel</span><span class="plt plt-tk">TikTok</span></div></div>
+    <div class="idea"><span class="idea-cat cat-b">Wishlist</span><div class="idea-title">Minha wishlist de livros — o que tá na minha lista</div><div class="idea-body">Público sugere também. Gera comentários e recomendações mútuas. Cria comunidade.</div><div class="idea-plat"><span class="plt plt-ig">Carrossel</span><span class="plt plt-tk">TikTok</span></div></div>
+    <div class="idea"><span class="idea-cat cat-b">Estante</span><div class="idea-title">Reorganizando minha estante — método geek</div><div class="idea-body">Por universo, por cor, por lido/não lido. Processo + resultado. Formato muito popular no BookTok.</div><div class="idea-plat"><span class="plt plt-yt">YouTube</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-b">Saga</span><div class="idea-title">Vale a pena começar [saga longa] em 2025?</div><div class="idea-body">Quarta Asa, A Court of Thorns, HP. Para quem não começou ainda. Público novo + veteranos que vão defender.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span></div></div>
+  </div>
+
+  <!-- FORMATOS CRIATIVOS -->
+  <div style="font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--orange);margin:20px 0 10px;">✨ FORMATOS CRIATIVOS E DIFERENCIAIS</div>
+  <div class="ideas-wrap">
+    <div class="idea"><span class="idea-cat cat-c">Crossover</span><div class="idea-title">Se [universo A] cruzasse com [universo B] — quem sobreviveria?</div><div class="idea-body">Quarta Asa vs Solo Leveling. Haikyuu vs Blue Lock. Guerras de fandom nos comentários = engajamento explosivo.</div><div class="idea-plat"><span class="plt plt-ig">Carrossel</span><span class="plt plt-tk">TikTok</span></div></div>
+    <div class="idea"><span class="idea-cat cat-c">Dev + Geek</span><div class="idea-title">Olhando [jogo] com olhos de dev — o que me chama atenção</div><div class="idea-body">Seu ângulo único que nenhuma outra influenciadora geek tem. Análise técnica + personalidade.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-yt">YouTube</span></div></div>
+    <div class="idea"><span class="idea-cat cat-c">Playlist</span><div class="idea-title">Playlist que combina com [universo/mood geek]</div><div class="idea-body">Cria no Spotify + vídeo explicando as escolhas. Conexão música + geek. Muito compartilhado.</div><div class="idea-plat"><span class="plt plt-ig">Reels</span><span class="plt plt-tk">TikTok</span></div></div>
+    <div class="idea"><span class="idea-cat cat-c">Microdrama</span><div class="idea-title">POV: você é [personagem de manhwa/game] e tem que [situação]</div><div class="idea-body"><strong>Tendência 2026 confirmada.</strong> Você age como personagem, curta narrativa. Único no BR no nicho geek feminino.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span></div></div>
+    <div class="idea"><span class="idea-cat cat-c">Comparação</span><div class="idea-title">Rank de protagonistas: quem merecia mais o arco de herói?</div><div class="idea-body">Avaliação subjetiva de personagens. Cada pessoa discorda e comenta. Simples de fazer, alto engajamento.</div><div class="idea-plat"><span class="plt plt-ig">Carrossel</span><span class="plt plt-tk">TikTok</span></div></div>
+    <div class="idea"><span class="idea-cat cat-c">Descoberta</span><div class="idea-title">"O algoritmo me jogou [obra obscura] e não fui mais a mesma"</div><div class="idea-body">Formato de descoberta inesperada. Alta identificação. Funciona pra qualquer mídia. O público ama.</div><div class="idea-plat"><span class="plt plt-tk">TikTok</span><span class="plt plt-ig">Reels</span></div></div>
+  </div>
+
+</div>
+
+<!-- ══════════ FORMATOS ══════════ -->
+<div id="formatos" class="sec">
+
+  <div class="sh">
+    <div class="sh-top"><span class="sh-num">04</span><span class="sh-tag">como executar</span></div>
+    <div class="sh-title">FORMATOS E COMO <em>FAZER</em></div>
+  </div>
+
+  <div class="card">
+    <div class="card-h">🎬 Reel / TikTok (15–60 segundos)</div>
+    <ul class="dots">
+      <li><strong>Gancho nos primeiros 3 segundos:</strong> a primeira frase decide se alguém continua. Começa com a informação mais interessante, não com introdução. "Então eu descobri uma coisa sobre [X] que mudou tudo" > "Oi gente, hoje vou falar sobre..."</li>
+      <li><strong>Legenda automática:</strong> usa o CapCut. 80% das pessoas assiste sem som. Legenda = acessibilidade + mais visualizações.</li>
+      <li><strong>Cortes rápidos:</strong> a cada 2–3 segundos no máximo. Edição dinâmica retém mais.</li>
+      <li><strong>CTA no final:</strong> "Salva esse vídeo", "Comenta se você concorda", "Segue pra mais". Sempre uma ação só.</li>
+      <li><strong>Thumbnail do Reel:</strong> usa frame onde seu rosto aparece bem. Expressão + texto na tela = mais clique.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-h">📸 Carrossel (slides)</div>
+    <ul class="dots">
+      <li><strong>Slide 1:</strong> título que faz as pessoas quererem ver o próximo. "X coisas que...", "Ranqueei todos os...", "Guia de..."</li>
+      <li><strong>Slides 2–N:</strong> conteúdo. Uma informação por slide. Não sobrecarrega.</li>
+      <li><strong>Último slide:</strong> CTA. "Salva pra não perder", "Marca alguém que precisa ver isso".</li>
+      <li><strong>Por que carrossel:</strong> o Instagram empurra pro feed quando as pessoas passam os slides. Mais tempo = mais alcance.</li>
+      <li><strong>Melhor pra:</strong> rankings, listas, guias, comparativos, recomendações, antes/depois.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-h">📺 YouTube — vídeo longo (8–20 minutos)</div>
+    <ul class="dots">
+      <li><strong>Thumbnail:</strong> rosto + expressão + texto grande colorido. O YouTube é sobre click. Thumbnail ruim = zero views.</li>
+      <li><strong>Título com palavra-chave:</strong> "Haul Bienal do Livro 2025", "Guia NTE para iniciantes". Pessoas buscam isso.</li>
+      <li><strong>Primeiros 30 segundos:</strong> mostra o que vai ter no vídeo. Não tem intro longa de 1 minuto.</li>
+      <li><strong>Melhor pra:</strong> vlogs de evento, tour pelo quarto, guias completos, séries de lore, unboxings longos.</li>
+      <li><strong>Frequência realista:</strong> 1 vídeo longo por mês é ótimo pra começar. Shorts semanais no meio.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-h">📖 Stories — conteúdo diário</div>
+    <ul class="dots">
+      <li><strong>Enquetes:</strong> "Qual você prefere: [A] ou [B]?" — engaja sem esforço e mostra ao algoritmo que sua conta tem movimento.</li>
+      <li><strong>Caixinha de perguntas:</strong> pede indicações, responde perguntas, cria conteúdo baseado no que o público quer.</li>
+      <li><strong>Bastidores:</strong> mostra o processo de edição, o que está jogando agora, o livro que começou. Humaniza.</li>
+      <li><strong>Repost de fã:</strong> quando alguém te marcar, reposta. Mostra que você vê o público.</li>
+      <li><strong>Contagem regressiva:</strong> usa pra avisar que vídeo novo vem aí. Cria expectativa.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-h">🔴 Lives — quando e como</div>
+    <ul class="dots">
+      <li><strong>Quando fazer:</strong> lançamento de trailer importante, durante evento geek ao vivo, sessão de games com o público, haul ao vivo.</li>
+      <li><strong>Avisa com antecedência:</strong> story 1 dia antes + 1 hora antes. Lives surpresa têm muito menos audiência.</li>
+      <li><strong>Duração:</strong> 30 minutos é suficiente pra começar. Lives longas demandam mais energia e audiência.</li>
+      <li><strong>Monetização:</strong> no TikTok lives você recebe gifts. Na Twitch, bits e subs. Começa aqui.</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ══════════ ALGORITMO ══════════ -->
+<div id="algoritmo" class="sec">
+
+  <div class="sh">
+    <div class="sh-top"><span class="sh-num">05</span><span class="sh-tag">crescer de verdade</span></div>
+    <div class="sh-title">COMO O <em>ALGORITMO</em> FUNCIONA</div>
+  </div>
+
+  <div class="call c-cyan">
+    <strong>TikTok Next 2026 (pesquisa oficial da plataforma):</strong> O algoritmo de 2026 recompensa "curiosidade ativa" — conteúdo que faz as pessoas explorarem, comentarem e compartilharem. Autenticidade e conteúdo humano têm prioridade sobre produção perfeita. Isso é uma boa notícia pra você.
+  </div>
+
+  <div class="sh" style="margin-top:28px"><div class="sh-title">Instagram — <em>como crescer</em></div></div>
+
+  <div class="card">
+    <ul class="dots">
+      <li><strong>Reels têm alcance orgânico muito maior que fotos.</strong> O Instagram empurra Reels pra pessoas que não te seguem. Prioriza esse formato.</li>
+      <li><strong>As primeiras 2h após postar são críticas.</strong> Responde TODOS os comentários nesse período. O algoritmo mede velocidade de engajamento para decidir se vai empurrar o post.</li>
+      <li><strong>Salvamentos > curtidas.</strong> O Instagram valoriza mais quando alguém salva um post do que quando curte. Cria conteúdo que as pessoas vão querer guardar.</li>
+      <li><strong>Compartilhamentos > tudo.</strong> Quando alguém manda seu Reel pra outra pessoa, o alcance explode. Conteúdo de identificação ("isso sou eu") é o mais compartilhado.</li>
+      <li><strong>Hashtags ainda funcionam, mas menos.</strong> Usa 5–8 hashtags específicas de nicho. Evita hashtags genéricas com bilhões de posts.</li>
+      <li><strong>Horário ideal no Brasil:</strong> 19h–22h de segunda a sexta. Sábado 10h–12h também funciona bem.</li>
+    </ul>
+  </div>
+
+  <div class="sh" style="margin-top:28px"><div class="sh-title">TikTok — <em>como crescer</em></div></div>
+
+  <div class="card">
+    <ul class="dots">
+      <li><strong>O TikTok entrega pra desconhecidos por padrão.</strong> Diferente do Instagram, cada vídeo começa do zero e é testado em grupos pequenos. Um vídeo ruim não "queima" sua conta.</li>
+      <li><strong>Som em alta = alcance maior.</strong> O algoritmo favorece vídeos com sons que estão em trend. Verifica a seção "Sons" antes de postar.</li>
+      <li><strong>Taxa de conclusão é a métrica mais importante.</strong> Se as pessoas assistem até o fim (ou repetem), o TikTok empurra pra mais gente. Vídeos curtos têm taxa de conclusão maior.</li>
+      <li><strong>Posta no horário de pico:</strong> 18h–22h no Brasil. Fim de semana: 10h–12h.</li>
+      <li><strong>Frequência > qualidade no início.</strong> 1 vídeo/dia por 30 dias ensina ao algoritmo quem é seu público. Depois você pode reduzir mantendo qualidade.</li>
+      <li><strong>Duet e Stitch:</strong> reage a vídeos do seu nicho. O algoritmo entrega seu vídeo pra audiência da conta original.</li>
+    </ul>
+  </div>
+
+  <div class="sh" style="margin-top:28px"><div class="sh-title">YouTube — <em>como crescer</em></div></div>
+
+  <div class="card">
+    <ul class="dots">
+      <li><strong>SEO é tudo.</strong> Use palavras que as pessoas buscam no título: "Haul Bienal 2025", "Como começar no NTE", "Quarta Asa vale a pena". YouTube é buscador.</li>
+      <li><strong>Thumbnail clicável:</strong> teste A/B de thumbnails é real. Rosto expressivo + texto grande + contraste alto = mais clique.</li>
+      <li><strong>Retenção determina recomendação.</strong> Se as pessoas assistem 70%+ do vídeo, o YouTube recomenda pra mais gente.</li>
+      <li><strong>Shorts alimentam o canal grande.</strong> Posta Shorts toda semana. Quando viralizar, as pessoas vão pro canal e encontram os vídeos longos.</li>
+    </ul>
+  </div>
+
+  <div class="sh" style="margin-top:28px"><div class="sh-title">Regras de ouro do <em>crescimento</em></div></div>
+  <div class="g2">
+    <div class="mini"><h4>🔥 O que cresce</h4><p>Identificação ("isso sou eu"), debate ("discordo!"), descoberta ("não sabia disso"), utilidade ("vou salvar"). Cria pra gerar um desses 4 sentimentos.</p></div>
+    <div class="mini"><h4>❄️ O que não cresce</h4><p>Post sem CTA, conteúdo genérico sem personalidade, sumir por semanas, postar sem responder comentários, thumbnail com texto pequeno.</p></div>
+    <div class="mini"><h4>📊 Métricas que importam</h4><p>Salvamentos, compartilhamentos, taxa de conclusão (vídeos), comentários reais. Curtidas são as menos importantes.</p></div>
+    <div class="mini"><h4>⏱️ Frequência mínima</h4><p>Instagram: 3–4 Reels/semana + stories diários. TikTok: 5+/semana. YouTube: 1 longo/mês + Shorts semanais.</p></div>
+  </div>
+
+</div>
+
+<!-- ══════════ CHECKLIST ══════════ -->
+<div id="checklist" class="sec">
+
+  <div class="sh">
+    <div class="sh-top"><span class="sh-num">06</span><span class="sh-tag">sua lista de execução</span></div>
+    <div class="sh-title">CHECKLIST <em>INTERATIVO</em></div>
+  </div>
+
+  <div class="call c-lil">Clique nos itens pra marcar como feito. Seu progresso fica salvo enquanto a página estiver aberta.</div>
+
+  <div class="card">
+    <div class="card-h">🚀 Semana 1 — Setup</div>
+    <ul class="check">
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Beacons.ai criado</strong> com todas as plataformas + email</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>TikTok @by.arwenn</strong> criado com foto e bio</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>YouTube @by.arwenn</strong> criado com foto e descrição</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Bio do Instagram</strong> atualizada com "Arwen" + link</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Highlights Make e Livros</strong> criados</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>CapCut instalado</strong> e tutorial básico feito</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Lightroom Mobile</strong> com preset criado</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>3 templates de stories</strong> no Canva prontos</div></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-h">📱 Semana 2 — Primeiros conteúdos</div>
+    <ul class="check">
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Reel de apresentação</strong> gravado e postado (IG + TikTok + YT Shorts)</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>8 conteúdos em estoque</strong> — prontos pra publicar</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Calendário de conteúdo</strong> das próximas 2 semanas montado</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Instagram Insights</strong> ativado e analisado pela primeira vez</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>30 contas do nicho</strong> seguidas e comentadas de verdade</div></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-h">🔧 Semana 3–4 — Sistemas</div>
+    <ul class="check">
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Notion de banco de ideias</strong> com pelo menos 20 ideias jogadas</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Amazon Afiliados</strong> cadastrado</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Media kit</strong> 1 página no Canva finalizado</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Paleta de cores definida</strong> e documentada (hex codes salvos)</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Pinterest</strong> criado e primeiros pins postados</div></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-h">📈 Mês 2–3 — Crescimento</div>
+    <ul class="check">
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Primeira série de conteúdo</strong> lançada (ex: Arwen Indica toda quinta)</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Primeiro email de parceria</strong> enviado (permuta)</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Primeira colab ou duet</strong> com outra conta do nicho</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>Análise semanal de insights</strong> — qual tipo de post performou melhor</div></li>
+      <li onclick="tog(this)"><span class="box"></span><div><strong>2k seguidores</strong> no Instagram atingidos</div></li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ══════════ PARCERIAS ══════════ -->
+<div id="parcerias" class="sec">
+
+  <div class="sh">
+    <div class="sh-top"><span class="sh-num">07</span><span class="sh-tag">monetização</span></div>
+    <div class="sh-title">FECHANDO <em>PARCERIAS</em></div>
+  </div>
+
+  <div class="call c-gold">
+    <strong>Verdade que ninguém conta:</strong> Parceria não depende de ter 100k seguidores. Depende de ter engajamento real, nicho claro e abordagem profissional. Com 1k–2k seguidores engajados você já pode fechar permuta. Com 3k–5k você começa a cobrar.
+  </div>
+
+  <div class="sh" style="margin-top:28px"><div class="sh-title">Onde mandar <em>proposta</em> agora</div></div>
+
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Tipo de empresa</th><th>Como abordar</th><th>O que oferecer</th></tr>
+      <tr><td>Lojas geek online</td><td>Email ou DM no Instagram da loja. Assunto: "Parceria — @by.arwenn"</td><td>Post/Reel em troca de produto (permuta)</td></tr>
+      <tr><td>Marcas de make indie</td><td>Email com media kit anexado</td><td>Review honesta em troca de produto</td></tr>
+      <tr><td>Editoras independentes</td><td>Email pra assessoria de imprensa da editora</td><td>Review de livro em BookTok/Reels</td></tr>
+      <tr><td>Apps de games mobile</td><td>Busca "programa de criadores [nome do jogo]"</td><td>Conteúdo do jogo em troca de itens/gemas</td></tr>
+      <tr><td>Sebos e livrarias indie</td><td>DM ou presencialmente</td><td>Post em troca de desconto ou livro</td></tr>
+      <tr><td>Lojas de Funko/cards</td><td>Email ou DM — menciona que coleciona</td><td>Unboxing/review em troca de produto</td></tr>
+    </table>
+  </div>
+
+  <div class="sh" style="margin-top:28px"><div class="sh-title">Email de <em>prospecção</em> — template</div></div>
+
+  <div class="card">
+    <div class="card-h">📧 Email pronto pra adaptar</div>
+    <div style="background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:18px; font-size:13px; color:var(--text); line-height:1.9; font-family:'JetBrains Mono',monospace;">
+      <strong style="color:var(--lil)">Assunto:</strong> Proposta de Parceria — @by.arwenn<br><br>
+      Olá, [nome da empresa/pessoa],<br><br>
+      Meu nome é Arwen, criadora de conteúdo geek no Instagram (@by.arwenn) e TikTok com foco em [games/livros/make — coloca o nicho deles].<br><br>
+      Tenho [X] seguidores com [X]K de alcance mensal, público majoritariamente feminino de 16–28 anos apaixonado por [nicho relevante pra empresa].<br><br>
+      Gostaria de propor uma parceria de [permuta/publi paga]: em troca de [produto], produzo [Reel + Stories / Review completa / Unboxing] com alcance estimado de [X] pessoas do seu público-alvo.<br><br>
+      Seguem minhas métricas em anexo [media kit].<br><br>
+      Fico à disposição para conversar,<br>
+      Arwen — @by.arwenn<br>
+      by.arwenn.contato@gmail.com
+    </div>
+  </div>
+
+  <div class="sh" style="margin-top:28px"><div class="sh-title">Tabela de <em>preços</em> sugeridos</div></div>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Formato</th><th>1k–3k seg.</th><th>3k–10k seg.</th><th>10k–50k seg.</th></tr>
+      <tr><td>Story simples (3 slides)</td><td>Permuta</td><td>R$80–200</td><td>R$200–500</td></tr>
+      <tr><td>Reel (até 60s)</td><td>Permuta</td><td>R$300–600</td><td>R$600–1.500</td></tr>
+      <tr><td>Review completa (Reels + Stories)</td><td>Permuta</td><td>R$400–800</td><td>R$800–2.000</td></tr>
+      <tr><td>Vídeo YouTube longo</td><td>Permuta</td><td>R$400–900</td><td>R$900–2.500</td></tr>
+      <tr><td>Pacote mensal (4 posts)</td><td>Permuta</td><td>R$600–1.500</td><td>R$1.500–4.000</td></tr>
+    </table>
+    <div class="call c-lil" style="margin-top:12px">
+      <strong>Lembra:</strong> 2k seguidores com 15% de engajamento fecha parceria. 30k com 0.5% não fecha. Seus números de engajamento do media kit são mais importantes que o total de seguidores.
+    </div>
+  </div>
+
+</div>
+
+<!-- ══════════ SEMANA TIPO ══════════ -->
+<div id="semana" class="sec">
+
+  <div class="sh">
+    <div class="sh-top"><span class="sh-num">08</span><span class="sh-tag">rotina de criadora</span></div>
+    <div class="sh-title">SUA <em>SEMANA TIPO</em></div>
+  </div>
+
+  <div class="call c-pink">
+    <strong>Isso não é lei.</strong> É um modelo. Adapta pra sua realidade: faculdade à noite, estágio de dia, horários variados. O que importa é que exista alguma estrutura — mesmo que irregular.
+  </div>
+
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Dia</th><th>Instagram</th><th>TikTok</th><th>YouTube</th><th>Bastidores</th></tr>
+      <tr><td>Segunda</td><td>Reel — games/anime (hot take ou reação)</td><td>Mesmo vídeo</td><td>Short automático</td><td>Analisa insights da semana passada</td></tr>
+      <tr><td>Terça</td><td>Stories (enquete, bastidor, vida)</td><td>Vídeo exclusivo — manhwa/lore</td><td>—</td><td>Grava conteúdo da semana</td></tr>
+      <tr><td>Quarta</td><td>Reel — make (GRWM ou review)</td><td>Mesmo vídeo</td><td>Short automático</td><td>Edita vídeos no CapCut</td></tr>
+      <tr><td>Quinta</td><td>Carrossel — ranking/guia/recomendação</td><td>Trend do momento</td><td>—</td><td>Planejamento da semana seguinte</td></tr>
+      <tr><td>Sexta</td><td>Reel — entretenimento/humor/POV</td><td>Mesmo vídeo</td><td>Short automático</td><td>Responde DMs e comentários acumulados</td></tr>
+      <tr><td>Sábado</td><td>Stories leves / Live ocasional</td><td>Haul ou vlog se tiver</td><td>Vídeo longo (1x/mês)</td><td>Grava conteúdos maiores (YT longo)</td></tr>
+      <tr><td>Domingo</td><td>Story opcional</td><td>Repost do melhor da semana</td><td>—</td><td>Descansa ou programa semana seguinte</td></tr>
+    </table>
+  </div>
+
+  <div class="sh" style="margin-top:28px"><div class="sh-title">Rotina de <em>segunda-feira</em></div></div>
+  <div class="card">
+    <div class="card-h">📊 Análise semanal — 15 minutos</div>
+    <ul class="dots">
+      <li><strong>Qual Reel teve mais alcance essa semana?</strong> Que tipo de conteúdo era? Faz mais desse.</li>
+      <li><strong>Qual post foi mais salvo?</strong> Carrossel de quê? Repete o formato.</li>
+      <li><strong>Qual TikTok teve mais visualizações?</strong> Qual nicho, qual formato?</li>
+      <li><strong>Cresceu quantos seguidores?</strong> Em qual dia teve pico? Por quê?</li>
+      <li><strong>O que você evitaria fazer de novo?</strong> Aprende rápido com o que não funcionou.</li>
+    </ul>
+  </div>
+
+  <div class="sh" style="margin-top:28px"><div class="sh-title">Quando o conteúdo <em>travar</em></div></div>
+  <div class="card">
+    <div class="card-h">🆘 Protocolo anti-bloqueio</div>
+    <div class="g2">
+      <div class="mini"><h4>Abre o banco de ideias</h4><p>Vai em "150+ Ideias" nesse manual. Escolhe o primeiro que parecer menos difícil de fazer agora. Executa.</p></div>
+      <div class="mini"><h4>Posta algo imperfeito</h4><p>Story de 15 segundos mostrando o que você está jogando/lendo. Simples. A presença importa mais que a qualidade quando você tá travada.</p></div>
+      <div class="mini"><h4>Pede pro público decidir</h4><p>Caixinha de perguntas: "Me manda uma indicação de [game/anime/livro]." O público te dá conteúdo gratuitamente.</p></div>
+      <div class="mini"><h4>Reage a algo novo</h4><p>Qualquer trailer, anúncio ou notícia do seu nicho que saiu hoje. Conteúdo time-sensitive tem alcance fácil e exige pouco planejamento.</p></div>
+    </div>
+  </div>
+
+</div>
+
+</div><!-- /wrap -->
+
+<div class="footer">
+  feito pra <strong>Arwen</strong> · @by.arwenn · by.arwenn.contato@gmail.com
+  <span class="big">SEU MUNDO É GRANDE — OCUPA ELE TODO</span>
+</div>
+
+<script>
+function show(id, btn) {
+  document.querySelectorAll('.sec').forEach(s => s.classList.remove('on'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function tog(li) {
+  li.classList.toggle('done');
+  const box = li.querySelector('.box');
+  box.textContent = li.classList.contains('done') ? '✓' : '';
+}
+</script>
+</body>
+</html>

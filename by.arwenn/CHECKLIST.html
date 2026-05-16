@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Arwen ✦ Checklist Master • Do Zero a Creator Profissional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lilac: #9D4EDD;
+    --lilac-dark: #5A189A;
+    --lilac-light: #E0BBE4;
+    --lilac-bg: #F3E8FF;
+    --black: #1A1A1A;
+    --off-white: #F5F1E8;
+    --white: #FFFFFF;
+    --green: #4ADE80;
+    --red: #F87171;
+    --yellow: #FCD34D;
+    --shadow: 0 8px 32px rgba(90, 24, 154, 0.15);
+    --shadow-hover: 0 16px 48px rgba(90, 24, 154, 0.30);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--off-white);
+    color: var(--black);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, var(--lilac-dark) 0%, var(--lilac) 100%);
+    color: var(--off-white);
+    padding: 3rem 2rem 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before, header::after {
+    content: '✦';
+    position: absolute;
+    font-size: 6rem;
+    opacity: 0.1;
+  }
+  header::before { top: 10%; left: 5%; }
+  header::after { bottom: 10%; right: 5%; }
+  header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    letter-spacing: 3px;
+    line-height: 1;
+  }
+  header h1 span {
+    display: inline-block;
+    background: var(--off-white);
+    color: var(--lilac-dark);
+    padding: 0 0.8rem;
+    transform: rotate(-2deg);
+    margin: 0 0.3rem;
+  }
+  header .subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    color: var(--lilac-light);
+  }
+  header .description {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1rem;
+  }
+
+  /* PROGRESS BAR */
+  .progress-section {
+    background: var(--lilac-bg);
+    padding: 2rem;
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 3px solid var(--lilac);
+  }
+  .progress-container {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .progress-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--lilac-dark);
+    letter-spacing: 2px;
+  }
+  .progress-stats {
+    font-weight: 700;
+    color: var(--lilac-dark);
+    font-size: 1.1rem;
+  }
+  .progress-bar {
+    background: var(--off-white);
+    border-radius: 999px;
+    height: 14px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .progress-fill {
+    background: linear-gradient(90deg, var(--lilac) 0%, var(--lilac-dark) 100%);
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    transition: width 0.6s ease;
+    position: relative;
+  }
+  .progress-fill::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+    animation: shimmer 2s infinite;
+  }
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  .quick-jump {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    justify-content: center;
+  }
+  .quick-jump a {
+    background: var(--off-white);
+    color: var(--lilac-dark);
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 2px solid var(--lilac);
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .quick-jump a:hover {
+    background: var(--lilac);
+    color: var(--off-white);
+    transform: translateY(-2px);
+  }
+
+  /* MAIN */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .phase {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 2.5rem;
+    margin-bottom: 2.5rem;
+    box-shadow: var(--shadow);
+    position: relative;
+    border-top: 8px solid var(--lilac);
+    transition: all 0.3s;
+  }
+  .phase:hover {
+    box-shadow: var(--shadow-hover);
+  }
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+  }
+  .phase-num {
+    background: var(--lilac-dark);
+    color: var(--off-white);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(90, 24, 154, 0.3);
+  }
+  .phase-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(1.8rem, 4vw, 2.5rem);
+    color: var(--lilac-dark);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    flex: 1;
+    min-width: 200px;
+  }
+  .phase-meta {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+  .phase-tag {
+    background: var(--lilac-light);
+    color: var(--lilac-dark);
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .phase-tag.urgent { background: var(--red); color: var(--white); }
+  .phase-tag.soon { background: var(--yellow); color: var(--black); }
+  .phase-tag.later { background: var(--lilac-light); color: var(--lilac-dark); }
+  .phase-description {
+    font-style: italic;
+    color: var(--lilac-dark);
+    margin-bottom: 1.5rem;
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    border-left: 3px solid var(--lilac);
+    padding-left: 1rem;
+  }
+
+  .task-group {
+    margin-bottom: 1.5rem;
+  }
+  .task-group-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    color: var(--lilac);
+    letter-spacing: 1.5px;
+    margin: 1.5rem 0 0.8rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px dashed var(--lilac-light);
+  }
+
+  .task {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--off-white);
+    border-radius: 14px;
+    margin-bottom: 0.6rem;
+    cursor: pointer;
+    transition: all 0.25s;
+    border: 2px solid transparent;
+  }
+  .task:hover {
+    background: var(--lilac-bg);
+    transform: translateX(4px);
+    border-color: var(--lilac-light);
+  }
+  .task input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 26px;
+    height: 26px;
+    border: 3px solid var(--lilac);
+    border-radius: 8px;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+    position: relative;
+    transition: all 0.2s;
+    background: var(--white);
+  }
+  .task input[type="checkbox"]:hover { transform: scale(1.1); }
+  .task input[type="checkbox"]:checked {
+    background: var(--lilac-dark);
+    border-color: var(--lilac-dark);
+  }
+  .task input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    color: var(--off-white);
+    font-size: 18px;
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .task-content {
+    flex: 1;
+  }
+  .task-content .task-title {
+    font-weight: 600;
+    color: var(--black);
+    transition: all 0.2s;
+    margin-bottom: 0.15rem;
+  }
+  .task-content .task-desc {
+    font-size: 0.88rem;
+    color: var(--lilac-dark);
+    margin-top: 0.2rem;
+    line-height: 1.45;
+  }
+  .task-content .task-desc a {
+    color: var(--lilac-dark);
+    text-decoration: underline;
+    font-weight: 600;
+  }
+  .task-content .task-desc a:hover { color: var(--lilac); }
+  .task input[type="checkbox"]:checked ~ .task-content .task-title {
+    text-decoration: line-through;
+    color: var(--lilac-light);
+  }
+  .task input[type="checkbox"]:checked ~ .task-content .task-desc {
+    opacity: 0.5;
+  }
+
+  /* PRIORITY DOT */
+  .priority {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 0.4rem;
+  }
+  .priority.high { background: var(--red); }
+  .priority.mid { background: var(--yellow); }
+  .priority.low { background: var(--green); }
+
+  /* CTA BOX */
+  .cta-box {
+    background: linear-gradient(135deg, var(--lilac-dark) 0%, var(--lilac) 100%);
+    color: var(--off-white);
+    padding: 2rem;
+    border-radius: 20px;
+    margin: 3rem 0;
+    text-align: center;
+  }
+  .cta-box h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+  }
+  .cta-box p {
+    margin-bottom: 1.2rem;
+    font-style: italic;
+  }
+  .cta-box button {
+    background: var(--off-white);
+    color: var(--lilac-dark);
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 0.9rem;
+  }
+  .cta-box button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+
+  /* MOTIVATION BANNER */
+  .motivation {
+    background: var(--white);
+    border-left: 6px solid var(--lilac);
+    padding: 1.2rem 1.5rem;
+    border-radius: 0 12px 12px 0;
+    margin: 1rem 0;
+    font-style: italic;
+    color: var(--lilac-dark);
+  }
+
+  /* COMPLETE STATE */
+  .phase.complete {
+    border-top-color: var(--green);
+    opacity: 0.9;
+  }
+  .phase.complete .phase-num {
+    background: var(--green);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    color: var(--lilac-light);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.85rem;
+  }
+  footer span { color: var(--lilac); }
+
+  /* MOBILE */
+  @media (max-width: 768px) {
+    main { padding: 2rem 1rem; }
+    .phase { padding: 1.5rem; }
+    .progress-section { padding: 1.2rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>CHECKLIST <span>MASTER</span></h1>
+  <p class="subtitle">do 0 a creator profissional ✦</p>
+  <p class="description">Roadmap completo da Arwen para sair do Instagram-com-um-sonho até estar prospectando marcas, cadastrada em plataformas e disputando processos seletivos. Marca os itens conforme for fazendo — o progresso fica salvo automaticamente.</p>
+</header>
+
+<div class="progress-section">
+  <div class="progress-container">
+    <div class="progress-header">
+      <div class="progress-title">✦ PROGRESSO GERAL</div>
+      <div class="progress-stats"><span id="completed">0</span> / <span id="total">0</span> · <span id="percent">0%</span></div>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="quick-jump">
+      <a href="#fase0">F0 · Auditoria</a>
+      <a href="#fase1">F1 · Perfil</a>
+      <a href="#fase2">F2 · Materiais</a>
+      <a href="#fase3">F3 · Conteúdo</a>
+      <a href="#fase4">F4 · Plataformas</a>
+      <a href="#fase5">F5 · Expansão</a>
+      <a href="#fase6">F6 · Prospecção</a>
+      <a href="#fase7">F7 · Rotina</a>
+    </div>
+  </div>
+</div>
+
+<main>
+
+<!-- FASE 0 -->
+<section class="phase" id="fase0">
+  <div class="phase-header">
+    <div class="phase-num">0</div>
+    <div>
+      <h2 class="phase-title">AUDITORIA ATUAL — O QUE VOCÊ JÁ TEM</h2>
+      <div class="phase-meta">
+        <span class="phase-tag">Status</span>
+        <span class="phase-tag urgent">Confirmar essa semana</span>
+      </div>
+    </div>
+  </div>
+  <p class="phase-description">Antes de criar coisa nova, valida o que já existe. Tudo aqui deveria estar pronto — só confirmar e ajustar se algo mudou.</p>
+
+  <div class="task-group">
+    <div class="task-group-title">PRESENÇA</div>
+    <label class="task"><input type="checkbox" data-id="0-1"><div class="task-content"><div class="task-title"><span class="priority high"></span>Instagram @by.arwenn verificado e ativo</div><div class="task-desc">Confere se a verificação ainda tá lá e se o e-mail de parcerias está visível.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="0-2"><div class="task-content"><div class="task-title"><span class="priority high"></span>E-mail de parcerias funcionando</div><div class="task-desc">Manda um e-mail teste pra by.arwenn.contato@gmail.com e responde de outra conta — confere se chega e se a notificação pinga.</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">ARQUIVOS QUE JÁ CRIEI (CONFERE)</div>
+    <label class="task"><input type="checkbox" data-id="0-3"><div class="task-content"><div class="task-title"><span class="priority high"></span>Abrir e revisar <code>PORTFOLIO_CANVA.md</code></div><div class="task-desc">Estrutura completa pra montar no Canva. Confere se os textos batem com sua voz — me avisa se quer mudar algo.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="0-4"><div class="task-content"><div class="task-title"><span class="priority high"></span>Abrir e revisar <code>index.html</code> (site portfolio)</div><div class="task-desc">Clica duas vezes no arquivo, abre no navegador. Confere paleta, textos, layout. Pendência: trocar o placeholder de foto.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="0-5"><div class="task-content"><div class="task-title"><span class="priority high"></span>Abrir e revisar <code>Arwen_MediaKit_2026.pdf</code></div><div class="task-desc">8 páginas, paleta lilás. Confere se os números estão certos (1.2K, 32K, 85%) — se mudou, me avisa que eu refaço.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="0-6"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Conferir <code>arwen-manual-completo.html</code></div><div class="task-desc">O manual que já existia. Garante que continua relevante e usa como base.</div></div></label>
+  </div>
+</section>
+
+<!-- FASE 1 -->
+<section class="phase" id="fase1">
+  <div class="phase-header">
+    <div class="phase-num">1</div>
+    <div>
+      <h2 class="phase-title">POLIR O PERFIL DO INSTAGRAM</h2>
+      <div class="phase-meta">
+        <span class="phase-tag urgent">Semana 1</span>
+        <span class="phase-tag">Sem isso, sem prospecção</span>
+      </div>
+    </div>
+  </div>
+  <p class="phase-description">Marca olha o perfil antes de fechar parceria. Esse é o cartão de visitas — precisa estar 10/10 antes de prospectar.</p>
+
+  <div class="task-group">
+    <div class="task-group-title">BIO &amp; INFO</div>
+    <label class="task"><input type="checkbox" data-id="1-1"><div class="task-content"><div class="task-title"><span class="priority high"></span>Aplicar bio otimizada</div><div class="task-desc">Abre <code>BIO_INSTAGRAM.md</code> que eu criei, escolhe uma das 3 opções (A/B/C), substitui no app. Inclui emoji, nicho, CTA e e-mail.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="1-2"><div class="task-content"><div class="task-title"><span class="priority high"></span>Categoria profissional certa no IG</div><div class="task-desc">Editar perfil → Configurações profissionais → Categoria: "Criador de conteúdo digital" ou "Personalidade pública".</div></div></label>
+    <label class="task"><input type="checkbox" data-id="1-3"><div class="task-content"><div class="task-title"><span class="priority high"></span>Botão de contato configurado</div><div class="task-desc">Editar perfil → Opções de contato → Adicionar e-mail by.arwenn.contato@gmail.com. Aparece um botão "E-mail" no perfil.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="1-4"><div class="task-content"><div class="task-title"><span class="priority high"></span>Foto de perfil bem iluminada e enquadrada</div><div class="task-desc">Rosto visível, expressão sua (sorriso ou cara de "vem que tem"), fundo limpo. Crop circular já considerado.</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">DESTAQUES (HIGHLIGHTS) — 6 essenciais</div>
+    <label class="task"><input type="checkbox" data-id="1-5"><div class="task-content"><div class="task-title"><span class="priority high"></span>Highlight "🎮 GAMES"</div><div class="task-desc">Gameplays, dicas, reações a lançamentos. Capa: ícone de controle em lilás.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="1-6"><div class="task-content"><div class="task-title"><span class="priority high"></span>Highlight "📚 LIVROS"</div><div class="task-desc">Resenhas, indicações, hauls. Você ainda não tem — produzir essa semana.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="1-7"><div class="task-content"><div class="task-title"><span class="priority high"></span>Highlight "💄 MAKE"</div><div class="task-desc">Looks, character makes, get ready. Você ainda não tem — produzir essa semana.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="1-8"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Highlight "🎪 EVENTOS"</div><div class="task-desc">CCXP, Bienal, lançamentos. Mesmo um post pequeno já vale.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="1-9"><div class="task-content"><div class="task-title"><span class="priority high"></span>Highlight "💜 SOBRE MIM"</div><div class="task-desc">Stories rápidos com 5-7 fatos sobre você. Funciona como bio expandida.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="1-10"><div class="task-content"><div class="task-title"><span class="priority high"></span>Highlight "🤝 PARCERIAS / UGC"</div><div class="task-desc">Vai virar o vitrine das colabs. Começa vazio mas cria a capa já.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="1-11"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Capas dos highlights na mesma paleta</div><div class="task-desc">Lilás + preto. Use Canva: busca "Instagram highlight cover purple" e edita.</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">PINNED POSTS (3 fixados)</div>
+    <label class="task"><input type="checkbox" data-id="1-12"><div class="task-content"><div class="task-title"><span class="priority high"></span>1º pinned: Vídeo de apresentação</div><div class="task-desc">Aquele que vou te entregar o roteiro. "Oi, sou a Arwen, faço X, Y, Z, bora ver?"</div></div></label>
+    <label class="task"><input type="checkbox" data-id="1-13"><div class="task-content"><div class="task-title"><span class="priority high"></span>2º pinned: Maior viral seu até hoje</div><div class="task-desc">Olha analytics, pega o de maior view e fixa. Prova social.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="1-14"><div class="task-content"><div class="task-title"><span class="priority high"></span>3º pinned: Conteúdo que mostra seu nicho mais forte</div><div class="task-desc">Make, livro, ou game — o que sua audiência mais responde.</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">LINK NA BIO</div>
+    <label class="task"><input type="checkbox" data-id="1-15"><div class="task-content"><div class="task-title"><span class="priority high"></span>Criar Beacons.ai</div><div class="task-desc">Vai em <a href="https://beacons.ai" target="_blank">beacons.ai</a>, cria conta com o e-mail de parcerias, cria página. Tema escuro com lilás.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="1-16"><div class="task-content"><div class="task-title"><span class="priority high"></span>Configurar Beacons com botões essenciais</div><div class="task-desc">📁 Portfolio (link do site) · 📩 Quero fazer parceria (e-mail) · 🎮 TikTok · 📺 YouTube · 📕 Skoob ou Goodreads (livros)</div></div></label>
+    <label class="task"><input type="checkbox" data-id="1-17"><div class="task-content"><div class="task-title"><span class="priority high"></span>Colocar link do Beacons na bio do IG</div><div class="task-desc">Único link visível, com tudo dentro.</div></div></label>
+  </div>
+</section>
+
+<!-- FASE 2 -->
+<section class="phase" id="fase2">
+  <div class="phase-header">
+    <div class="phase-num">2</div>
+    <div>
+      <h2 class="phase-title">MATERIAIS PROFISSIONAIS</h2>
+      <div class="phase-meta">
+        <span class="phase-tag urgent">Semana 1-2</span>
+        <span class="phase-tag">Portfolio &amp; Kit</span>
+      </div>
+    </div>
+  </div>
+  <p class="phase-description">A maioria das tarefas dessa fase já tá pronta — só falta publicar e personalizar com sua cara.</p>
+
+  <div class="task-group">
+    <div class="task-group-title">SITE PORTFOLIO</div>
+    <label class="task"><input type="checkbox" data-id="2-1"><div class="task-content"><div class="task-title"><span class="priority high"></span>Substituir placeholders de foto no <code>index.html</code></div><div class="task-desc">Tem 1 placeholder grande na seção Sobre. Troca por &lt;img src="suafoto.jpg"&gt; ou similar. Me chama se precisar.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="2-2"><div class="task-content"><div class="task-title"><span class="priority high"></span>Publicar no Netlify (grátis, 30 segundos)</div><div class="task-desc">Vai em <a href="https://app.netlify.com/drop" target="_blank">netlify.com/drop</a>, arrasta o <code>index.html</code>, vira <code>arwen.netlify.app</code>. Renomeia o subdomínio depois (Configurações → Domain).</div></div></label>
+    <label class="task"><input type="checkbox" data-id="2-3"><div class="task-content"><div class="task-title"><span class="priority mid"></span>(Opcional) Comprar domínio próprio</div><div class="task-desc">Tipo <code>byarwen.com.br</code> em <a href="https://registro.br" target="_blank">registro.br</a> (~R$40/ano). Conecta no Netlify depois.</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">PORTFOLIO NO CANVA</div>
+    <label class="task"><input type="checkbox" data-id="2-4"><div class="task-content"><div class="task-title"><span class="priority high"></span>Abrir Canva e criar arquivo A4 vertical</div><div class="task-desc">Tamanho: A4. Busca template "Influencer media kit" e adapta com sua paleta.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="2-5"><div class="task-content"><div class="task-title"><span class="priority high"></span>Colar conteúdo do <code>PORTFOLIO_CANVA.md</code> nas 8 páginas</div><div class="task-desc">Cada seção do MD vira uma página. Textos prontos, é só copiar.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="2-6"><div class="task-content"><div class="task-title"><span class="priority high"></span>Inserir suas fotos reais nas páginas</div><div class="task-desc">Foto sua na Sobre, prints de conteúdo na seção de quadros, etc.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="2-7"><div class="task-content"><div class="task-title"><span class="priority high"></span>Publicar Canva como site</div><div class="task-desc">Canva → Compartilhar → Publicar como site → URL tipo <code>arwen.my.canva.site</code>. URL gratuita.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="2-8"><div class="task-content"><div class="task-title"><span class="priority high"></span>Exportar PDF do portfolio Canva</div><div class="task-desc">Canva → Baixar → PDF Padrão. Renomeia: <code>Arwen_Portfolio_2026.pdf</code>. Anexa em e-mails de prospecção.</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">MEDIA KIT</div>
+    <label class="task"><input type="checkbox" data-id="2-9"><div class="task-content"><div class="task-title"><span class="priority high"></span>Revisar números e atualizar se preciso</div><div class="task-desc">Abre o PDF. Se algum número mudou, me chama que eu refaço.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="2-10"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Criar versão alternativa em Canva</div><div class="task-desc">Mesma estrutura do PDF, mais visual. Usa pra mandar pra marcas que quer impressionar com estética.</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">FOTOS PROFISSIONAIS</div>
+    <label class="task"><input type="checkbox" data-id="2-11"><div class="task-content"><div class="task-title"><span class="priority high"></span>Sessão de fotos &mdash; 1 dia separado pra produzir</div><div class="task-desc">Olha o <code>GUIA_FOTO_VIDEO.md</code> que eu criei. Tem lista de takes essenciais.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="2-12"><div class="task-content"><div class="task-title"><span class="priority high"></span>Banco de pelo menos 20 fotos próprias</div><div class="task-desc">Variedade: foto vertical pro IG, foto horizontal pro site, foto com setup, foto com produto na mão (UGC sample), foto de make pronta.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="2-13"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Tratar e organizar fotos em pasta</div><div class="task-desc">Pasta tipo <code>by.arwenn/midia/fotos/</code> separadas por categoria. Lightroom ou Snapseed pra editar (cor uniforme).</div></div></label>
+  </div>
+</section>
+
+<!-- FASE 3 -->
+<section class="phase" id="fase3">
+  <div class="phase-header">
+    <div class="phase-num">3</div>
+    <div>
+      <h2 class="phase-title">CONTEÚDO BASE — VITRINE PRÉ-PROSPECÇÃO</h2>
+      <div class="phase-meta">
+        <span class="phase-tag soon">Semana 2-3</span>
+        <span class="phase-tag">Provar que entrega</span>
+      </div>
+    </div>
+  </div>
+  <p class="phase-description">Antes de mandar e-mail pra marca, seu perfil precisa ter conteúdo recente e variado mostrando que você sabe fazer. Inclui UGC sample mesmo sem cliente.</p>
+
+  <div class="task-group">
+    <div class="task-group-title">VÍDEO DE APRESENTAÇÃO (pinned post)</div>
+    <label class="task"><input type="checkbox" data-id="3-1"><div class="task-content"><div class="task-title"><span class="priority high"></span>Gravar vídeo seguindo o <code>ROTEIRO_APRESENTACAO.md</code></div><div class="task-desc">15-30 segundos. Vertical. Iluminação boa. Som claro.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="3-2"><div class="task-content"><div class="task-title"><span class="priority high"></span>Editar no CapCut com sua identidade</div><div class="task-desc">Legenda em lilás, transições simples, música que combine (não muito alta).</div></div></label>
+    <label class="task"><input type="checkbox" data-id="3-3"><div class="task-content"><div class="task-title"><span class="priority high"></span>Postar e fixar no topo do perfil</div><div class="task-desc">Toque longo no post → Fixar no perfil.</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">UGC SAMPLES — 4 vídeos próprios</div>
+    <label class="task"><input type="checkbox" data-id="3-4"><div class="task-content"><div class="task-title"><span class="priority high"></span>UGC #1 — Produto de make que você usa</div><div class="task-desc">Estilo "review honesta UGC". 15-30s vertical. Gancho forte + benefício + CTA. Não posta no seu perfil — usa como amostra.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="3-5"><div class="task-content"><div class="task-title"><span class="priority high"></span>UGC #2 — Game mobile (gameplay quick)</div><div class="task-desc">15s gameplay + voz over animada falando sobre o jogo. Estilo "esse game é viciante demais".</div></div></label>
+    <label class="task"><input type="checkbox" data-id="3-6"><div class="task-content"><div class="task-title"><span class="priority high"></span>UGC #3 — Livro físico (unboxing/review)</div><div class="task-desc">"Esse livro mudou minha cabeça" + showing capa + 3 pontos.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="3-7"><div class="task-content"><div class="task-title"><span class="priority high"></span>UGC #4 — Produto tech / lifestyle</div><div class="task-desc">Funko, action figure, fone, mouse — qualquer coisa que mostre você sabendo apresentar produto.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="3-8"><div class="task-content"><div class="task-title"><span class="priority high"></span>Subir os 4 UGCs numa pasta no Google Drive</div><div class="task-desc">Pasta pública: "Portfolio UGC — Arwen". Link vai pro Beacons e Media Kit.</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">REELS DOS NICHOS — 8 reels (1 por nicho)</div>
+    <label class="task"><input type="checkbox" data-id="3-9"><div class="task-content"><div class="task-title"><span class="priority high"></span>1 Reel de Game Mobile</div><div class="task-desc">Use o quadro "Arwen Joga" ou "Arwen Reage".</div></div></label>
+    <label class="task"><input type="checkbox" data-id="3-10"><div class="task-content"><div class="task-title"><span class="priority high"></span>1 Reel de Nintendo</div><div class="task-desc">Mario Kart resenha, Luigi's Mansion top moments, etc.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="3-11"><div class="task-content"><div class="task-title"><span class="priority high"></span>1 Reel de Livro / Manhwa</div><div class="task-desc">"Quarta Asa em 30 segundos" ou top 3 manhwas do Comick Key.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="3-12"><div class="task-content"><div class="task-title"><span class="priority high"></span>1 Reel de Make</div><div class="task-desc">"Arwen se Arruma" — character make ou dark make rápida.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="3-13"><div class="task-content"><div class="task-title"><span class="priority high"></span>1 Reel de Anime/Filme/Série</div><div class="task-desc">Hot take ou top picks. "Arwen Tem Opinião".</div></div></label>
+    <label class="task"><input type="checkbox" data-id="3-14"><div class="task-content"><div class="task-title"><span class="priority mid"></span>1 Reel de Colecionável</div><div class="task-desc">Mostrando estante de Funkos, unboxing blind box.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="3-15"><div class="task-content"><div class="task-title"><span class="priority mid"></span>1 Reel "A Arwen Indica"</div><div class="task-desc">Top 3 de algo geek (jogos, livros, mangás).</div></div></label>
+    <label class="task"><input type="checkbox" data-id="3-16"><div class="task-content"><div class="task-title"><span class="priority mid"></span>1 Reel "Surto Geek"</div><div class="task-desc">Reação a algum drop, trailer ou release recente.</div></div></label>
+  </div>
+</section>
+
+<!-- FASE 4 -->
+<section class="phase" id="fase4">
+  <div class="phase-header">
+    <div class="phase-num">4</div>
+    <div>
+      <h2 class="phase-title">CADASTRO EM PLATAFORMAS UGC &amp; AGÊNCIAS</h2>
+      <div class="phase-meta">
+        <span class="phase-tag soon">Semana 2-3 (em paralelo)</span>
+        <span class="phase-tag">Onde o trabalho aparece</span>
+      </div>
+    </div>
+  </div>
+  <p class="phase-description">Bora se cadastrar em tudo — quanto mais lugares te buscarem, mais campanhas chegam. Detalhes completos no <code>PLATAFORMAS_CADASTRO.md</code>.</p>
+
+  <div class="task-group">
+    <div class="task-group-title">⭐ ESSENCIAIS — começar por essas</div>
+    <label class="task"><input type="checkbox" data-id="4-1"><div class="task-content"><div class="task-title"><span class="priority high"></span>The Insiders Brasil</div><div class="task-desc">A mais conhecida do mundo, 10+ anos no Brasil. Recebe produto pra testar e divulgar. <a href="https://theinsidersbr.com/" target="_blank">theinsidersbr.com</a></div></div></label>
+    <label class="task"><input type="checkbox" data-id="4-2"><div class="task-content"><div class="task-title"><span class="priority high"></span>The Creator</div><div class="task-desc">Plataforma brasileira pioneira em UGC. <a href="https://thecreator.com.br/" target="_blank">thecreator.com.br</a></div></div></label>
+    <label class="task"><input type="checkbox" data-id="4-3"><div class="task-content"><div class="task-title"><span class="priority high"></span>Bloomer</div><div class="task-desc">Plataforma UGC com matching de campanhas pelo seu perfil. <a href="https://www.bloomer.pro/" target="_blank">bloomer.pro</a></div></div></label>
+    <label class="task"><input type="checkbox" data-id="4-4"><div class="task-content"><div class="task-title"><span class="priority high"></span>Noovid</div><div class="task-desc">Conecta marcas a UGC creators profissionais. Foco em conversão. <a href="https://noovid.com/" target="_blank">noovid.com</a></div></div></label>
+    <label class="task"><input type="checkbox" data-id="4-5"><div class="task-content"><div class="task-title"><span class="priority high"></span>Influency.me</div><div class="task-desc">Nacional. Campanhas + CRM. Aceita micro influencers. <a href="https://www.influency.me/" target="_blank">influency.me</a></div></div></label>
+    <label class="task"><input type="checkbox" data-id="4-6"><div class="task-content"><div class="task-title"><span class="priority high"></span>Creatify</div><div class="task-desc">Principal plataforma UGC no Brasil — campanhas pagas em geral. <a href="https://creatify.com.br/criadores" target="_blank">creatify.com.br</a></div></div></label>
+    <label class="task"><input type="checkbox" data-id="4-7"><div class="task-content"><div class="task-title"><span class="priority high"></span>Publipost</div><div class="task-desc">UGC + reviews + tutoriais. <a href="https://publipost.com.br/" target="_blank">publipost.com.br</a></div></div></label>
+    <label class="task"><input type="checkbox" data-id="4-8"><div class="task-content"><div class="task-title"><span class="priority high"></span>Influencer Brasil</div><div class="task-desc">Sem mínimo de seguidores. <a href="https://influencerbrasil.com.br/" target="_blank">influencerbrasil.com.br</a></div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">🚀 COMPLEMENTARES</div>
+    <label class="task"><input type="checkbox" data-id="4-9"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Seu Influencer</div><div class="task-desc"><a href="https://seuinfluencer.com/" target="_blank">seuinfluencer.com</a></div></div></label>
+    <label class="task"><input type="checkbox" data-id="4-10"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Ovni (app)</div><div class="task-desc">App de loja virtual + UGC. Baixa na PlayStore/AppStore.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="4-11"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Airfluencers / Squid</div><div class="task-desc">Plataforma de influencer (mais focada em micro).</div></div></label>
+    <label class="task"><input type="checkbox" data-id="4-12"><div class="task-content"><div class="task-title"><span class="priority mid"></span>BrandLovers</div><div class="task-desc">Grande mercado nacional de influencers.</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">🎯 AGÊNCIAS (cadastro pra entrar no casting)</div>
+    <label class="task"><input type="checkbox" data-id="4-13"><div class="task-content"><div class="task-title"><span class="priority high"></span>Spark Influencer Hub</div><div class="task-desc">Cadastro aberto pra qualquer tamanho. <a href="https://spark.com.br/influencerhub/" target="_blank">spark.com.br/influencerhub</a></div></div></label>
+    <label class="task"><input type="checkbox" data-id="4-14"><div class="task-content"><div class="task-title"><span class="priority high"></span>Mynd / Pop Creator</div><div class="task-desc">Maior agência do Brasil. <a href="https://mynd8.com.br/" target="_blank">mynd8.com.br</a> — procura formulário "seja talento".</div></div></label>
+    <label class="task"><input type="checkbox" data-id="4-15"><div class="task-content"><div class="task-title"><span class="priority mid"></span>BR Media Group</div><div class="task-desc">Pesquisar formulário de cadastro de creators no site oficial.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="4-16"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Play9</div><div class="task-desc">Agência da Felipe Neto. Pesquisar como entrar em contato.</div></div></label>
+  </div>
+
+  <div class="motivation">
+    💡 <strong>Dica:</strong> tem texto/foto/portfolio pronto, então preencher 12 cadastros leva 2-3 horas. Faz tudo numa tarde.
+  </div>
+</section>
+
+<!-- FASE 5 -->
+<section class="phase" id="fase5">
+  <div class="phase-header">
+    <div class="phase-num">5</div>
+    <div>
+      <h2 class="phase-title">EXPANSÃO MULTIPLATAFORMA</h2>
+      <div class="phase-meta">
+        <span class="phase-tag soon">Semana 3-5</span>
+        <span class="phase-tag">Onde estar</span>
+      </div>
+    </div>
+  </div>
+  <p class="phase-description">Marca paga mais quem entrega em várias plataformas. TikTok primeiro (maior algoritmo geek), depois YouTube.</p>
+
+  <div class="task-group">
+    <div class="task-group-title">TIKTOK</div>
+    <label class="task"><input type="checkbox" data-id="5-1"><div class="task-content"><div class="task-title"><span class="priority high"></span>Criar conta @by.arwenn (ou variação se ocupada)</div><div class="task-desc">Mesmo handle do IG sempre que possível. Conta business/criador.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="5-2"><div class="task-content"><div class="task-title"><span class="priority high"></span>Bio + foto sincronizada com IG</div><div class="task-desc">Mesma vibe, mesma paleta. Link pro Beacons.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="5-3"><div class="task-content"><div class="task-title"><span class="priority high"></span>Repostar seus 5 melhores Reels lá</div><div class="task-desc">Sem TikTok-watermark (baixa direto do CapCut). Hashtags +20 por vídeo, 7 dias seguidos.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="5-4"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Cadastro no TikTok Creator Marketplace</div><div class="task-desc">Quando bater 1k seguidores no TikTok, ativar o Creator Marketplace nas configurações pra receber convites de marca.</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">YOUTUBE</div>
+    <label class="task"><input type="checkbox" data-id="5-5"><div class="task-content"><div class="task-title"><span class="priority high"></span>Criar canal "Arwen" ou "by Arwen"</div><div class="task-desc">Logada com a Google do e-mail pessoal. Foto + banner com paleta lilás.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="5-6"><div class="task-content"><div class="task-title"><span class="priority high"></span>Gravar 1 vídeo de apresentação (vertical OU horizontal)</div><div class="task-desc">Pode ser o mesmo do IG, pode ser mais longo (1-3min). "Quem é Arwen + o que vou postar aqui".</div></div></label>
+    <label class="task"><input type="checkbox" data-id="5-7"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Postar Shorts (versão YouTube do TikTok)</div><div class="task-desc">Mesmos vídeos curtos. Hashtag #shorts.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="5-8"><div class="task-content"><div class="task-title"><span class="priority low"></span>(Futuro) 1 vídeo longo por mês</div><div class="task-desc">Tipo "Top 10 jogos mobile 2026", "Maratona Quarta Asa". Crescimento lento mas pago melhor.</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">CANAIS FUTUROS (planejar)</div>
+    <label class="task"><input type="checkbox" data-id="5-9"><div class="task-content"><div class="task-title"><span class="priority low"></span>Reservar @by.arwenn na Twitch</div><div class="task-desc">Cria conta mesmo que não use agora — segura o nome.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="5-10"><div class="task-content"><div class="task-title"><span class="priority low"></span>Reservar @by.arwenn no Threads</div><div class="task-desc">Texto curto, baseado no IG. Bom pra hot takes.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="5-11"><div class="task-content"><div class="task-title"><span class="priority low"></span>Reservar @by.arwenn no Bluesky</div><div class="task-desc">Em alta entre nicho geek. Boa pra construir cedo.</div></div></label>
+  </div>
+</section>
+
+<!-- FASE 6 -->
+<section class="phase" id="fase6">
+  <div class="phase-header">
+    <div class="phase-num">6</div>
+    <div>
+      <h2 class="phase-title">PROSPECÇÃO ATIVA &amp; PROCESSOS SELETIVOS</h2>
+      <div class="phase-meta">
+        <span class="phase-tag soon">Semana 3+</span>
+        <span class="phase-tag">A grana entra aqui</span>
+      </div>
+    </div>
+  </div>
+  <p class="phase-description">Não dá pra esperar marca te chamar quando você tem 1.2k. Você vai atrás. Detalhes completos no <code>PROCESSOS_SELETIVOS.md</code>.</p>
+
+  <div class="task-group">
+    <div class="task-group-title">LINKEDIN — perfil profissional</div>
+    <label class="task"><input type="checkbox" data-id="6-1"><div class="task-content"><div class="task-title"><span class="priority high"></span>Otimizar título: "Creator @by.arwenn · UGC Creator · Dev"</div><div class="task-desc">Cabeçalho do LinkedIn. Aparece em busca de marcas.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="6-2"><div class="task-content"><div class="task-title"><span class="priority high"></span>Sobre: copiar do PORTFOLIO_CANVA seção Sobre</div><div class="task-desc">Adapta um pouco mais formal pro LinkedIn.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="6-3"><div class="task-content"><div class="task-title"><span class="priority high"></span>Destaques com prints do portfolio + media kit</div><div class="task-desc">Sobe foto/PDF na seção "Destaques" do perfil.</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">PROCESSOS ATIVOS HOJE (maio/2026)</div>
+    <label class="task"><input type="checkbox" data-id="6-4"><div class="task-content"><div class="task-title"><span class="priority high"></span>TIM House — campanha aberta com prêmio R$50k + iPhone 17</div><div class="task-desc">A TIM lançou plataforma própria de creators. Procure no Instagram <code>@timbrasil</code> + Google "TIM House creators". Inscrição via plataforma da TIM.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="6-5"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Programa Inspirali Creators 2026</div><div class="task-desc">Edital aberto, foco educacional/saúde. <a href="https://www.inspirali.com/edital/programa-inspirali-creators-2026/" target="_blank">Ver edital</a></div></div></label>
+    <label class="task"><input type="checkbox" data-id="6-6"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Casa FURIA 2026 (esports, Rio)</div><div class="task-desc">Volta em 2026 no Joá-RJ durante IEM Rio. Conecta com FURIA Esports e fica de olho em chamadas.</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">ONDE BUSCAR OUTROS PROCESSOS (toda semana)</div>
+    <label class="task"><input type="checkbox" data-id="6-7"><div class="task-content"><div class="task-title"><span class="priority high"></span>LinkedIn — busca semanal por palavras-chave</div><div class="task-desc">Lista completa no <code>PROCESSOS_SELETIVOS.md</code>. Termos: "creator program", "casa [marca]", "embaixadora", "influenciadora", "creator residency".</div></div></label>
+    <label class="task"><input type="checkbox" data-id="6-8"><div class="task-content"><div class="task-title"><span class="priority high"></span>Seguir perfis IG que divulgam oportunidades</div><div class="task-desc"><code>@mercadoinfluencer</code>, <code>@brigadeiroprafluencer</code>, <code>@vagasinfluencer</code>, <code>@trampopracriadores</code>.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="6-9"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Entrar em comunidades Discord/Telegram de creators</div><div class="task-desc">Procurar Discord "Creator Economy Brasil", grupos Telegram "UGC Creators BR".</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">PROSPECÇÃO ATIVA — marcas que você quer</div>
+    <label class="task"><input type="checkbox" data-id="6-10"><div class="task-content"><div class="task-title"><span class="priority high"></span>Lista de 20 marcas dos meus nichos</div><div class="task-desc">Games (Tencent, Riot, Nintendo BR, Krafton), Editoras (Galera, Intrínseca, Suma, Arqueiro, V&amp;R), Makes (Avon, Quem Disse Berenice, Vult, Eudora), Tech (TCL, Anker, JBL).</div></div></label>
+    <label class="task"><input type="checkbox" data-id="6-11"><div class="task-content"><div class="task-title"><span class="priority high"></span>Mandar e-mail de prospecção pra 5 marcas/semana</div><div class="task-desc">Template no <code>PROCESSOS_SELETIVOS.md</code>. Personaliza pra cada marca. Anexa media kit + portfolio.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="6-12"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Marcar marcas em conteúdo orgânico</div><div class="task-desc">Toda vez que você fizer review/menção espontânea, marca a marca. Elas veem, comentam, viram parceria.</div></div></label>
+  </div>
+</section>
+
+<!-- FASE 7 -->
+<section class="phase" id="fase7">
+  <div class="phase-header">
+    <div class="phase-num">7</div>
+    <div>
+      <h2 class="phase-title">ROTINA &amp; ORGANIZAÇÃO</h2>
+      <div class="phase-meta">
+        <span class="phase-tag later">Continuamente</span>
+        <span class="phase-tag">Pra não pirar</span>
+      </div>
+    </div>
+  </div>
+  <p class="phase-description">Creator que não tem rotina queima. Bora montar o sistema de gestão da operação.</p>
+
+  <div class="task-group">
+    <div class="task-group-title">CALENDÁRIO DE CONTEÚDO</div>
+    <label class="task"><input type="checkbox" data-id="7-1"><div class="task-content"><div class="task-title"><span class="priority high"></span>Frequência semanal definida</div><div class="task-desc">Sugestão: 4 Reels/semana (terça, quinta, sábado, domingo) + 1 carrossel + stories diários.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="7-2"><div class="task-content"><div class="task-title"><span class="priority high"></span>Planilha de ideias com status</div><div class="task-desc">Ideia → Roteiro → Gravado → Editado → Postado. Pode ser Notion, Google Sheets ou Trello.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="7-3"><div class="task-content"><div class="task-title"><span class="priority high"></span>Agendamento de posts (Meta Business Suite)</div><div class="task-desc">Posta tudo da semana num domingo, pra não ter que estar no celular o tempo todo.</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">GESTÃO COMERCIAL</div>
+    <label class="task"><input type="checkbox" data-id="7-4"><div class="task-content"><div class="task-title"><span class="priority high"></span>Planilha de prospects (CRM básico)</div><div class="task-desc">Colunas: Marca · Contato · Data envio · Status · Resposta · Valor proposto · Próximo passo.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="7-5"><div class="task-content"><div class="task-title"><span class="priority high"></span>Planilha de ganhos (pra IR e organização)</div><div class="task-desc">Cada parceria fechada: data, marca, valor, status pagamento, NF emitida sim/não.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="7-6"><div class="task-content"><div class="task-title"><span class="priority mid"></span>(Quando começar a faturar) MEI / Microempresa</div><div class="task-desc">CNAE 7319-0/04 (Consultoria em publicidade) ou 5912-0/01 (Atividades de pós-produção). Pesquisar contador.</div></div></label>
+  </div>
+
+  <div class="task-group">
+    <div class="task-group-title">MÉTRICAS &amp; APRENDIZADO</div>
+    <label class="task"><input type="checkbox" data-id="7-7"><div class="task-content"><div class="task-title"><span class="priority high"></span>Revisar Insights do IG toda segunda</div><div class="task-desc">15 minutos: o que cresceu, o que caiu, qual nicho engajou mais.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="7-8"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Atualizar números do Media Kit todo mês</div><div class="task-desc">Me chama no dia 1º de cada mês, eu refaço com os novos dados.</div></div></label>
+    <label class="task"><input type="checkbox" data-id="7-9"><div class="task-content"><div class="task-title"><span class="priority mid"></span>Diário rápido — o que funcionou essa semana</div><div class="task-desc">Bullet de 3 linhas. Acumula virando dataset pra estratégia.</div></div></label>
+  </div>
+</section>
+
+<div class="cta-box">
+  <h3>BORA PRA CIMA! ✦</h3>
+  <p>Tá completo. Conforme você for checando, me chama que ajusto, crio mais conteúdo, escrevo e-mails, monto contratos — o que precisar.</p>
+  <button onclick="resetAll()">Resetar checklist</button>
+</div>
+
+</main>
+
+<footer>
+  <p>© 2026 Arwen · @by.arwenn — feito com <span>💜</span> + cafeína · seu progresso é salvo automaticamente neste navegador</p>
+</footer>
+
+<script>
+  // Save / Load progress with localStorage
+  const STORAGE_KEY = 'arwen-checklist-progress';
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const completedEl = document.getElementById('completed');
+  const totalEl = document.getElementById('total');
+  const percentEl = document.getElementById('percent');
+  const progressFill = document.getElementById('progressFill');
+
+  totalEl.textContent = checkboxes.length;
+
+  function updateProgress() {
+    const done = document.querySelectorAll('input[type="checkbox"]:checked').length;
+    const total = checkboxes.length;
+    const percent = Math.round((done / total) * 100);
+    completedEl.textContent = done;
+    percentEl.textContent = percent + '%';
+    progressFill.style.width = percent + '%';
+
+    // Mark phases as complete
+    document.querySelectorAll('.phase').forEach(phase => {
+      const phaseChecks = phase.querySelectorAll('input[type="checkbox"]');
+      const phaseDone = phase.querySelectorAll('input[type="checkbox"]:checked').length;
+      if (phaseChecks.length > 0 && phaseDone === phaseChecks.length) {
+        phase.classList.add('complete');
+      } else {
+        phase.classList.remove('complete');
+      }
+    });
+  }
+
+  function saveState() {
+    const state = {};
+    checkboxes.forEach(cb => { state[cb.dataset.id] = cb.checked; });
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    } catch (e) { /* ignore */ }
+  }
+
+  function loadState() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const state = JSON.parse(raw);
+      checkboxes.forEach(cb => {
+        if (state[cb.dataset.id]) cb.checked = true;
+      });
+    } catch (e) { /* ignore */ }
+  }
+
+  function resetAll() {
+    if (!confirm('Tem certeza que quer resetar todo o progresso?')) return;
+    checkboxes.forEach(cb => cb.checked = false);
+    try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    updateProgress();
+  }
+
+  checkboxes.forEach(cb => {
+    cb.addEventListener('change', () => {
+      saveState();
+      updateProgress();
+    });
+  });
+
+  loadState();
+  updateProgress();
+</script>
+
+</body>
+</html>

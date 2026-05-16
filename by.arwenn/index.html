@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Arwen ✦ Portfolio • Criadora de Conteúdo Geek & UGC Creator</title>
+<meta name="description" content="Portfolio da Arwen (@by.arwenn) — criadora de conteúdo geek, UGC creator. Games, livros, makes, animes, eventos. Indaiatuba, SP." />
+<meta property="og:title" content="Arwen ✦ Portfolio" />
+<meta property="og:description" content="Criadora de conteúdo geek & UGC Creator." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --lilac: #9D4EDD;
+    --lilac-dark: #5A189A;
+    --lilac-light: #E0BBE4;
+    --lilac-bg: #F3E8FF;
+    --black: #1A1A1A;
+    --off-white: #F5F1E8;
+    --white: #FFFFFF;
+    --shadow: 0 8px 32px rgba(90, 24, 154, 0.18);
+    --shadow-hover: 0 16px 48px rgba(90, 24, 154, 0.35);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--off-white);
+    color: var(--black);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ──────── DECORATIVE SPARKLES ──────── */
+  .sparkle {
+    position: absolute;
+    color: var(--lilac);
+    font-size: 1.5rem;
+    animation: twinkle 2s infinite alternate;
+    pointer-events: none;
+  }
+  @keyframes twinkle {
+    0% { opacity: 0.3; transform: scale(0.8) rotate(0deg); }
+    100% { opacity: 1; transform: scale(1.2) rotate(180deg); }
+  }
+
+  /* ──────── NAVBAR ──────── */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(245, 241, 232, 0.95);
+    backdrop-filter: blur(12px);
+    z-index: 1000;
+    padding: 1rem 2rem;
+    border-bottom: 2px solid var(--lilac);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  nav .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.8rem;
+    color: var(--lilac-dark);
+    letter-spacing: 2px;
+  }
+  nav .logo span { color: var(--lilac); }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+  }
+  nav ul a {
+    text-decoration: none;
+    color: var(--black);
+    font-weight: 500;
+    font-size: 0.9rem;
+    position: relative;
+    transition: color 0.3s;
+  }
+  nav ul a:hover { color: var(--lilac-dark); }
+  nav ul a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--lilac);
+    transition: width 0.3s;
+  }
+  nav ul a:hover::after { width: 100%; }
+  .menu-toggle { display: none; background: none; border: none; cursor: pointer; font-size: 1.5rem; color: var(--lilac-dark); }
+
+  /* ──────── HERO ──────── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem 3rem;
+    position: relative;
+    background: linear-gradient(135deg, var(--off-white) 0%, var(--lilac-bg) 100%);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--lilac-light) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0.6;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: -150px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, var(--lilac) 0%, transparent 70%);
+    border-radius: 50%;
+    opacity: 0.3;
+  }
+  .hero-content {
+    max-width: 900px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .hero .badge {
+    display: inline-block;
+    background: var(--black);
+    color: var(--off-white);
+    padding: 0.5rem 1.2rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    letter-spacing: 1px;
+  }
+  .hero h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    line-height: 0.9;
+    color: var(--lilac-dark);
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+  }
+  .hero h1 span {
+    display: inline-block;
+    background: var(--lilac);
+    color: var(--off-white);
+    padding: 0 1rem;
+    transform: rotate(-2deg);
+  }
+  .hero .tagline {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+    color: var(--black);
+    margin-bottom: 2rem;
+  }
+  .hero .description {
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    color: var(--black);
+  }
+  .hero .cta-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--lilac-dark);
+    color: var(--off-white);
+  }
+  .btn-primary:hover {
+    background: var(--lilac);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--lilac-dark);
+    border-color: var(--lilac-dark);
+  }
+  .btn-secondary:hover {
+    background: var(--lilac-dark);
+    color: var(--off-white);
+    transform: translateY(-3px);
+  }
+
+  /* ──────── SECTIONS ──────── */
+  section {
+    padding: 5rem 2rem;
+    position: relative;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--lilac-dark);
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  .section-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    text-align: center;
+    color: var(--lilac);
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+  }
+
+  /* ──────── SOBRE ──────── */
+  #sobre {
+    background: var(--off-white);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+    align-items: center;
+  }
+  .about-photo {
+    aspect-ratio: 3/4;
+    background: linear-gradient(135deg, var(--lilac) 0%, var(--lilac-dark) 100%);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--off-white);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    text-align: center;
+    padding: 2rem;
+    overflow: hidden;
+  }
+  .about-photo::before {
+    content: '✦';
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    font-size: 2rem;
+  }
+  .about-photo::after {
+    content: '✦';
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+  }
+  .about-text h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: var(--lilac-dark);
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+  }
+  .about-text p {
+    margin-bottom: 1.2rem;
+    font-size: 1.05rem;
+  }
+  .quick-facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 1.5rem;
+  }
+  .quick-facts span {
+    background: var(--lilac-light);
+    color: var(--lilac-dark);
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  /* ──────── NÚMEROS ──────── */
+  #numeros {
+    background: var(--lilac-bg);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+  .stat-card {
+    background: var(--off-white);
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+    border: 2px solid transparent;
+  }
+  .stat-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--lilac);
+  }
+  .stat-card .number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    color: var(--lilac-dark);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .stat-card .label {
+    font-weight: 600;
+    color: var(--black);
+    margin-bottom: 0.3rem;
+  }
+  .stat-card .desc {
+    font-size: 0.85rem;
+    color: var(--lilac-dark);
+  }
+  .stats-note {
+    text-align: center;
+    margin-top: 2.5rem;
+    font-style: italic;
+    color: var(--lilac-dark);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ──────── NICHOS ──────── */
+  #nichos {
+    background: var(--off-white);
+  }
+  .niches-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+  .niche-card {
+    background: var(--white);
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    border: 2px solid var(--lilac-light);
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  .niche-card:hover {
+    background: var(--lilac-dark);
+    color: var(--off-white);
+    transform: translateY(-5px) rotate(-1deg);
+    border-color: var(--lilac-dark);
+  }
+  .niche-card:hover .niche-name,
+  .niche-card:hover .niche-desc { color: var(--off-white); }
+  .niche-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .niche-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 1.5px;
+    color: var(--lilac-dark);
+    margin-bottom: 0.6rem;
+    transition: color 0.3s;
+  }
+  .niche-desc {
+    font-size: 0.9rem;
+    color: var(--black);
+    transition: color 0.3s;
+  }
+
+  /* ──────── QUADROS ──────── */
+  #quadros {
+    background: var(--lilac-dark);
+    color: var(--off-white);
+  }
+  #quadros .section-title { color: var(--off-white); }
+  #quadros .section-subtitle { color: var(--lilac-light); }
+  .frames-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .frame-item {
+    background: rgba(255, 255, 255, 0.06);
+    padding: 1.5rem;
+    border-radius: 16px;
+    border-left: 4px solid var(--lilac);
+    transition: all 0.3s;
+  }
+  .frame-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateX(8px);
+  }
+  .frame-item h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--lilac-light);
+    letter-spacing: 1.5px;
+    margin-bottom: 0.6rem;
+  }
+  .frame-item p {
+    font-size: 0.95rem;
+    color: var(--off-white);
+  }
+
+  /* ──────── SERVIÇOS ──────── */
+  #servicos {
+    background: var(--off-white);
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .service-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    transition: all 0.3s;
+    position: relative;
+    border-top: 6px solid var(--lilac);
+  }
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+  }
+  .service-card .icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .service-card h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    color: var(--lilac-dark);
+    letter-spacing: 1.5px;
+    margin-bottom: 0.8rem;
+  }
+  .service-card p {
+    font-size: 0.95rem;
+    color: var(--black);
+    margin-bottom: 0.8rem;
+  }
+  .service-tag {
+    display: inline-block;
+    background: var(--lilac-light);
+    color: var(--lilac-dark);
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin: 0.2rem 0.2rem 0 0;
+  }
+  .services-footer {
+    text-align: center;
+    margin-top: 2.5rem;
+    font-style: italic;
+    color: var(--lilac-dark);
+  }
+
+  /* ──────── PROCESSO ──────── */
+  #processo {
+    background: var(--lilac-bg);
+  }
+  .process-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+  .process-step {
+    background: var(--off-white);
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .process-step .step-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    color: var(--lilac);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .process-step h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--lilac-dark);
+    letter-spacing: 1.5px;
+    margin-bottom: 0.6rem;
+  }
+  .process-step p {
+    font-size: 0.9rem;
+  }
+
+  /* ──────── CONTATO ──────── */
+  #contato {
+    background: var(--black);
+    color: var(--off-white);
+    text-align: center;
+  }
+  #contato .section-title { color: var(--off-white); }
+  #contato .section-subtitle { color: var(--lilac-light); }
+  .contact-content {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .contact-content > p {
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    color: var(--off-white);
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .contact-card {
+    background: var(--lilac-dark);
+    padding: 1.5rem;
+    border-radius: 16px;
+    transition: all 0.3s;
+    border: 2px solid transparent;
+  }
+  .contact-card:hover {
+    background: var(--lilac);
+    transform: translateY(-5px);
+    border-color: var(--off-white);
+  }
+  .contact-card .icon {
+    font-size: 2rem;
+    margin-bottom: 0.6rem;
+  }
+  .contact-card .label {
+    font-size: 0.85rem;
+    color: var(--lilac-light);
+    margin-bottom: 0.4rem;
+    letter-spacing: 1px;
+  }
+  .contact-card a, .contact-card span {
+    color: var(--off-white);
+    font-weight: 600;
+    text-decoration: none;
+    word-break: break-all;
+  }
+  .contact-footer {
+    margin-top: 2rem;
+    color: var(--lilac-light);
+    font-style: italic;
+  }
+
+  /* ──────── FOOTER ──────── */
+  footer {
+    background: var(--black);
+    color: var(--lilac-light);
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--lilac-dark);
+    font-size: 0.85rem;
+  }
+  footer span { color: var(--lilac); }
+
+  /* ──────── RESPONSIVE ──────── */
+  @media (max-width: 768px) {
+    nav { padding: 0.8rem 1rem; }
+    nav ul {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--off-white);
+      flex-direction: column;
+      padding: 1.5rem;
+      border-bottom: 2px solid var(--lilac);
+    }
+    nav ul.active { display: flex; }
+    .menu-toggle { display: block; }
+    section { padding: 3.5rem 1rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .about-photo { max-width: 350px; margin: 0 auto; }
+    .hero { padding: 5rem 1rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- DECORATIVE SPARKLES -->
+<div class="sparkle" style="top: 15%; left: 5%;">✦</div>
+<div class="sparkle" style="top: 30%; right: 8%; animation-delay: 0.5s;">✧</div>
+<div class="sparkle" style="top: 60%; left: 3%; animation-delay: 1s;">✦</div>
+<div class="sparkle" style="top: 80%; right: 5%; animation-delay: 1.5s;">✧</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="logo">ARWEN <span>✦</span></div>
+  <button class="menu-toggle" onclick="document.querySelector('nav ul').classList.toggle('active')">☰</button>
+  <ul>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#numeros">Números</a></li>
+    <li><a href="#nichos">Nichos</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="badge">PORTFOLIO 2026 ✦ @by.arwenn</span>
+    <h1>ARWEN<br><span>geek &amp; loud</span></h1>
+    <p class="tagline">Dev de dia, geek permanente — criadora de conteúdo &amp; UGC creator.</p>
+    <p class="description">
+      Conteúdo maximalist, autêntico e sem filtro pra marcas que querem se conectar com público geek de verdade. Games, livros, makes, animes, eventos — tudo cabe aqui.
+    </p>
+    <div class="cta-group">
+      <a href="#servicos" class="btn btn-primary">Ver Serviços ✦</a>
+      <a href="#contato" class="btn btn-secondary">Falar Comigo</a>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="container">
+    <h2 class="section-title">SOBRE MIM</h2>
+    <p class="section-subtitle">oi, eu sou a Arwen ✦</p>
+    <div class="about-grid">
+      <div class="about-photo">
+        <p>[ INSIRA SUA FOTO AQUI ]<br><br>Substitua este bloco por uma <strong>&lt;img&gt;</strong> com sua foto de destaque.</p>
+      </div>
+      <div class="about-text">
+        <h3>KAREN ARWEN FERREIRA</h3>
+        <p>Sou Karen Arwen — mas pode me chamar de Arwen. Crio conteúdo sobre tudo que amo: games (do mobile ao Nintendo), livros físicos e manhwas, animes, séries, maquiagem em todos os estilos, eventos geek e a vida desorganizadamente colorida de quem coleciona Funkos, action figures e blind boxes.</p>
+        <p>Minha estética é maximalist, chamativa e sem medo de cor — porque conteúdo não precisa ser apagado pra ser bom. Aqui você vê o que eu faço, como eu faço, e como a gente pode construir algo juntos.</p>
+        <div class="quick-facts">
+          <span>📍 Indaiatuba, SP</span>
+          <span>🎮 Geek desde sempre</span>
+          <span>✓ Verificada no Instagram</span>
+          <span>🎤 Desinibida na câmera</span>
+          <span>💜 Estética maximalist</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NÚMEROS -->
+<section id="numeros">
+  <div class="container">
+    <h2 class="section-title">OS NÚMEROS</h2>
+    <p class="section-subtitle">comunidade pequena, engajada e geek de verdade ✦</p>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="number">1.2K+</div>
+        <div class="label">SEGUIDORES</div>
+        <div class="desc">@by.arwenn</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">32K</div>
+        <div class="label">VIEWS/MÊS</div>
+        <div class="desc">Média Reels + Feed</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">✓</div>
+        <div class="label">VERIFICADA</div>
+        <div class="desc">Instagram Oficial</div>
+      </div>
+      <div class="stat-card">
+        <div class="number">85%</div>
+        <div class="label">PÚBLICO 18-34</div>
+        <div class="desc">Brasil · SP/RJ/MG</div>
+      </div>
+    </div>
+    <p class="stats-note">Quem segue, segue por interesse real — não por curtidinha de robô. Comunidade construída por opinião e identidade, não por algoritmo de pegar trend.</p>
+  </div>
+</section>
+
+<!-- NICHOS -->
+<section id="nichos">
+  <div class="container">
+    <h2 class="section-title">ONDE EU REINO</h2>
+    <p class="section-subtitle">8 nichos, infinitos surtos ✦</p>
+    <div class="niches-grid">
+      <div class="niche-card">
+        <span class="niche-icon">🎮</span>
+        <h4 class="niche-name">GAMES MOBILE</h4>
+        <p class="niche-desc">NTE · Star Dive · Heartopia · COD · Fortnite · Brawl Stars e muito mais.</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-icon">🍄</span>
+        <h4 class="niche-name">NINTENDO</h4>
+        <p class="niche-desc">Mario Kart · Luigi's Mansion · Mario Wonder · clássicos &amp; lançamentos.</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-icon">🎬</span>
+        <h4 class="niche-name">ANIMES, FILMES &amp; SÉRIES</h4>
+        <p class="niche-desc">Reviews, reações, hot takes geek e indicação de maratona.</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-icon">📚</span>
+        <h4 class="niche-name">LIVROS &amp; MANHWAS</h4>
+        <p class="niche-desc">Quarta Asa · OUABH · HP · Desenfreados · leituras em Comick Key.</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-icon">💄</span>
+        <h4 class="niche-name">MAQUIAGEM</h4>
+        <p class="niche-desc">Do natural ao dark, passando por character make — tudo cabe aqui.</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-icon">🎪</span>
+        <h4 class="niche-name">EVENTOS GEEK</h4>
+        <p class="niche-desc">CCXP veterana · Bienal do Livro 2025 · lançamentos e ativações.</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-icon">🧸</span>
+        <h4 class="niche-name">COLECIONÁVEIS</h4>
+        <p class="niche-desc">Funkos, action figures, blind boxes — unboxing &amp; coleção.</p>
+      </div>
+      <div class="niche-card">
+        <span class="niche-icon">📱</span>
+        <h4 class="niche-name">UGC PRA MARCAS</h4>
+        <p class="niche-desc">Vídeos verticais sob medida — você usa onde quiser.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUADROS -->
+<section id="quadros">
+  <div class="container">
+    <h2 class="section-title">MEUS QUADROS</h2>
+    <p class="section-subtitle">conteúdo que vira marca registrada ✦</p>
+    <div class="frames-list">
+      <div class="frame-item">
+        <h4>✦ ARWEN REAGE</h4>
+        <p>Reações cruas, sinceras, sem filtro a games, trailers, lançamentos e drops geek.</p>
+      </div>
+      <div class="frame-item">
+        <h4>✦ A ARWEN INDICA</h4>
+        <p>Indicações personalizadas: livro, jogo, manhwa, make, série. Pra quem ama curadoria.</p>
+      </div>
+      <div class="frame-item">
+        <h4>✦ ARWEN SE ARRUMA</h4>
+        <p>Get ready with me — make do natural ao dark, contando histórias enquanto pinta.</p>
+      </div>
+      <div class="frame-item">
+        <h4>✦ ARWEN JOGA</h4>
+        <p>Gameplay com comentário, dicas, descobertas e surto de gamer feliz.</p>
+      </div>
+      <div class="frame-item">
+        <h4>✦ SURTO GEEK</h4>
+        <p>Reações de fangirl quando algo bom acontece no universo geek. Sem juízo, só amor.</p>
+      </div>
+      <div class="frame-item">
+        <h4>✦ ARWEN TESTA</h4>
+        <p>Reviews honestas de produtos, tecnologia, games, makes — UGC e parceria.</p>
+      </div>
+      <div class="frame-item">
+        <h4>✦ ARWEN NO EVENTO</h4>
+        <p>Cobertura ao vivo de CCXP, Bienal, lançamentos e tudo que rolar pelo Brasil.</p>
+      </div>
+      <div class="frame-item">
+        <h4>✦ ARWEN TEM OPINIÃO</h4>
+        <p>Hot takes geek. Sem medo de discordar do consenso. Polêmica com fundamento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="container">
+    <h2 class="section-title">SERVIÇOS</h2>
+    <p class="section-subtitle">o que eu posso fazer pela sua marca ✦</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="icon">📱</div>
+        <h4>UGC</h4>
+        <p>Vídeos verticais pra marca usar onde quiser — Reels, TikTok, ads, site, e-mail mkt. Você recebe os arquivos, eu não preciso postar.</p>
+        <span class="service-tag">15s</span><span class="service-tag">30s</span><span class="service-tag">60s</span>
+      </div>
+      <div class="service-card">
+        <div class="icon">✨</div>
+        <h4>POSTS PATROCINADOS</h4>
+        <p>Conteúdo no meu perfil mencionando sua marca. Linguagem natural, integrada, com cara de Arwen.</p>
+        <span class="service-tag">Reel</span><span class="service-tag">Stories</span><span class="service-tag">Feed</span><span class="service-tag">Combo</span>
+      </div>
+      <div class="service-card">
+        <div class="icon">🎮</div>
+        <h4>REVIEWS &amp; UNBOXING</h4>
+        <p>Avaliações honestas de produtos: games, livros, makes, tech, colecionáveis. Conteúdo aprofundado, opinião real.</p>
+        <span class="service-tag">Reel longo</span><span class="service-tag">Carrossel</span>
+      </div>
+      <div class="service-card">
+        <div class="icon">🎪</div>
+        <h4>COBERTURA DE EVENTOS</h4>
+        <p>Cobertura presencial: CCXP, Bienal, lançamentos, ativações de marca. Stories ao vivo + Reels + carrossel.</p>
+        <span class="service-tag">Meio período</span><span class="service-tag">Dia inteiro</span>
+      </div>
+      <div class="service-card">
+        <div class="icon">🎯</div>
+        <h4>CREATOR PROGRAMS</h4>
+        <p>Disponível pra programas de creator de jogos mobile e console — gameplay, dicas, eventos in-game, divulgação de updates.</p>
+        <span class="service-tag">Games</span><span class="service-tag">Apps</span>
+      </div>
+      <div class="service-card">
+        <div class="icon">💡</div>
+        <h4>FORMATOS CUSTOM</h4>
+        <p>Outro formato em mente? Me chama. Adoro criar coisa nova sob medida pra encaixar com seu objetivo de marca.</p>
+        <span class="service-tag">Sob medida</span>
+      </div>
+    </div>
+    <p class="services-footer">Valores sob consulta ✦ Permuta, paga, pontuais ou long-term — bora conversar.</p>
+  </div>
+</section>
+
+<!-- PROCESSO -->
+<section id="processo">
+  <div class="container">
+    <h2 class="section-title">COMO FUNCIONA</h2>
+    <p class="section-subtitle">do briefing ao relatório ✦</p>
+    <div class="process-grid">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <h4>BRIEFING</h4>
+        <p>Você me manda o que precisa: produto, prazo, objetivo, referências. Eu respondo com proposta detalhada.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <h4>CRIAÇÃO</h4>
+        <p>Aprovado o roteiro, eu produzo. Você acompanha em pontos-chave: pré-aprovação e material final.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <h4>ENTREGA</h4>
+        <p>Conteúdo finalizado nos formatos combinados. Edição inclusa. 1 rodada de ajustes pequenos sem custo.</p>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <h4>MÉTRICAS</h4>
+        <p>Pra parcerias com post no meu perfil: relatório de performance em até 14 dias.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="container contact-content">
+    <h2 class="section-title">BORA CRIAR JUNTOS?</h2>
+    <p class="section-subtitle">parcerias que combinam ✦</p>
+    <p>Tô aberta a marcas que combinam com o universo geek, lifestyle, beleza, livros e games. Permuta, paga, pontuais ou de longo prazo — me chama que a gente conversa.</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="icon">✉️</div>
+        <div class="label">PARCERIAS</div>
+        <a href="mailto:by.arwenn.contato@gmail.com">by.arwenn.contato@gmail.com</a>
+      </div>
+      <div class="contact-card">
+        <div class="icon">📱</div>
+        <div class="label">INSTAGRAM</div>
+        <a href="https://instagram.com/by.arwenn" target="_blank" rel="noopener">@by.arwenn</a>
+      </div>
+      <div class="contact-card">
+        <div class="icon">📍</div>
+        <div class="label">LOCALIZAÇÃO</div>
+        <span>Indaiatuba, SP<br><small>atendo Brasil todo</small></span>
+      </div>
+    </div>
+    <p class="contact-footer">Resposta em até 48h úteis ✦ Valores sob consulta</p>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Arwen · @by.arwenn — feito com <span>💜</span> &amp; cafeína</p>
+</footer>
+
+</body>
+</html>
