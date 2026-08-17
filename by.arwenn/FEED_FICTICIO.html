@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feed Fictício — @by.arwenn</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0d0d0d;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: #fff;
+    min-height: 100vh;
+  }
+
+  .page-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px 20px;
+  }
+
+  .title-bar {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .title-bar h1 {
+    font-size: 14px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #b39ddb;
+    margin-bottom: 6px;
+  }
+  .title-bar h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .title-bar p {
+    font-size: 13px;
+    color: #666;
+    margin-top: 6px;
+  }
+
+  /* Profile Header */
+  .profile {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #1f1f1f;
+  }
+  .avatar {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #9c27b0, #673ab7, #3f51b5);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    flex-shrink: 0;
+    border: 3px solid #b39ddb;
+  }
+  .profile-info h3 {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .profile-info p {
+    font-size: 13px;
+    color: #888;
+    margin-top: 2px;
+  }
+  .profile-stats {
+    display: flex;
+    gap: 24px;
+    margin-top: 12px;
+  }
+  .stat { text-align: center; }
+  .stat-num { font-weight: 700; font-size: 16px; }
+  .stat-label { font-size: 11px; color: #666; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* Highlights */
+  .highlights {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 28px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+  }
+  .highlight-item { text-align: center; flex-shrink: 0; }
+  .highlight-circle {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    border: 2px solid #b39ddb;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 24px;
+    background: #1a1a1a;
+    margin: 0 auto 6px;
+  }
+  .highlight-label { font-size: 10px; color: #888; }
+
+  /* Filter tabs */
+  .filter-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    cursor: pointer;
+    border: 1px solid #2a2a2a;
+    background: #1a1a1a;
+    color: #888;
+    transition: all 0.2s;
+  }
+  .tab.active {
+    background: #7c3aed;
+    color: #fff;
+    border-color: #7c3aed;
+  }
+
+  /* Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+
+  .post {
+    aspect-ratio: 1;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .post:hover .post-overlay { opacity: 1; }
+  .post:hover .post-bg { filter: brightness(0.5); }
+
+  .post-bg {
+    width: 100%; height: 100%;
+    transition: filter 0.2s;
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column;
+    padding: 10px;
+    text-align: center;
+    position: relative;
+  }
+
+  .post-emoji { font-size: 28px; margin-bottom: 6px; }
+  .post-mini-title {
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.3;
+    color: rgba(255,255,255,0.9);
+  }
+
+  .post-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+    padding: 12px;
+    background: rgba(0,0,0,0.75);
+  }
+  .post-overlay .caption {
+    font-size: 10px;
+    color: #fff;
+    text-align: center;
+    line-height: 1.4;
+  }
+  .post-overlay .format-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 9px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .tag-reel { background: #e91e63; }
+  .tag-foto { background: #7c3aed; }
+  .tag-carrossel { background: #ff6f00; }
+  .tag-live { background: #1db954; }
+  .tag-urgente { background: #f44336; }
+
+  .post-badge {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    font-size: 14px;
+  }
+
+  /* Legend */
+  .legend {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #666;
+  }
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 3px;
+  }
+
+  /* Post detail modal */
+  .modal-bg {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-bg.open { display: flex; }
+  .modal {
+    background: #1a1a1a;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 380px;
+    width: 90%;
+    border: 1px solid #2a2a2a;
+  }
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  .modal-close {
+    cursor: pointer;
+    color: #666;
+    font-size: 20px;
+    background: none;
+    border: none;
+    color: #fff;
+  }
+  .modal-emoji { font-size: 40px; margin-bottom: 12px; display: block; }
+  .modal-format { margin-bottom: 8px; }
+  .modal-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+  .modal-caption { font-size: 13px; color: #aaa; line-height: 1.6; margin-bottom: 12px; }
+  .modal-hook { font-size: 12px; color: #b39ddb; border-left: 3px solid #7c3aed; padding-left: 10px; }
+
+  /* Color themes per category */
+  .cat-games { background: linear-gradient(135deg, #1a237e 0%, #283593 100%); }
+  .cat-anime { background: linear-gradient(135deg, #880e4f 0%, #ad1457 100%); }
+  .cat-manhwa { background: linear-gradient(135deg, #004d40 0%, #00695c 100%); }
+  .cat-livros { background: linear-gradient(135deg, #4a148c 0%, #6a1b9a 100%); }
+  .cat-make { background: linear-gradient(135deg, #b71c1c 0%, #c62828 100%); }
+  .cat-moda { background: linear-gradient(135deg, #4e342e 0%, #5d4037 100%); }
+  .cat-colec { background: linear-gradient(135deg, #e65100 0%, #ef6c00 100%); }
+  .cat-heroi { background: linear-gradient(135deg, #1565c0 0%, #1976d2 100%); }
+  .cat-bluelock { background: linear-gradient(135deg, #0d47a1 0%, #1a237e 100%); }
+  .cat-lifestyle { background: linear-gradient(135deg, #37474f 0%, #455a64 100%); }
+
+  .note {
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 24px;
+    font-size: 13px;
+    color: #888;
+    line-height: 1.7;
+  }
+  .note strong { color: #b39ddb; }
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <div class="title-bar">
+    <h1>Feed Fictício Planejado</h1>
+    <h2>@by.arwenn</h2>
+    <p>Passe o mouse sobre cada post pra ver detalhes · Clique pra ver o gancho</p>
+  </div>
+
+  <!-- Profile -->
+  <div class="profile">
+    <div class="avatar">🌙</div>
+    <div class="profile-info">
+      <h3>Arwen ✦</h3>
+      <p>dev de dia · geek permanente · by.arwenn.contato@gmail.com</p>
+      <div class="profile-stats">
+        <div class="stat"><div class="stat-num">1.2k</div><div class="stat-label">seguidores</div></div>
+        <div class="stat"><div class="stat-num">32k</div><div class="stat-label">views/mês</div></div>
+        <div class="stat"><div class="stat-num">47</div><div class="stat-label">posts</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Highlights -->
+  <div class="highlights">
+    <div class="highlight-item"><div class="highlight-circle">🎮</div><div class="highlight-label">Games</div></div>
+    <div class="highlight-item"><div class="highlight-circle">📚</div><div class="highlight-label">Livros</div></div>
+    <div class="highlight-item"><div class="highlight-circle">💄</div><div class="highlight-label">Make</div></div>
+    <div class="highlight-item"><div class="highlight-circle">📖</div><div class="highlight-label">Manhwa</div></div>
+    <div class="highlight-item"><div class="highlight-circle">🏆</div><div class="highlight-label">Colec.</div></div>
+    <div class="highlight-item"><div class="highlight-circle">🦸</div><div class="highlight-label">Heróis</div></div>
+    <div class="highlight-item"><div class="highlight-circle">👗</div><div class="highlight-label">Moda</div></div>
+  </div>
+
+  <!-- Grid -->
+  <div class="grid" id="grid"></div>
+
+  <!-- Legend -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#e91e63"></div>Reel</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#7c3aed"></div>Foto</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#ff6f00"></div>Carrossel</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#1db954"></div>Live</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#f44336"></div>🔴 Urgente/Tendência</div>
+  </div>
+
+  <div class="note">
+    <strong>Como usar esse feed:</strong> esse é um feed fictício de referência visual. Cada post representa um conteúdo planejado — com tema, formato e gancho. A ideia é ter um feed coeso visualmente (paleta lilás/preto) com variedade de temas. <strong>Regra de ouro:</strong> nunca poste 2 do mesmo nicho em sequência — alterna sempre (make → game → livro → anime → lifestyle). O feed deve respirar.
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal-bg" id="modal">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="modal-format" id="modal-format"></span>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <span class="modal-emoji" id="modal-emoji"></span>
+    <div class="modal-title" id="modal-title"></div>
+    <div class="modal-caption" id="modal-caption"></div>
+    <div class="modal-hook" id="modal-hook"></div>
+  </div>
+</div>
+
+<script>
+const posts = [
+  // Linha 1
+  {
+    emoji: "🎮", cat: "cat-bluelock", format: "reel", urgent: true,
+    mini: "BLUE LOCK LIVE ACTION",
+    caption: "Reação ao trailer do live-action de Blue Lock — agosto 2026",
+    hook: "\"ELES NÃO FIZERAM ISSO COM A GENTE — trailer do live action de Blue Lock saiu e eu preciso processar\"",
+    detail: "Formato: tela dividida — clip do trailer + sua cara reagindo. Urgente: postar antes do lançamento (7 agosto)"
+  },
+  {
+    emoji: "📚", cat: "cat-livros", format: "carrossel", urgent: false,
+    mini: "HAUL BLACK FRIDAY",
+    caption: "Unboxing/haul dos livros da Black Friday — um slide por livro",
+    hook: "\"finalmente chegou tudo da black friday dos livros e eu preciso mostrar cada um\"",
+    detail: "Cada slide: foto do livro + por que comprou + expectativa de 1 a 5. Texto: 'comprei com a cabeça, vou ler com o coração'"
+  },
+  {
+    emoji: "💄", cat: "cat-make", format: "reel", urgent: false,
+    mini: "CHARACTER MAKE YOR FORGER",
+    caption: "Character make da Yor Forger — delineado esfumaçado + batom vermelho",
+    hook: "\"Yor Forger é a make mais subestimada do anime e eu decidi provar\"",
+    detail: "GRWM reverso — abre com resultado, mostra processo em timelapse. Crossover make + anime = alcance duplo"
+  },
+  // Linha 2
+  {
+    emoji: "📖", cat: "cat-manhwa", format: "reel", urgent: false,
+    mini: "3 MANHWAS AGORA",
+    caption: "3 manhwas pra começar no Comick Key — lista rápida",
+    hook: "\"tem 3 manhwas que se você não tá lendo, tá atrasada — e eu vou te contar quais\"",
+    detail: "Formato lista: cover do manhwa + 1 frase por que vale. Finaliza com CTA nos comentários"
+  },
+  {
+    emoji: "🏆", cat: "cat-colec", format: "foto", urgent: false,
+    mini: "BLIND BOX ABERTA",
+    caption: "Unboxing estético de blind box — reação real à revelação",
+    hook: "\"abrindo essa blind box sem saber o que vem — vem o que eu quero ou frustra?\"",
+    detail: "Foto da revelação com expressão real. Feed: produto na mão, fundo limpo, luz natural. Muito engajamento em colecionáveis"
+  },
+  {
+    emoji: "🦸", cat: "cat-heroi", format: "reel", urgent: false,
+    mini: "MARVEL RANKING",
+    caption: "Ranking de todos os filmes da Marvel que eu já vi — do pior ao melhor",
+    hook: "\"vou rankear os filmes da marvel e ALGUÉM vai se ofender nos comentários — tô pronta\"",
+    detail: "Hot take + ranking visual. Alta chance de compartilhamento e debate nos comentários. Usar tier list"
+  },
+  // Linha 3
+  {
+    emoji: "👗", cat: "cat-moda", format: "foto", urgent: false,
+    mini: "LOOK GEEK DO DIA",
+    caption: "Outfit do dia com referência geek sutil que ninguém vai perceber",
+    hook: "\"roupa normal por fora, referência geek por dentro — esse é o jeito\"",
+    detail: "Foto de corpo inteiro com detalhe no item geek (camiseta, acessório, cor). Feed: fundo neutro, postura casual"
+  },
+  {
+    emoji: "🎮", cat: "cat-games", format: "reel", urgent: false,
+    mini: "TIER LIST GAMES MOBILE",
+    caption: "Tier list de todos os games mobile que joguei — S a F",
+    hook: "\"vou colocar todos os games mobile no tier list e não aceito debate... na verdade aceito\"",
+    detail: "Formato tier list, 1 game por corte. Alta viralidade quando tem jogo popular. Inclui NTE, COD, Brawl Stars, Star Dive"
+  },
+  {
+    emoji: "📺", cat: "cat-anime", format: "reel", urgent: false,
+    mini: "ANIME QUE NINGUÉM VÊ",
+    caption: "O anime mais subestimado que você precisa ver — indicação nichada",
+    hook: "\"esse anime tem menos hype que merece e eu não consigo deixar pra lá\"",
+    detail: "Pick nichado = comunidade específica engaja muito. Escolhe anime que você realmente ama mas não é mainstream"
+  },
+  // Linha 4
+  {
+    emoji: "📚", cat: "cat-livros", format: "reel", urgent: false,
+    mini: "QUARTA ASA HOT TAKE",
+    caption: "Quarta Asa é melhor que Hunger Games — vou nos comentários defender",
+    hook: "\"vou dizer e tô preparada pra ser cancelada: Quarta Asa > Hunger Games\"",
+    detail: "Hot take polêmico = engajamento garantido. Formato: você falando direto pro câmera, segurando os 2 livros"
+  },
+  {
+    emoji: "💄", cat: "cat-make", format: "carrossel", urgent: false,
+    mini: "5 PRODUTOS FAVORITOS",
+    caption: "5 produtos de make que não vivo sem em 2026 — lista honesta",
+    hook: "\"5 produtos que entraram na minha rotina e não saem mais — link de afiliado nos comentários\"",
+    detail: "Carrossel: capa com numero + produto em cada slide. UGC natural = ótimo pra portfólio de marcas de make"
+  },
+  {
+    emoji: "🔵", cat: "cat-bluelock", format: "reel", urgent: true,
+    mini: "BLUE LOCK TIER LIST",
+    caption: "Tier list dos personagens de Blue Lock — quem é S tier pra mim",
+    hook: "\"tier list dos personagens de Blue Lock — vocês vão discordar da minha posição do Rin e tá ótimo\"",
+    detail: "Posta essa enquanto Blue Lock tá no hype do live-action. Muito compartilhamento em fandoms"
+  },
+  // Linha 5
+  {
+    emoji: "📖", cat: "cat-manhwa", format: "reel", urgent: false,
+    mini: "VILLAIN GOSTOSO",
+    caption: "O vilão de manhwa que não deveria ser gostoso mas é — compilação",
+    hook: "\"o problema desse vilão de manhwa é que ele não devia ser gostoso, mas é, e eu preciso falar\"",
+    detail: "Conteúdo de fandom = engajamento absurdo. Pick o vilão mais controverso que você segue"
+  },
+  {
+    emoji: "🏆", cat: "cat-colec", format: "foto", urgent: false,
+    mini: "ESTANTE ORGANIZADA",
+    caption: "Estante de colecionáveis reorganizada — display final com todos os Funkos",
+    hook: "\"reorganizei minha estante de Funkos e o resultado ficou absurdamente satisfatório\"",
+    detail: "Foto estática: estante bem iluminada, organizada por personagem/franquia. Fundo escuro + iluminação ambiente"
+  },
+  {
+    emoji: "🎮", cat: "cat-games", format: "live", urgent: false,
+    mini: "MARIO KART AO VIVO",
+    caption: "Live: Mario Kart com os seguidores — aceito corrida e desafio",
+    hook: "\"live de mario kart ao vivo — comenta no chat pra entrar na sala e rachar comigo\"",
+    detail: "Avisa 24h antes. Duração: 1h. High engagement — seguidores jogam COM você. Ótimo pra comunidade"
+  },
+  // Linha 6
+  {
+    emoji: "✨", cat: "cat-lifestyle", format: "carrossel", urgent: false,
+    mini: "MINHA SEMANA CREATOR",
+    caption: "Semana de creator em fotos — bastidores, setup, vida real",
+    hook: "\"como foi minha semana sendo dev de dia e creator de noite — spoiler: deu certo e deu errado\"",
+    detail: "Carrossel lifestyle: foto do setup, foto gravando, foto lendo, foto do Funko chegando. Humaniza o perfil"
+  },
+  {
+    emoji: "📺", cat: "cat-anime", format: "reel", urgent: true,
+    mini: "BLUE LOCK T3 HYPE",
+    caption: "O que esperar da temporada 3 de Blue Lock — arco Neo Egoist League",
+    hook: "\"temporada 3 de blue lock confirmada pra outubro e eu já tô surtando antecipado\"",
+    detail: "Posta perto do anúncio/estreia. Formato: análise rápida do arco, o que mudará, o que esperar"
+  },
+  {
+    emoji: "📚", cat: "cat-livros", format: "foto", urgent: false,
+    mini: "LIVRO + CAFÉ",
+    caption: "Flat lay: livro aberto + bebida + luz natural — o cantinho perfeito",
+    hook: "\"esse é meu cantinho de leitura e não saio daqui\"",
+    detail: "Foto de feed: flat lay top-down. Livro da vez + bebida de preferência + item geek pequeno de detalhe. Luz natural"
+  },
+  // Linha 7
+  {
+    emoji: "⚡", cat: "cat-heroi", format: "reel", urgent: false,
+    mini: "HARRY POTTER RELEITURA",
+    caption: "Releitura de Harry Potter como adulta — o que percebi que nunca tinha visto",
+    hook: "\"reli Harry Potter e agora percebo coisas que a criança em mim nunca notaria\"",
+    detail: "Análise madura + nostalgia = combo perfeito. Formato: você falando + B-roll dos livros físicos"
+  },
+  {
+    emoji: "💄", cat: "cat-make", format: "reel", urgent: true,
+    mini: "CHARACTER MAKE BLUE LOCK",
+    caption: "Character make inspirada no Rin Itoshi de Blue Lock — aproveitando o hype",
+    hook: "\"fiz uma make inspirada no Rin Itoshi de Blue Lock porque o live-action tá chegando e eu tô em modo fã\"",
+    detail: "Urgente: faz antes da estreia do live-action. Crossover make + Blue Lock = alcance nos 2 fandoms"
+  },
+  {
+    emoji: "🎁", cat: "cat-colec", format: "reel", urgent: false,
+    mini: "QUANTO GASTEI EM FUNKO",
+    caption: "Confissão: quanto eu gastei em Funkos nesse ano — não estou bem",
+    hook: "\"vou revelar quanto gastei em funkos em 2026 e preciso que vocês não me julguem\"",
+    detail: "Humor + vulnerabilidade = muito compartilhamento. Relatable pra qualquer colecionador. Alta retenção"
+  }
+];
+
+const formatLabel = { reel: "REEL", foto: "FOTO", carrossel: "CARROSSEL", live: "LIVE" };
+const formatClass = { reel: "tag-reel", foto: "tag-foto", carrossel: "tag-carrossel", live: "tag-live" };
+
+const grid = document.getElementById('grid');
+
+posts.forEach((p, i) => {
+  const post = document.createElement('div');
+  post.className = 'post';
+  post.innerHTML = `
+    <div class="post-bg ${p.cat}">
+      <div class="post-emoji">${p.emoji}</div>
+      <div class="post-mini-title">${p.mini}</div>
+    </div>
+    ${p.urgent ? '<div class="post-badge">🔴</div>' : ''}
+    <div class="post-overlay">
+      <span class="format-tag ${formatClass[p.format]}">${formatLabel[p.format]}</span>
+      <div class="caption">${p.caption}</div>
+    </div>
+  `;
+  post.onclick = () => openModal(p);
+  grid.appendChild(post);
+});
+
+function openModal(p) {
+  document.getElementById('modal-emoji').textContent = p.emoji;
+  document.getElementById('modal-format').innerHTML = `<span class="format-tag ${formatClass[p.format]}">${formatLabel[p.format]}${p.urgent ? ' 🔴 URGENTE' : ''}</span>`;
+  document.getElementById('modal-title').textContent = p.caption;
+  document.getElementById('modal-caption').textContent = p.detail;
+  document.getElementById('modal-hook').textContent = p.hook;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+}
+document.getElementById('modal').addEventListener('click', e => {
+  if (e.target === e.currentTarget) closeModal();
+});
+</script>
+</body>
+</html>

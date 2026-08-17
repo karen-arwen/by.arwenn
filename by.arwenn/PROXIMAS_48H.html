@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Próximas 48h — Arwen</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07050f;--bg2:#0d0a1a;--bg3:#120f22;--lil:#c4a8ff;--lil2:#9b72f5;--pink:#ff3fa4;--cyan:#00ffe1;--gold:#ffd166;--green:#00ff88;--red:#ff4060;--cream:#f0eaff;--muted:#6b5f8a;--text:#c4b8e0;--border:rgba(255,255,255,0.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 0%,rgba(155,114,245,0.08),transparent);pointer-events:none;z-index:0}
+.wrap{max-width:800px;margin:0 auto;padding:40px 20px 80px;position:relative;z-index:1}
+.hero{text-align:center;margin-bottom:40px}
+.hero-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;color:var(--cyan);border:1px solid rgba(0,255,225,0.2);padding:5px 16px;border-radius:3px;margin-bottom:16px;text-transform:uppercase}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,10vw,80px);letter-spacing:2px;line-height:0.9}
+.hero h1 .g{background:linear-gradient(90deg,var(--pink),var(--lil),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:13px;color:var(--muted);margin-top:10px}
+.urg-banner{background:linear-gradient(135deg,rgba(255,64,96,0.12),rgba(255,63,164,0.08));border:1px solid rgba(255,64,96,0.3);border-radius:14px;padding:18px 22px;margin-bottom:24px;display:flex;align-items:center;gap:14px}
+.urg-icon{font-size:32px;flex-shrink:0}
+.urg-text h3{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--red);margin-bottom:4px}
+.urg-text p{font-size:13px;color:var(--muted);line-height:1.6}
+.urg-text strong{color:var(--cream)}
+.block{background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px}
+.block.done-block{border-color:rgba(0,255,136,0.2);background:rgba(0,255,136,0.02)}
+.block-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.block-num{font-family:'Bebas Neue',sans-serif;font-size:44px;line-height:1;width:52px;text-align:center;flex-shrink:0}
+.block-meta{}
+.block-time{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:3px}
+.block-title{font-size:17px;color:var(--cream);font-weight:700;line-height:1.2}
+.block-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.steps{list-style:none;display:flex;flex-direction:column;gap:6px}
+.step{display:flex;gap:12px;padding:10px 12px;background:var(--bg3);border-radius:10px;cursor:pointer;transition:all 0.2s;border:1px solid transparent;align-items:flex-start}
+.step:hover{border-color:rgba(196,168,255,0.15)}
+.step.done{background:rgba(0,255,136,0.04);border-color:rgba(0,255,136,0.15)}
+.step.done .step-text{text-decoration:line-through;color:var(--muted)}
+.step.urgent{border-color:rgba(255,64,96,0.25);background:rgba(255,64,96,0.04)}
+.sbox{width:20px;height:20px;border-radius:5px;border:1px solid rgba(196,168,255,0.35);flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all 0.15s}
+.step.done .sbox{background:var(--green);border-color:var(--green);color:#000}
+.step-text{font-size:13px;color:var(--text);line-height:1.5;flex:1}
+.step-text strong{color:var(--cream)}
+.step-badge{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1px;padding:2px 7px;border-radius:3px;flex-shrink:0;margin-top:2px}
+.sb-urg{background:rgba(255,64,96,0.15);color:var(--red)}
+.sb-now{background:rgba(0,255,225,0.08);color:var(--cyan)}
+.sb-easy{background:rgba(0,255,136,0.08);color:var(--green)}
+.divider{height:1px;background:linear-gradient(to right,transparent,rgba(196,168,255,0.1),transparent);margin:8px 0}
+.progress-area{margin-top:24px;background:var(--bg2);border-radius:16px;padding:20px;border:1px solid var(--border)}
+.progress-title{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:1px;color:var(--cream);margin-bottom:14px}
+.prog-bar-wrap{margin-bottom:10px}
+.prog-label{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:5px}
+.prog-label strong{color:var(--text)}
+.prog-bar{height:10px;background:var(--bg3);border-radius:5px;overflow:hidden}
+.prog-fill{height:100%;border-radius:5px;transition:width 0.5s ease;background:linear-gradient(90deg,var(--pink),var(--lil))}
+.motivational{text-align:center;margin-top:32px;padding:20px;background:linear-gradient(135deg,rgba(155,114,245,0.07),rgba(255,63,164,0.04));border:1px solid rgba(196,168,255,0.1);border-radius:12px}
+.motivational p{font-size:14px;color:var(--cream);line-height:1.8;font-style:italic}
+.motivational span{color:var(--muted);font-size:11px;display:block;margin-top:6px;font-family:'JetBrains Mono',monospace;letter-spacing:1px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="hero">
+    <div class="hero-badge">✦ 8-10 junho 2026 · urgente ✦</div>
+    <h1>PRÓXIMAS <span class="g">48 HORAS</span></h1>
+    <p>o que fazer agora, amanhã e depois de amanhã — em ordem de prioridade</p>
+  </div>
+
+  <!-- URGENTE -->
+  <div class="urg-banner">
+    <div class="urg-icon">🎪</div>
+    <div class="urg-text">
+      <h3>🔴 URGENTE: CCXP 2026</h3>
+      <p><strong>Amanhã, 10 de junho às 12h</strong>, abrem as vendas dos ingressos da CCXP 2026 (3-6 dezembro). Você é veterana. Não perde. Existe o novo "Ingresso Coringa" — você escolhe o dia depois. <strong>Coloca alarme pra 11h50 de amanhã.</strong></p>
+    </div>
+  </div>
+
+  <!-- BLOCO 1: HOJE -->
+  <div class="block">
+    <div class="block-header">
+      <div class="block-num" style="color:var(--pink)">1</div>
+      <div class="block-meta">
+        <div class="block-time" style="color:var(--pink)">HOJE · 8 DE JUNHO · AGORA</div>
+        <div class="block-title">Candidaturas abertas — manda hoje</div>
+        <div class="block-sub">as vagas têm prazo. manda antes de dormir.</div>
+      </div>
+    </div>
+    <ul class="steps">
+      <li class="step urgent" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Gocase:</strong> acessa influencers.gocase.com.br e preenche o cadastro. Leva 10 minutos.</div><span class="step-badge sb-urg">URGENTE</span></li>
+      <li class="step urgent" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Love Maze:</strong> procura "@lovemaze" no Instagram ou TikTok → acha o formulário de parceria → preenche.</div><span class="step-badge sb-urg">URGENTE</span></li>
+      <li class="step urgent" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Pangeia:</strong> DM no @editorapangeia no Instagram + email no site editorapangeia.com.br oferecendo parceria BookTok.</div><span class="step-badge sb-urg">URGENTE</span></li>
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Noovid:</strong> noovid.com → "Sou Creator" → cria perfil completo.</div><span class="step-badge sb-now">HOJE</span></li>
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Bloomer:</strong> bloomer.pro → cadastro. 100% da grana vai pra você.</div><span class="step-badge sb-now">HOJE</span></li>
+    </ul>
+  </div>
+
+  <!-- BLOCO 2: HOJE TARDE -->
+  <div class="block">
+    <div class="block-header">
+      <div class="block-num" style="color:var(--lil2)">2</div>
+      <div class="block-meta">
+        <div class="block-time" style="color:var(--lil2)">HOJE TARDE · GRAVAÇÃO</div>
+        <div class="block-title">1 vídeo gravado — o mais fácil primeiro</div>
+        <div class="block-sub">o primeiro vídeo é sempre o mais difícil. grava um. qualquer um.</div>
+      </div>
+    </div>
+    <ul class="steps">
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Arruma o setup</strong> em 1 lugar da casa: iluminação (janela ou ring light frontal), fundo limpo ou setup geek, celular no tripé ou na mão.</div><span class="step-badge sb-easy">15 MIN</span></li>
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Grava o vídeo mais fácil:</strong> "Coisas que ninguém te conta antes de colecionar Funkos" — só você falando, 35s, sem setup elaborado. Roteiro completo no BACKLOG #15 do manual.</div><span class="step-badge sb-easy">FÁCIL</span></li>
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Ou grave:</strong> "Um. Capítulo. Por. Semana." (manhwa sofrimento humor) — 25s, só expressão facial + falar. Roteiro #27.</div><span class="step-badge sb-easy">FÁCIL</span></li>
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Posta o vídeo no IG + TikTok</strong> sem watermark. Caption pronta no ARSENAL_CREATOR.html.</div><span class="step-badge sb-now">HOJE</span></li>
+    </ul>
+  </div>
+
+  <!-- BLOCO 3: HOJE NOITE -->
+  <div class="block">
+    <div class="block-header">
+      <div class="block-num" style="color:var(--cyan)">3</div>
+      <div class="block-meta">
+        <div class="block-time" style="color:var(--cyan)">HOJE NOITE</div>
+        <div class="block-title">Setup digital — o que ainda não foi feito</div>
+        <div class="block-sub">coisas que ficaram pendentes desde maio.</div>
+      </div>
+    </div>
+    <ul class="steps">
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>TikTok @by.arwenn:</strong> se ainda não criou, cria agora. Foto de perfil = mesma do IG. Bio adaptada (texto no manual → aba Posicionamento).</div><span class="step-badge sb-now">PENDENTE</span></li>
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Beacons.ai:</strong> beacons.ai/by.arwenn — cadastra e configura os 8 blocos. Estrutura completa no manual → aba Beacons.</div><span class="step-badge sb-now">PENDENTE</span></li>
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Coloca o alarme:</strong> amanhã às 11h50 — compra o ingresso da CCXP 2026 (12h abre). Coloca agora antes de esquecer.</div><span class="step-badge sb-urg">NÃO ESQUECE</span></li>
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Amazon Afiliados:</strong> afiliados.amazon.com.br — cadastra agora. Ganha comissão todo livro, game e colecionável que você recomendar.</div><span class="step-badge sb-easy">10 MIN</span></li>
+    </ul>
+  </div>
+
+  <!-- BLOCO 4: AMANHÃ -->
+  <div class="block">
+    <div class="block-header">
+      <div class="block-num" style="color:var(--gold)">4</div>
+      <div class="block-meta">
+        <div class="block-time" style="color:var(--gold)">AMANHÃ · 9 JUNHO</div>
+        <div class="block-title">Postagem + CCXP + 2º vídeo</div>
+        <div class="block-sub">dia de postar o primeiro reel E comprar o ingresso da sua vida.</div>
+      </div>
+    </div>
+    <ul class="steps">
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>8h — Engagement bombing (20min):</strong> antes de postar, comenta em 15 contas do seu nicho. Aumenta o alcance do post que você vai fazer.</div><span class="step-badge sb-now">9 JUN</span></li>
+      <li class="step urgent" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>11h50 — Alarme CCXP:</strong> abre o site, deixa o checkout pronto. Ingressos abrem às 12h. Compra na velocidade da luz.</div><span class="step-badge sb-urg">12H!</span></li>
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>12h30 — Story "comprei meu ingresso da CCXP 2026":</strong> isso já é conteúdo. Print do ingresso + reação = story que conecta com veteranos e gera engajamento.</div><span class="step-badge sb-easy">FÁCIL</span></li>
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>19h — Posta Reel + TikTok:</strong> o vídeo que você gravou hoje. Usa a caption do ARSENAL_CREATOR. Fica online por 1h respondendo todos os comentários.</div><span class="step-badge sb-now">9 JUN</span></li>
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Tarde — Grava o 2º vídeo:</strong> "Manhwa da Segunda #1" (roteiro no manual). Vai ao ar na segunda-feira.</div><span class="step-badge sb-now">9 JUN</span></li>
+    </ul>
+  </div>
+
+  <!-- BLOCO 5: DEPOIS DE AMANHÃ -->
+  <div class="block">
+    <div class="block-header">
+      <div class="block-num" style="color:var(--green)">5</div>
+      <div class="block-meta">
+        <div class="block-time" style="color:var(--green)">DEPOIS DE AMANHÃ · 10 JUNHO</div>
+        <div class="block-title">Lovable site + mais candidaturas</div>
+        <div class="block-sub">continua o site + cadastros que ficaram de segunda-feira.</div>
+      </div>
+    </div>
+    <ul class="steps">
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Site no Lovable:</strong> me manda o link do que você tem — eu analiso e te digo exatamente o que ajustar em texto, hero, seções e CTA pra virar portfólio que converte.</div><span class="step-badge sb-now">10 JUN</span></li>
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>The Creator:</strong> thecreator.com.br → "Sou Creator" → cadastra.</div><span class="step-badge sb-easy">10 MIN</span></li>
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Influency.me:</strong> influency.me → cadastra conectando IG/TikTok. Você aparece na busca de marcas.</div><span class="step-badge sb-easy">15 MIN</span></li>
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Manda 3 emails de prospecção:</strong> Redragon (email no manual), Vult cosméticos, qualquer loja geek que você já compra. Emails prontos no manual → aba Scripts UGC.</div><span class="step-badge sb-now">10 JUN</span></li>
+      <li class="step" onclick="tog(this)"><div class="sbox"></div><div class="step-text"><strong>Grava o 3º vídeo:</strong> "Blue Lock — Rin Itoshi não é frio, ele é ferido" (roteiro #11). Timing perfeito antes do live-action de agosto.</div><span class="step-badge sb-urg">TIMING!</span></li>
+    </ul>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-area">
+    <div class="progress-title">📊 Progresso das 48h</div>
+    <div class="prog-bar-wrap">
+      <div class="prog-label"><span>Candidaturas enviadas</span><strong id="cand-pct">0%</strong></div>
+      <div class="prog-bar"><div class="prog-fill" id="cand-bar" style="width:0%"></div></div>
+    </div>
+    <div class="prog-bar-wrap">
+      <div class="prog-label"><span>Vídeos gravados</span><strong id="vid-pct">0%</strong></div>
+      <div class="prog-bar"><div class="prog-fill" id="vid-bar" style="width:0%;background:linear-gradient(90deg,var(--cyan),var(--lil))"></div></div>
+    </div>
+    <div class="prog-bar-wrap">
+      <div class="prog-label"><span>Setup digital completo</span><strong id="setup-pct">0%</strong></div>
+      <div class="prog-bar"><div class="prog-fill" id="setup-bar" style="width:0%;background:linear-gradient(90deg,var(--gold),var(--green))"></div></div>
+    </div>
+    <p style="font-size:11px;color:var(--muted);margin-top:12px;font-family:'JetBrains Mono',monospace">clica nos itens acima pra marcar como feito · progresso calculado automaticamente</p>
+  </div>
+
+  <!-- MOTIVACIONAL -->
+  <div class="motivational">
+    <p>"O primeiro vídeo não precisa ser perfeito.<br>Precisa existir. O resto vem depois."</p>
+    <span>ARWEN · SPRINT 10K · JUNHO 2026</span>
+  </div>
+
+</div>
+
+<script>
+// Track all steps and update progress bars
+const stepsInBlocks = {
+  cand: [0,1,2,3,4],      // bloco 1: candidaturas
+  vid: [5,6,7,8],          // bloco 2: vídeos
+  setup: [9,10,11,12]      // bloco 3: setup
+};
+
+function tog(el){
+  el.classList.toggle('done');
+  const b=el.querySelector('.sbox');
+  b.textContent=el.classList.contains('done')?'✓':'';
+  updateProgress();
+}
+
+function updateProgress(){
+  const all=document.querySelectorAll('.step');
+  // candidaturas: primeiros 5 steps
+  let cand=0;
+  for(let i=0;i<5;i++){if(all[i]&&all[i].classList.contains('done'))cand++;}
+  // videos: steps 5-8
+  let vid=0;
+  for(let i=5;i<9;i++){if(all[i]&&all[i].classList.contains('done'))vid++;}
+  // setup: steps 9-12
+  let setup=0;
+  for(let i=9;i<13;i++){if(all[i]&&all[i].classList.contains('done'))setup++;}
+
+  setBar('cand',cand,5);
+  setBar('vid',vid,4);
+  setBar('setup',setup,4);
+}
+
+function setBar(id,done,total){
+  const pct=Math.round((done/total)*100);
+  document.getElementById(id+'-bar').style.width=pct+'%';
+  document.getElementById(id+'-pct').textContent=pct+'%';
+}
+</script>
+</body>
+</html>

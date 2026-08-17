@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ARWEN — Manual Completo da Influenciadora</title>
+<meta name="theme-color" content="#07050f">
+<meta name="description" content="Manual app da Arwen com guia operacional, banco de ideias, checklist e rotina de criadora.">
+<link rel="manifest" href="./manifest.webmanifest">
+<link rel="icon" href="./arwen-app-icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="./arwen-app-icon.svg">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -92,6 +97,15 @@ body::before {
 }
 .nav-btn:hover { color:var(--lil); border-color:rgba(196,168,255,0.3); }
 .nav-btn.on { background:var(--lil2); border-color:var(--lil2); color:#fff; }
+.install-btn {
+  display:none; position:fixed; right:16px; bottom:16px; z-index:80;
+  background:linear-gradient(135deg, var(--pink), var(--lil2));
+  border:1px solid rgba(255,255,255,0.18); color:#fff;
+  font-family:'Syne',sans-serif; font-size:12px; font-weight:800;
+  padding:10px 14px; border-radius:8px; cursor:pointer;
+  box-shadow:0 14px 36px rgba(0,0,0,0.35);
+}
+.install-btn.show { display:inline-flex; align-items:center; gap:8px; }
 
 /* ── SECTIONS ── */
 .sec { display:none; animation:si 0.2s ease both; }
@@ -866,19 +880,93 @@ body::before {
   <span class="big">SEU MUNDO É GRANDE — OCUPA ELE TODO</span>
 </div>
 
+<button class="install-btn" id="installApp" type="button">Instalar app</button>
+
 <script>
-function show(id, btn) {
+const APP_STATE_KEY = 'arwenManualState';
+let deferredInstallPrompt = null;
+
+function readState() {
+  try {
+    return JSON.parse(localStorage.getItem(APP_STATE_KEY)) || {};
+  } catch {
+    return {};
+  }
+}
+
+function writeState(nextState) {
+  localStorage.setItem(APP_STATE_KEY, JSON.stringify({ ...readState(), ...nextState }));
+}
+
+function show(id, btn, shouldScroll = true) {
   document.querySelectorAll('.sec').forEach(s => s.classList.remove('on'));
   document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('on'));
-  document.getElementById(id).classList.add('on');
-  btn.classList.add('on');
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  const section = document.getElementById(id);
+  if (!section) return;
+  section.classList.add('on');
+  if (btn) btn.classList.add('on');
+  writeState({ activeSection: id });
+  history.replaceState(null, '', `#${id}`);
+  if (shouldScroll) window.scrollTo({top: 0, behavior: 'smooth'});
 }
 function tog(li) {
   li.classList.toggle('done');
   const box = li.querySelector('.box');
   box.textContent = li.classList.contains('done') ? '✓' : '';
+  saveChecklist();
 }
+
+function checklistItems() {
+  return [...document.querySelectorAll('.check li')];
+}
+
+function saveChecklist() {
+  const checklist = checklistItems().map(item => item.classList.contains('done'));
+  writeState({ checklist });
+}
+
+function restoreChecklist() {
+  const checklist = readState().checklist || [];
+  checklistItems().forEach((item, index) => {
+    item.classList.toggle('done', Boolean(checklist[index]));
+    const box = item.querySelector('.box');
+    box.textContent = item.classList.contains('done') ? '✓' : '';
+  });
+}
+
+function restoreSection() {
+  const savedSection = location.hash.replace('#', '') || readState().activeSection || 'agente';
+  const button = [...document.querySelectorAll('.nav-btn')]
+    .find(btn => btn.getAttribute('onclick')?.includes(`'${savedSection}'`));
+  show(savedSection, button, false);
+}
+
+function registerAppShell() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js');
+  }
+
+  const installButton = document.getElementById('installApp');
+  window.addEventListener('beforeinstallprompt', event => {
+    event.preventDefault();
+    deferredInstallPrompt = event;
+    installButton.classList.add('show');
+  });
+
+  installButton.addEventListener('click', async () => {
+    if (!deferredInstallPrompt) return;
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice;
+    deferredInstallPrompt = null;
+    installButton.classList.remove('show');
+  });
+
+  window.addEventListener('appinstalled', () => installButton.classList.remove('show'));
+}
+
+restoreChecklist();
+restoreSection();
+registerAppShell();
 </script>
 </body>
 </html>

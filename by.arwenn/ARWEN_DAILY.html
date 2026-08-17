@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arwen Daily — Rotina de Creator</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07050f;--bg2:#0d0a1a;--bg3:#120f22;--lil:#c4a8ff;--lil2:#9b72f5;--pink:#ff3fa4;--cyan:#00ffe1;--gold:#ffd166;--green:#00ff88;--red:#ff4060;--cream:#f0eaff;--muted:#6b5f8a;--text:#c4b8e0;--border:rgba(255,255,255,0.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 0%,rgba(155,114,245,0.08),transparent),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(255,63,164,0.05),transparent);pointer-events:none;z-index:0}
+
+/* HEADER */
+.header{max-width:1000px;margin:0 auto;padding:32px 20px 0;position:relative;z-index:1;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.header-left h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,6vw,52px);letter-spacing:2px;line-height:1}
+.header-left h1 span{background:linear-gradient(90deg,var(--pink),var(--lil),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.header-left p{font-size:12px;color:var(--muted);margin-top:4px;font-family:'JetBrains Mono',monospace;letter-spacing:1px}
+.clock-box{text-align:right}
+#clock{font-family:'Bebas Neue',sans-serif;font-size:clamp(28px,5vw,44px);color:var(--cyan);letter-spacing:2px}
+#date-str{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;margin-top:2px}
+
+/* COUNTDOWN */
+.countdown-bar{background:rgba(155,114,245,0.05);border:1px solid rgba(196,168,255,0.1);border-radius:12px;padding:14px 20px;margin:20px auto;max-width:1000px;position:relative;z-index:1;display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+.cd-item{text-align:center;min-width:60px}
+.cd-num{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--pink);line-height:1}
+.cd-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.cd-title{font-size:13px;color:var(--cream);font-weight:700;flex:1;min-width:200px}
+.cd-title span{color:var(--lil)}
+.blink{animation:blink 1.5s infinite}
+@keyframes blink{50%{opacity:0.3}}
+
+/* MAIN GRID */
+.main{max-width:1000px;margin:0 auto;padding:16px 20px 80px;position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:640px){.main{grid-template-columns:1fr}}
+.full{grid-column:1/-1}
+
+/* CARD */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px}
+.card-title{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:1px;color:var(--cream);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.card-title .dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.dot-pink{background:var(--pink);box-shadow:0 0 6px var(--pink)}
+.dot-cyan{background:var(--cyan);box-shadow:0 0 6px var(--cyan)}
+.dot-gold{background:var(--gold);box-shadow:0 0 6px var(--gold)}
+.dot-lil{background:var(--lil2);box-shadow:0 0 6px var(--lil2)}
+.dot-green{background:var(--green);box-shadow:0 0 6px var(--green)}
+
+/* HABITS */
+.habit-list{list-style:none;display:flex;flex-direction:column;gap:6px}
+.habit-item{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:var(--bg3);cursor:pointer;transition:background 0.15s;border:1px solid transparent;user-select:none}
+.habit-item:hover{background:rgba(155,114,245,0.08);border-color:rgba(196,168,255,0.1)}
+.habit-item.done{background:rgba(0,255,136,0.05);border-color:rgba(0,255,136,0.15)}
+.habit-item.done .htext{text-decoration:line-through;color:var(--muted)}
+.hbox{width:18px;height:18px;border-radius:4px;border:1px solid rgba(196,168,255,0.3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all 0.15s}
+.habit-item.done .hbox{background:var(--green);border-color:var(--green);color:#000}
+.htext{font-size:12.5px;color:var(--text);flex:1;line-height:1.4}
+.htag{font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:1px;padding:2px 6px;border-radius:2px;flex-shrink:0}
+.t-m{background:rgba(255,63,164,0.1);color:var(--pink)}
+.t-t{background:rgba(0,255,225,0.08);color:var(--cyan)}
+.t-n{background:rgba(255,209,102,0.08);color:var(--gold)}
+
+/* PROGRESS */
+.progress-wrap{margin-bottom:12px}
+.progress-label{display:flex;justify-content:space-between;margin-bottom:6px;font-size:12px;color:var(--muted)}
+.progress-label strong{color:var(--text)}
+.progress-bar{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden}
+.progress-fill{height:100%;border-radius:4px;transition:width 0.5s ease}
+.p-pink{background:linear-gradient(90deg,var(--pink),#ff89c8)}
+.p-lil{background:linear-gradient(90deg,var(--lil2),var(--lil))}
+.p-cyan{background:linear-gradient(90deg,#0088cc,var(--cyan))}
+.p-gold{background:linear-gradient(90deg,#cc8800,var(--gold))}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.stat-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:12px;text-align:center}
+.stat-input{background:transparent;border:none;width:100%;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--cyan);outline:none;cursor:pointer}
+.stat-input:focus{color:var(--lil)}
+.stat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:3px}
+.stat-meta{font-size:10px;color:rgba(107,95,138,0.6);margin-top:1px}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:4px}
+.tl-row{display:flex;gap:10px;padding:6px 8px;border-radius:8px;align-items:flex-start;cursor:pointer;transition:background 0.15s}
+.tl-row:hover{background:rgba(255,255,255,0.02)}
+.tl-row.active{background:rgba(155,114,245,0.08);border:1px solid rgba(196,168,255,0.1)}
+.tl-time{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--lil2);min-width:36px;padding-top:2px;flex-shrink:0}
+.tl-dot{width:8px;height:8px;border-radius:50%;margin-top:4px;flex-shrink:0}
+.tl-content{font-size:12px;color:var(--muted);line-height:1.5;flex:1}
+.tl-content strong{color:var(--text)}
+.tl-row.done-t .tl-content{text-decoration:line-through;color:rgba(107,95,138,0.4)}
+.tl-row.done-t .tl-dot{background:var(--green)!important}
+
+/* HOOKS */
+.hook-list{display:flex;flex-direction:column;gap:6px;max-height:280px;overflow-y:auto}
+.hook-list::-webkit-scrollbar{width:4px}
+.hook-list::-webkit-scrollbar-track{background:transparent}
+.hook-list::-webkit-scrollbar-thumb{background:rgba(196,168,255,0.2);border-radius:2px}
+.hook{background:var(--bg3);border-radius:8px;padding:10px 12px;font-size:12px;color:var(--text);line-height:1.5;border-left:2px solid var(--lil2);cursor:pointer;transition:all 0.15s;position:relative}
+.hook:hover{background:rgba(155,114,245,0.08);border-color:var(--pink)}
+.hook-nicho{font-family:'JetBrains Mono',monospace;font-size:8px;color:var(--cyan);letter-spacing:1px;margin-bottom:4px}
+.hook .copy-btn{position:absolute;right:8px;top:50%;transform:translateY(-50%);font-size:10px;color:var(--muted);opacity:0;transition:opacity 0.15s}
+.hook:hover .copy-btn{opacity:1}
+
+/* COPY TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--green);color:#000;font-size:12px;font-weight:700;padding:10px 20px;border-radius:8px;opacity:0;transform:translateY(10px);transition:all 0.3s;pointer-events:none;z-index:999;font-family:'JetBrains Mono',monospace;letter-spacing:1px}
+.toast.show{opacity:1;transform:translateY(0)}
+
+/* HASHTAG QUICK */
+.ht-grid{display:flex;flex-direction:column;gap:6px}
+.ht-set{background:var(--bg3);border-radius:8px;padding:10px 12px;cursor:pointer;transition:all 0.15s;border:1px solid transparent}
+.ht-set:hover{border-color:rgba(196,168,255,0.2);background:rgba(155,114,245,0.06)}
+.ht-set-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--lil);letter-spacing:1px;margin-bottom:4px}
+.ht-set-text{font-size:10.5px;color:var(--muted);line-height:1.6;word-break:break-all}
+
+/* QUOTE */
+.quote-box{background:linear-gradient(135deg,rgba(155,114,245,0.08),rgba(255,63,164,0.05));border:1px solid rgba(196,168,255,0.12);border-radius:12px;padding:16px;text-align:center}
+.quote-text{font-size:14px;color:var(--cream);line-height:1.7;font-style:italic;margin-bottom:8px}
+.quote-author{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:2px}
+
+/* EMERGENCY */
+.emergency-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.emg{background:var(--bg3);border-radius:10px;padding:12px;border-left:3px solid var(--pink)}
+.emg h4{font-size:11px;color:var(--cream);font-weight:700;margin-bottom:4px}
+.emg p{font-size:11px;color:var(--muted);line-height:1.5}
+
+/* FOOTER */
+.footer-note{text-align:center;padding:24px 20px;position:relative;z-index:1;font-size:11px;color:rgba(107,95,138,0.4);font-family:'JetBrains Mono',monospace}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-left">
+    <h1>ARWEN <span>DAILY</span></h1>
+    <p>✦ rotina creator · sprint 10k · by.arwenn ✦</p>
+  </div>
+  <div class="clock-box">
+    <div id="clock">--:--:--</div>
+    <div id="date-str">carregando...</div>
+  </div>
+</div>
+
+<!-- COUNTDOWNS -->
+<div class="countdown-bar">
+  <div class="cd-item"><div class="cd-num blink" id="cd-bluelock-d">--</div><div class="cd-label">dias</div></div>
+  <div class="cd-item"><div class="cd-num" id="cd-bluelock-h">--</div><div class="cd-label">horas</div></div>
+  <div class="cd-title">até o <span>🔵 live-action de Blue Lock</span> (7 ago 2026) — a wave mais importante do ano</div>
+</div>
+<div class="countdown-bar" style="margin-top:-8px">
+  <div class="cd-item"><div class="cd-num" id="cd-t3-d">--</div><div class="cd-label">dias</div></div>
+  <div class="cd-title">até a <span>📺 Temporada 3 de Blue Lock</span> (outubro 2026)</div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- HÁBITOS DO DIA -->
+  <div class="card">
+    <div class="card-title"><div class="dot dot-pink"></div>HÁBITOS DO DIA</div>
+    <ul class="habit-list" id="habits">
+      <li class="habit-item" onclick="tog(this,'h1')"><div class="hbox"></div><div class="htext"><strong>Engagement bombing</strong> — 20min comentando em contas do nicho antes de postar</div><span class="htag t-m">MANHÃ</span></li>
+      <li class="habit-item" onclick="tog(this,'h2')"><div class="hbox"></div><div class="htext"><strong>Postar (IG + TikTok)</strong> — Reel do dia sem watermark nos dois</div><span class="htag t-m">MANHÃ</span></li>
+      <li class="habit-item" onclick="tog(this,'h3')"><div class="hbox"></div><div class="htext"><strong>Story de manhã</strong> — bom dia / bastidor / o que vai rolar hoje</div><span class="htag t-m">MANHÃ</span></li>
+      <li class="habit-item" onclick="tog(this,'h4')"><div class="hbox"></div><div class="htext"><strong>Responder comentários</strong> — TUDO nas primeiras 2h depois de postar</div><span class="htag t-t">TARDE</span></li>
+      <li class="habit-item" onclick="tog(this,'h5')"><div class="hbox"></div><div class="htext"><strong>Story de engajamento</strong> — enquete, caixinha ou pergunta</div><span class="htag t-t">TARDE</span></li>
+      <li class="habit-item" onclick="tog(this,'h6')"><div class="hbox"></div><div class="htext"><strong>Gravar / editar próximo conteúdo</strong> — pelo menos 1 hoje</div><span class="htag t-t">TARDE</span></li>
+      <li class="habit-item" onclick="tog(this,'h7')"><div class="hbox"></div><div class="htext"><strong>Mandar DM de collab</strong> — 1-2 por dia (5 por semana)</div><span class="htag t-t">TARDE</span></li>
+      <li class="habit-item" onclick="tog(this,'h8')"><div class="hbox"></div><div class="htext"><strong>Story noturno</strong> — o que tô lendo/jogando agora</div><span class="htag t-n">NOITE</span></li>
+      <li class="habit-item" onclick="tog(this,'h9')"><div class="hbox"></div><div class="htext"><strong>Conferir insights</strong> — qual post bombou hoje? por quê?</div><span class="htag t-n">NOITE</span></li>
+      <li class="habit-item" onclick="tog(this,'h10')"><div class="hbox"></div><div class="htext"><strong>Planejar amanhã</strong> — o que vou postar, qual horário</div><span class="htag t-n">NOITE</span></li>
+    </ul>
+  </div>
+
+  <!-- MÉTRICAS DA SEMANA -->
+  <div class="card">
+    <div class="card-title"><div class="dot dot-cyan"></div>MÉTRICAS DA SEMANA</div>
+    <div class="stats-grid">
+      <div class="stat-box">
+        <input class="stat-input" type="number" id="seg" placeholder="0" oninput="saveMetrics()" title="Clica pra editar">
+        <div class="stat-lbl">Seguidores</div>
+        <div class="stat-meta">meta: 10.000</div>
+      </div>
+      <div class="stat-box">
+        <input class="stat-input" type="number" id="views" placeholder="0" oninput="saveMetrics()" title="Views semana">
+        <div class="stat-lbl">Views/semana</div>
+        <div class="stat-meta">meta: cresce +50%</div>
+      </div>
+      <div class="stat-box">
+        <input class="stat-input" type="number" id="reels" placeholder="0" oninput="saveMetrics()" title="Reels postados">
+        <div class="stat-lbl">Reels postados</div>
+        <div class="stat-meta">meta: 10+/semana</div>
+      </div>
+      <div class="stat-box">
+        <input class="stat-input" type="number" id="lives" placeholder="0" oninput="saveMetrics()" title="Lives feitas">
+        <div class="stat-lbl">Lives</div>
+        <div class="stat-meta">meta: 2-3/semana</div>
+      </div>
+      <div class="stat-box">
+        <input class="stat-input" type="number" id="collabs" placeholder="0" oninput="saveMetrics()" title="DMs de collab">
+        <div class="stat-lbl">DMs Collab</div>
+        <div class="stat-meta">meta: 5+/semana</div>
+      </div>
+      <div class="stat-box">
+        <input class="stat-input" type="number" id="emails" placeholder="0" oninput="saveMetrics()" title="Emails enviados">
+        <div class="stat-lbl">Emails UGC</div>
+        <div class="stat-meta">meta: 5+/semana</div>
+      </div>
+    </div>
+    <div style="margin-top:14px">
+      <div class="progress-wrap">
+        <div class="progress-label"><span>Seguidores</span><strong id="pct-seg">0%</strong></div>
+        <div class="progress-bar"><div class="progress-fill p-pink" id="bar-seg" style="width:0%"></div></div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-label"><span>Reels (meta semanal: 10)</span><strong id="pct-reels">0%</strong></div>
+        <div class="progress-bar"><div class="progress-fill p-lil" id="bar-reels" style="width:0%"></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE DO DIA -->
+  <div class="card">
+    <div class="card-title"><div class="dot dot-lil"></div>ROTINA DO DIA</div>
+    <div class="timeline">
+      <div class="tl-row" onclick="togTl(this)"><div class="tl-time">8h</div><div class="tl-dot" style="background:var(--muted)"></div><div class="tl-content"><strong>Engagement bombing</strong> — 20min em contas do nicho antes de postar qualquer coisa</div></div>
+      <div class="tl-row" onclick="togTl(this)"><div class="tl-time">9h</div><div class="tl-dot" style="background:var(--muted)"></div><div class="tl-content"><strong>Story de manhã</strong> — bom dia + bastidor do dia</div></div>
+      <div class="tl-row active" onclick="togTl(this)"><div class="tl-time">11h</div><div class="tl-dot" style="background:var(--pink)"></div><div class="tl-content"><strong>Postar Reel do dia</strong> — sem watermark no IG + mesmo no TikTok</div></div>
+      <div class="tl-row" onclick="togTl(this)"><div class="tl-time">11-13h</div><div class="tl-dot" style="background:var(--muted)"></div><div class="tl-content"><strong>Responder TODOS os comentários</strong> do Reel postado — 2h de janela do algoritmo</div></div>
+      <div class="tl-row" onclick="togTl(this)"><div class="tl-time">14h</div><div class="tl-dot" style="background:var(--muted)"></div><div class="tl-content"><strong>Gravar próximo vídeo</strong> — ou editar o que já foi gravado</div></div>
+      <div class="tl-row" onclick="togTl(this)"><div class="tl-time">17h</div><div class="tl-dot" style="background:var(--muted)"></div><div class="tl-content"><strong>Story de engajamento</strong> — enquete, caixinha, pergunta</div></div>
+      <div class="tl-row" onclick="togTl(this)"><div class="tl-time">19h</div><div class="tl-dot" style="background:var(--cyan)"></div><div class="tl-content"><strong>Postar 2º conteúdo</strong> — carrossel, story longo ou repost no TikTok</div></div>
+      <div class="tl-row" onclick="togTl(this)"><div class="tl-time">20h</div><div class="tl-dot" style="background:var(--muted)"></div><div class="tl-content"><strong>Mandar DMs de collab</strong> — 1-2 hoje</div></div>
+      <div class="tl-row" onclick="togTl(this)"><div class="tl-time">21h</div><div class="tl-dot" style="background:var(--muted)"></div><div class="tl-content"><strong>Story noturno</strong> — o que tô lendo/jogando/assistindo</div></div>
+      <div class="tl-row" onclick="togTl(this)"><div class="tl-time">22h</div><div class="tl-dot" style="background:var(--muted)"></div><div class="tl-content"><strong>Conferir insights + planejar amanhã</strong> — 5 min, não mais</div></div>
+    </div>
+  </div>
+
+  <!-- HOOKS PRONTOS -->
+  <div class="card">
+    <div class="card-title"><div class="dot dot-gold"></div>GANCHOS PRONTOS — clica pra copiar</div>
+    <div class="hook-list">
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">GAMES</div>"Esse game mobile é CRIMINOSO com meu tempo livre."<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">GAMES</div>"Tava em último lugar. Faltava 1 volta. Aconteceu isso:"<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">BLUE LOCK</div>"Rin Itoshi não é frio. ele é ferido. a diferença importa."<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">BLUE LOCK</div>"Live-action de Blue Lock em agosto e eu já tô em modo fangirl. explico:"<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">LIVROS</div>"Esse livro me destruiu em 2 dias e eu não me arrependo."<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">LIVROS</div>"Pilha da vergonha: comprei mais livros. não terminei os outros. e?"<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">MANHWA</div>"Um. Capítulo. Por. Semana."<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">MANHWA</div>"Tem um manhwa que tem 2 leitoras no Brasil e eu sou uma delas."<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">MAKE</div>"Make de domingo quando o livro te destrói emocionalmente."<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">MAKE</div>"Yor Forger é a make mais subestimada do anime. hoje eu fiz."<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">OPINIÃO</div>"Vou ser cancelada por isso mas precisa ser dito:"<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">OPINIÃO</div>"Isso vai te ofender mas é a verdade:"<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">LIFESTYLE</div>"Dev de 8h às 17h. creator das 17h às 22h. humana das 22h em diante."<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">COLECIONÁVEIS</div>"Você nunca compra só um Funko. nunca."<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">UGC</div>"Vou ser honesta com vocês sobre esse produto:"<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">ANIME</div>"ELES NÃO FIZERAM ISSO COM A GENTE"<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">HARRY POTTER</div>"Relí Harry Potter como adulta e não sou mais a mesma pessoa."<span class="copy-btn">copiar</span></div>
+      <div class="hook" onclick="copyHook(this)"><div class="hook-nicho">GAMES</div>"O update que me fez voltar pro game depois de 3 meses."<span class="copy-btn">copiar</span></div>
+    </div>
+  </div>
+
+  <!-- HASHTAG QUICK COPY -->
+  <div class="card full">
+    <div class="card-title"><div class="dot dot-lil"></div>HASHTAGS RÁPIDAS — clica no set pra copiar</div>
+    <div class="ht-grid">
+      <div class="ht-set" onclick="copyHt(this)">
+        <div class="ht-set-label">🎮 GAMES MOBILE</div>
+        <div class="ht-set-text">#gamesmobile #gamerbrasil #gamergirl #mobilegaming #gamerbr #gamer #conteudogames #criadoradeconteudo #gamesgirl #mobilegamer #nte #stardive #brawlstars #fortnitemobile #codmobile</div>
+      </div>
+      <div class="ht-set" onclick="copyHt(this)">
+        <div class="ht-set-label">🔵 BLUE LOCK</div>
+        <div class="ht-set-text">#bluelock #bluelockbrasil #bluelockbr #animebr #anime #bluelockedit #isagi #rinItoshi #liveaction #animebrasil #conteudoanime #bluelockfan</div>
+      </div>
+      <div class="ht-set" onclick="copyHt(this)">
+        <div class="ht-set-label">📺 ANIME GERAL</div>
+        <div class="ht-set-text">#anime #animebr #animebrasil #animelovers #animegirl #animerecomendacao #otaku #otakubr #conteudoanime #animefan #animeaddicted #animereview</div>
+      </div>
+      <div class="ht-set" onclick="copyHt(this)">
+        <div class="ht-set-label">📖 MANHWA</div>
+        <div class="ht-set-text">#manhwa #manhwabrasil #manhwabr #manhwarecs #booktok #comickkey #webtoon #manhwaaddicted #manhwafan #leituradigital #manhwalovers</div>
+      </div>
+      <div class="ht-set" onclick="copyHt(this)">
+        <div class="ht-set-label">📚 LIVROS / BOOKTOK</div>
+        <div class="ht-set-text">#booktok #booktokbrasil #bookstagram #livros #livrosfisicos #booktoker #quartaasa #harrypotter #leituras #resenha #booktokbr #leitoras #fanasdelivros</div>
+      </div>
+      <div class="ht-set" onclick="copyHt(this)">
+        <div class="ht-set-label">💄 MAKE / CHARACTER MAKE</div>
+        <div class="ht-set-text">#charactermake #makegeek #cosplaymake #animecosmake #makeup #makeupbrasil #grwm #criadoradeconteudo #makeupoftheday #makebrasil #ugcmake #makeartist</div>
+      </div>
+      <div class="ht-set" onclick="copyHt(this)">
+        <div class="ht-set-label">🧸 COLECIONÁVEIS / UNBOXING</div>
+        <div class="ht-set-text">#funko #funkopop #colecionavel #blindbox #unboxing #popmart #funkocollection #colecionaveis #geek #geekbrasil #conteudogeek #criadoradeconteudo</div>
+      </div>
+      <div class="ht-set" onclick="copyHt(this)">
+        <div class="ht-set-label">🦸 HARRY POTTER / MARVEL</div>
+        <div class="ht-set-text">#harrypotter #hogwarts #potterhead #harrypotterbrasil #marvel #vingadores #avengers #mcu #geek #conteudogeek #fangeek</div>
+      </div>
+      <div class="ht-set" onclick="copyHt(this)">
+        <div class="ht-set-label">🎯 UGC CREATOR</div>
+        <div class="ht-set-text">#ugc #ugcbrasil #ugccreator #ugccreatorbrasil #criadoradeconteudo #contentcreator #ugcportfolio #ugcvideo #ugcbr #ugccreatorbr</div>
+      </div>
+      <div class="ht-set" onclick="copyHt(this)">
+        <div class="ht-set-label">✨ LIFESTYLE GEEK (MIX GERAL)</div>
+        <div class="ht-set-text">#geekgirl #geekbrasil #criadoradeconteudo #conteudogeek #lifestylegeek #devlife #geeklifestyle #by.arwenn #maximalist #girlgamer</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTEÚDO DE EMERGÊNCIA -->
+  <div class="card">
+    <div class="card-title"><div class="dot dot-pink"></div>TRAVOU? CONTEÚDO DE EMERGÊNCIA</div>
+    <div class="emergency-grid">
+      <div class="emg"><h4>📖 Enquete stories</h4><p>"Qual desses manhwas você conhece?" — 4 capas como opções</p></div>
+      <div class="emg"><h4>📱 Reposta Reel antigo</h4><p>Compartilha nos Stories com "quem não viu ainda ⤴"</p></div>
+      <div class="emg"><h4>📸 Foto simples</h4><p>O que tá lendo/jogando agora. Sem texto. Só você e o produto.</p></div>
+      <div class="emg"><h4>🎮 Bastidor</h4><p>Mostra o CapCut aberto com próximo vídeo sendo editado</p></div>
+      <div class="emg"><h4>🗳 Caixinha</h4><p>"Me indica um manhwa" — o público te dá conteúdo de graça</p></div>
+      <div class="emg"><h4>🎬 Reação rápida</h4><p>Qualquer trailer/notícia geek de hoje. Story de reação em 30s.</p></div>
+    </div>
+  </div>
+
+  <!-- QUOTE DO DIA -->
+  <div class="card">
+    <div class="card-title"><div class="dot dot-green"></div>LEMBRA DISSO</div>
+    <div class="quote-box">
+      <div class="quote-text" id="quote-text">"Consistência bate qualidade isolada. 30 dias de presença vale mais que 1 vídeo viral."</div>
+      <div class="quote-author">— ARWEN HQ · SPRINT 10K</div>
+    </div>
+    <button onclick="nextQuote()" style="margin-top:12px;width:100%;padding:8px;background:rgba(155,114,245,0.08);border:1px solid rgba(196,168,255,0.15);border-radius:8px;color:var(--lil);font-family:'Syne',sans-serif;font-size:12px;cursor:pointer">próxima frase →</button>
+  </div>
+
+</div>
+
+<div class="footer-note">arwen daily · by.arwenn · abre todo dia · clica pra salvar hábitos</div>
+
+<div class="toast" id="toast">✓ copiado!</div>
+
+<script>
+// CLOCK
+function updateClock(){
+  const n=new Date();
+  document.getElementById('clock').textContent=n.toLocaleTimeString('pt-BR');
+  const d=n.toLocaleDateString('pt-BR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  document.getElementById('date-str').textContent=d.toUpperCase();
+}
+setInterval(updateClock,1000);updateClock();
+
+// COUNTDOWN Blue Lock live-action BRASIL 10 set 2026 (corrigido — 07/08 era a estreia do Japão) e T3 out 2026
+function updateCountdowns(){
+  const now=new Date();
+  const bl=new Date('2026-09-10T00:00:00');
+  const t3=new Date('2026-10-01T00:00:00');
+  const diffBL=bl-now;
+  const dBL=Math.max(0,Math.floor(diffBL/86400000));
+  const hBL=Math.max(0,Math.floor((diffBL%86400000)/3600000));
+  document.getElementById('cd-bluelock-d').textContent=dBL;
+  document.getElementById('cd-bluelock-h').textContent=hBL+'h';
+  const diffT3=t3-now;
+  const dT3=Math.max(0,Math.floor(diffT3/86400000));
+  document.getElementById('cd-t3-d').textContent=dT3;
+}
+setInterval(updateCountdowns,60000);updateCountdowns();
+
+// HABITS — persistência em memória (sem localStorage)
+const habitState = {};
+function tog(el, key) {
+  el.classList.toggle('done');
+  const box = el.querySelector('.hbox');
+  box.textContent = el.classList.contains('done') ? '✓' : '';
+  habitState[key] = el.classList.contains('done');
+}
+
+// TIMELINE
+function togTl(el){el.classList.toggle('done-t')}
+
+// METRICS
+const metricsState = {};
+function saveMetrics(){
+  const ids=['seg','views','reels','lives','collabs','emails'];
+  ids.forEach(id=>{metricsState[id]=document.getElementById(id).value});
+  updateBars();
+}
+function updateBars(){
+  const seg=parseInt(document.getElementById('seg').value)||1200;
+  const reels=parseInt(document.getElementById('reels').value)||0;
+  const segPct=Math.min(100,Math.round((seg/10000)*100));
+  const reelsPct=Math.min(100,Math.round((reels/10)*100));
+  document.getElementById('bar-seg').style.width=segPct+'%';
+  document.getElementById('pct-seg').textContent=segPct+'%';
+  document.getElementById('bar-reels').style.width=reelsPct+'%';
+  document.getElementById('pct-reels').textContent=reelsPct+'%';
+}
+
+// COPY HOOK
+function copyHook(el){
+  const txt=el.childNodes[1].textContent.trim();
+  navigator.clipboard.writeText(txt).catch(()=>{});
+  showToast();
+}
+
+// COPY HASHTAG
+function copyHt(el){
+  const txt=el.querySelector('.ht-set-text').textContent.trim();
+  navigator.clipboard.writeText(txt).catch(()=>{});
+  el.style.borderColor='var(--green)';
+  setTimeout(()=>el.style.borderColor='',1500);
+  showToast();
+}
+
+function showToast(){
+  const t=document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2000);
+}
+
+// QUOTES
+const quotes=[
+  '"Consistência bate qualidade isolada. 30 dias de presença vale mais que 1 vídeo viral."',
+  '"O save é a métrica que mais pesa no algoritmo. Cria conteúdo que as pessoas vão querer guardar."',
+  '"Sua comunidade é pequena mas engajada de verdade — isso vale mais do que 100k passivos."',
+  '"Poste na onda, não depois dela. Blue Lock em agosto: quem chega primeiro ganha."',
+  '"Um collab por semana. Um email por dia. Consistência nos dois é o que vai chegar no 10k."',
+  '"Nunca suma por mais de 5 dias. Mesmo que seja só um story. Presença é consistência."',
+  '"Responde os comentários nas primeiras 2h. Cada resposta empurra o post pro feed de mais gente."',
+  '"Dev de dia, geek permanente. Essa dupla identidade é o que te diferencia de qualquer outra creator."',
+  '"Shares > likes > saves > comments. Cria conteúdo que as pessoas mandam pra amiga."',
+  '"Hot take de sexta. Manhwa de segunda. O algoritmo ama previsibilidade — você dá pra ele."',
+];
+let qi=0;
+function nextQuote(){qi=(qi+1)%quotes.length;document.getElementById('quote-text').textContent=quotes[qi]}
+</script>
+</body>
+</html>

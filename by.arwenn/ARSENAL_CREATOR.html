@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arsenal Creator — Arwen</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07050f;--bg2:#0d0a1a;--bg3:#120f22;--lil:#c4a8ff;--lil2:#9b72f5;--pink:#ff3fa4;--cyan:#00ffe1;--gold:#ffd166;--green:#00ff88;--red:#ff4060;--cream:#f0eaff;--muted:#6b5f8a;--text:#c4b8e0;--border:rgba(255,255,255,0.06)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Syne',sans-serif;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 80% 50% at 20% 0%,rgba(155,114,245,0.06),transparent);pointer-events:none;z-index:0}
+.hero{max-width:1000px;margin:0 auto;padding:40px 20px 20px;position:relative;z-index:1;text-align:center}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,8vw,72px);letter-spacing:2px;line-height:1}
+.hero h1 span{background:linear-gradient(90deg,var(--pink),var(--lil),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:13px;color:var(--muted);margin-top:8px}
+.nav{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;max-width:1000px;margin:16px auto;padding:0 20px;position:relative;z-index:1}
+.nav-btn{background:transparent;border:1px solid rgba(255,255,255,0.07);color:var(--muted);font-family:'Syne',sans-serif;font-size:11px;font-weight:600;padding:6px 14px;border-radius:4px;cursor:pointer;transition:all 0.15s}
+.nav-btn:hover,.nav-btn.on{background:var(--lil2);border-color:var(--lil2);color:#fff}
+.wrap{max-width:1000px;margin:0 auto;padding:16px 20px 80px;position:relative;z-index:1}
+.sec{display:none;animation:si 0.2s ease both}
+.sec.on{display:block}
+@keyframes si{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.sh{margin-bottom:16px;margin-top:32px}
+.sh:first-child{margin-top:0}
+.sh-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,3vw,34px);letter-spacing:1px;color:var(--cream);line-height:1}
+.sh-title em{background:linear-gradient(90deg,var(--pink),var(--lil));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal}
+.call{border-radius:10px;padding:12px 16px;font-size:13px;line-height:1.7;margin:10px 0}
+.c-lil{background:rgba(196,168,255,0.07);border:1px solid rgba(196,168,255,0.2);color:#e0d5ff}
+.c-lil strong{color:var(--lil)}
+.c-pink{background:rgba(255,63,164,0.07);border:1px solid rgba(255,63,164,0.2);color:#ffd5ef}
+.c-pink strong{color:var(--pink)}
+.c-gold{background:rgba(255,209,102,0.07);border:1px solid rgba(255,209,102,0.2);color:#fff3c0}
+.c-gold strong{color:var(--gold)}
+.c-green{background:rgba(0,255,136,0.06);border:1px solid rgba(0,255,136,0.18);color:#c0fff0}
+.c-green strong{color:var(--green)}
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;padding:20px 22px;margin-bottom:12px;transition:border-color 0.2s}
+.card:hover{border-color:rgba(196,168,255,0.12)}
+.card-h{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:0.5px;color:var(--cream);margin-bottom:12px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:600px){.g2{grid-template-columns:1fr}}
+.mini{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:16px}
+.mini h4{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--lil);text-transform:uppercase;margin-bottom:8px}
+.mini p{font-size:12px;color:var(--muted);line-height:1.65}
+.mini p strong{color:var(--text)}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl th{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;color:var(--lil);text-transform:uppercase;padding:10px 12px;text-align:left;border-bottom:1px solid rgba(255,255,255,0.07)}
+.tbl td{padding:9px 12px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,0.03);vertical-align:top;line-height:1.55}
+.tbl td:first-child{color:var(--text);font-weight:600}
+.tbl tr:last-child td{border-bottom:none}
+/* CAPTION CARDS */
+.caption-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:600px){.caption-grid{grid-template-columns:1fr}}
+.cap-card{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:14px;position:relative;cursor:pointer;transition:all 0.2s}
+.cap-card:hover{border-color:rgba(196,168,255,0.25);background:rgba(155,114,245,0.06)}
+.cap-num{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--pink);line-height:1;margin-bottom:4px}
+.cap-title{font-size:12px;color:var(--cream);font-weight:700;margin-bottom:6px}
+.cap-text{font-size:11px;color:var(--muted);line-height:1.6;white-space:pre-wrap}
+.cap-ht{font-size:10px;color:var(--lil2);margin-top:6px;line-height:1.5}
+.cap-copy{position:absolute;top:10px;right:10px;font-size:9px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:1px;background:rgba(255,255,255,0.05);padding:3px 8px;border-radius:3px}
+.cap-card:hover .cap-copy{color:var(--cyan)}
+/* CREATOR TARGETS */
+.creator-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:8px;display:flex;gap:14px;align-items:flex-start}
+.creator-avatar{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;border:2px solid rgba(196,168,255,0.2)}
+.creator-info h4{font-size:13px;color:var(--cream);font-weight:700}
+.creator-info p{font-size:11.5px;color:var(--muted);line-height:1.5;margin-top:3px}
+.creator-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:6px}
+.ctag{font-family:'JetBrains Mono',monospace;font-size:8px;padding:2px 6px;border-radius:2px}
+.ct-n{background:rgba(0,255,225,0.08);color:var(--cyan)}
+.ct-p{background:rgba(255,63,164,0.08);color:var(--pink)}
+.ct-b{background:rgba(196,168,255,0.08);color:var(--lil)}
+.dm-btn{margin-top:8px;padding:5px 12px;background:rgba(155,114,245,0.1);border:1px solid rgba(196,168,255,0.2);border-radius:6px;color:var(--lil);font-size:11px;cursor:pointer;font-family:'Syne',sans-serif;transition:all 0.15s}
+.dm-btn:hover{background:rgba(155,114,245,0.2)}
+/* REPURPOSE */
+.rp-flow{display:flex;flex-direction:column;gap:8px}
+.rp-row{display:flex;gap:12px;align-items:flex-start;padding:12px;background:var(--bg3);border-radius:10px}
+.rp-num{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--lil2);line-height:1;width:32px;flex-shrink:0;text-align:center}
+.rp-content h4{font-size:13px;color:var(--cream);font-weight:700;margin-bottom:3px}
+.rp-content p{font-size:12px;color:var(--muted);line-height:1.55}
+/* WAVE */
+.wave-week{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:10px}
+.wave-week-h{font-family:'Bebas Neue',sans-serif;font-size:15px;color:var(--cream);letter-spacing:1px;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.wave-tag{font-family:'JetBrains Mono',monospace;font-size:8px;padding:2px 8px;border-radius:2px}
+.wt-urg{background:rgba(255,64,96,0.15);color:var(--red)}
+.wt-ok{background:rgba(0,255,136,0.08);color:var(--green)}
+.wave-list{list-style:none;display:flex;flex-direction:column;gap:4px}
+.wave-list li{font-size:12px;color:var(--muted);line-height:1.5;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.03);display:flex;gap:8px}
+.wave-list li:last-child{border-bottom:none}
+.wave-list li strong{color:var(--text)}
+.wi{width:16px;flex-shrink:0;margin-top:1px}
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--green);color:#000;font-size:12px;font-weight:700;padding:10px 20px;border-radius:8px;opacity:0;transform:translateY(10px);transition:all 0.3s;pointer-events:none;z-index:999;font-family:'JetBrains Mono',monospace;letter-spacing:1px}
+.toast.show{opacity:1;transform:translateY(0)}
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>ARSENAL <span>CREATOR</span></h1>
+  <p>captions prontas · reaproveitamento · collab targets · blue lock wave · swipe files</p>
+</div>
+<div class="nav">
+  <button class="nav-btn on" onclick="show('captions',this)">📝 Captions Pack</button>
+  <button class="nav-btn" onclick="show('repurpose',this)">♻️ 1 Vídeo → 5+</button>
+  <button class="nav-btn" onclick="show('collab',this)">🤝 Collab Targets</button>
+  <button class="nav-btn" onclick="show('wave',this)">🔵 Blue Lock Wave</button>
+  <button class="nav-btn" onclick="show('swipe',this)">⚡ Swipe Files</button>
+</div>
+<div class="wrap">
+
+<!-- ══ CAPTIONS ══ -->
+<div id="captions" class="sec on">
+  <div class="sh"><div class="sh-title">CAPTIONS PRONTAS — <em>30 roteiros</em></div></div>
+  <div class="call c-lil"><strong>Como usar:</strong> clica na caption pra copiar. Personalize os campos em [colchetes]. Vai direto pro post.</div>
+  <div class="caption-grid">
+    <div class="cap-card" onclick="copyCap(this)"><span class="cap-copy">copiar</span><div class="cap-num">#01</div><div class="cap-title">NTE — o que me viciou</div><div class="cap-text">NTE virou meu vício mensal 🎮
+
+✦ visual cinema
+✦ combate satisfatório
+✦ história que não é pretexto
+
+dica pra começar bem: começa pelo NPC do mercado da capital.
+
+já jogou? comenta aqui que conversa rola.</div><div class="cap-ht">#nte #gamemobile #gamergirl #nextimeera #conteudogeek #criadoradeconteudo</div></div>
+
+    <div class="cap-card" onclick="copyCap(this)"><span class="cap-copy">copiar</span><div class="cap-num">#02</div><div class="cap-title">Quarta Asa > Hunger Games</div><div class="cap-text">sim eu sei o que falei e tô comprometida com a polêmica 🐉
+
+quarta asa > hunger games
+
+✦ violet é personagem mais complexa que katniss
+✦ mundo mais rico (dragões + magia + faculdade militar)
+✦ enemies to lovers >>>>>> triângulo amoroso
+
+discorda? comenta. vou defender até o fim.</div><div class="cap-ht">#booktok #quartaasa #fourthwing #rebeccayarros #livrosfisicos #booktoker</div></div>
+
+    <div class="cap-card" onclick="copyCap(this)"><span class="cap-copy">copiar</span><div class="cap-num">#03</div><div class="cap-title">Make Yor Forger</div><div class="cap-text">yor forger glow up 💋
+
+essa make tem menos atenção que merece. fiz com:
+✦ base contorno marcado
+✦ delineado smokey + sombra preta
+✦ batom vermelho clássico
+✦ blush rosado por CIMA do contorno (segredo!)
+
+qual personagem next?</div><div class="cap-ht">#charactermake #yorforger #spyxfamily #makegeek #cosplaymake #animecosmake</div></div>
+
+    <div class="cap-card" onclick="copyCap(this)"><span class="cap-copy">copiar</span><div class="cap-num">#04</div><div class="cap-title">Manhwas no Comick Key</div><div class="cap-text">3 manhwas pra começar HOJE no Comick Key 📚
+
+✦ [nome 1] — romance fantasia esperto
+✦ [nome 2] — protagonista que usa os clichês a favor dela
+✦ [nome 3] — slice of life elegante pra pausa
+
+comenta seu favorito que eu pego a dica.</div><div class="cap-ht">#manhwa #manhwabrasil #booktok #comickkey #criadoradeconteudo</div></div>
+
+    <div class="cap-card" onclick="copyCap(this)"><span class="cap-copy">copiar</span><div class="cap-num">#05</div><div class="cap-title">Reação a trailer de anime</div><div class="cap-text">ELES NÃO FIZERAM ISSO COM A GENTE 😭✨
+
+trailer de [anime] saiu e eu não tô bem:
+
+✦ paleta de cor mudou pro novo arco (lindo)
+✦ estúdio escolhido entrega consistente
+✦ estreia em [data]
+
+compartilha com quem precisa ver isso.</div><div class="cap-ht">#animenews #animebr #surtogeek #criadoradeconteudo #conteudoanime #anime2026</div></div>
+
+    <div class="cap-card" onclick="copyCap(this)"><span class="cap-copy">copiar</span><div class="cap-num">#06</div><div class="cap-title">Setup gamer da Arwen</div><div class="cap-text">setup completo da geek 🎮💜
+
+✦ canto dev: monitor, teclado mec, mouse vertical
+✦ estante geek: funkos + action figures + blind boxes
+✦ reading nook: livros + luminária + almofadinha
+✦ bancada de make: organizada por categoria
+
+qual canto te ganhou?</div><div class="cap-ht">#setupgamer #setupgirl #setupgeek #criadoradeconteudo #conteudogeek #lifestylegeek</div></div>
+
+    <div class="cap-card" onclick="copyCap(this)"><span class="cap-copy">copiar</span><div class="cap-num">#07</div><div class="cap-title">Mario Kart virada épica</div><div class="cap-text">mario kart é a única coisa que me faz pular do sofá 🏎️🍄
+
+essa virada:
+✦ tava em último na 3a volta
+✦ peguei a casca azul = 1º lugar
+✦ gritei alto na chegada
+
+alguém joga mk online? bora rachar.</div><div class="cap-ht">#mariokart #nintendo #nintendoswitch #gamergirl #conteudogeek #criadoradeconteudo</div></div>
+
+    <div class="cap-card" onclick="copyCap(this)"><span class="cap-copy">copiar</span><div class="cap-num">#08</div><div class="cap-title">Unboxing blind box</div><div class="cap-text">abrindo essa blind box da [coleção] e eu QUERIA o [personagem] 🤞
+
+✦ cada caixa = 1 personagem random
+✦ veio o [resultado]
+✦ valor: R$ X
+
+blind box é literalmente o cassino dos geeks.
+
+frustrante ou satisfatório?</div><div class="cap-ht">#blindbox #funko #popmart #unboxing #colecionavel #conteudogeek #criadoradeconteudo</div></div>
+
+    <div class="cap-card" onclick="copyCap(this)"><span class="cap-copy">copiar</span><div class="cap-num">#11</div><div class="cap-title">Rin Itoshi análise — Blue Lock</div><div class="cap-text">rin itoshi não é frio. ele é ferido. a diferença importa. 🔵
+
+blue lock acerta: ego não é arrogância — às vezes é armadura.
+
+tem uma cena no final da t2 que recontextualiza tudo que ele fez antes.
+
+qual personagem você acha mais complexo de blue lock?</div><div class="cap-ht">#bluelock #animebr #rintoshi #bluelockbrasil #conteudoanime #criadoradeconteudo</div></div>
+
+    <div class="cap-card" onclick="copyCap(this)"><span class="cap-copy">copiar</span><div class="cap-num">#12</div><div class="cap-title">Manhwa da Segunda (série)</div><div class="cap-text">manhwa da semana #[X] 📖
+
+✦ [nome 1] — [motivo em 1 frase]
+✦ [nome 2] — [motivo em 1 frase]
+✦ [nome 3] — [motivo em 1 frase]
+
+toda segunda tem manhwa novo aqui → salva esse pra não perder.
+
+qual o seu favorito agora?</div><div class="cap-ht">#manhwa #manhwadasegunda #booktok #comickkey #leituras #criadoradeconteudo</div></div>
+
+    <div class="cap-card" onclick="copyCap(this)"><span class="cap-copy">copiar</span><div class="cap-num">#13</div><div class="cap-title">HP releitura adulta</div><div class="cap-text">relei harry potter como adulta e não sou mais a mesma pessoa 🧙
+
+coisas que não percebia:
+✦ dumbledore manipula o harry desde criança
+✦ sirius dói mais — agora entendo o que é perder quem te vê
+✦ hermione fez TUDO. literalmente tudo.
+
+você releu? o que mudou pra você?</div><div class="cap-ht">#harrypotter #booktok #livrosfisicos #releitura #harrypotterbrasil #criadoradeconteudo</div></div>
+
+    <div class="cap-card" onclick="copyCap(this)"><span class="cap-copy">copiar</span><div class="cap-num">#15</div><div class="cap-title">Coisas sobre Funkos</div><div class="cap-text">se alguém tivesse me contado... 🎭
+
+verdades sobre colecionar funkos:
+✦ você nunca compra só um (é lei)
+✦ a caixa não pode ir fora (também lei)
+✦ alguns sculpts são feios e você compra assim mesmo
+✦ um dia você calcula o total e precisa sentar
+
+o que faltou na lista?</div><div class="cap-ht">#funko #funkopop #colecionavel #geek #verdadessobre #criadoradeconteudo #funkocollection</div></div>
+
+    <div class="cap-card" onclick="copyCap(this)"><span class="cap-copy">copiar</span><div class="cap-num">#16</div><div class="cap-title">Day in the life dev+creator</div><div class="cap-text">dev de 8h às 17h. creator das 17h às 22h. humana das 22h em diante. 💻✨
+
+✦ bug report antes do café (obrigada, produção)
+✦ vs code → capcut às 17h em ponto
+✦ gravação + edição + janta em paralelo
+✦ 22h: livro. reset. humana de novo.
+
+você também tem vida dupla? comenta como é.</div><div class="cap-ht">#dayinthelife #devlife #creatorlife #vidadupla #lifestyle #conteudogeek #criadoradeconteudo</div></div>
+
+    <div class="cap-card" onclick="copyCap(this)"><span class="cap-copy">copiar</span><div class="cap-num">#18</div><div class="cap-title">Haul Black Friday livros</div><div class="cap-text">a black friday dos livros chegou e sim, comprei mais do que devia 📦📚
+
+✦ [livro 1] — [motivo]
+✦ [livro 2] — [motivo]
+✦ [livro 3] — [motivo]
+
+comprei com a cabeça. vou ler com o coração.
+
+pilha de vergonha: [X] livros não lidos e crescendo.
+
+o que você comprou?</div><div class="cap-ht">#hauldlivros #blackfridaylivros #booktok #livrosfisicos #bookhaul #criadoradeconteudo</div></div>
+
+    <div class="cap-card" onclick="copyCap(this)"><span class="cap-copy">copiar</span><div class="cap-num">#27</div><div class="cap-title">1 capítulo por semana — manhwa</div><div class="cap-text">um. capítulo. por. semana. 📖
+
+o ciclo de sofrimento:
+domingo → 3 min de leitura → cliffhanger → 7 dias existindo com isso
+
+segunda: "acho que sei o que vai acontecer"
+quarta: "e se não for?"
+sábado: 8h da manhã e já fiz 3 teorias
+
+qual manhwa te faz isso?</div><div class="cap-ht">#manhwa #comickkey #booktok #sofrendomanhwa #manhwabr #criadoradeconteudo</div></div>
+
+    <div class="cap-card" onclick="copyCap(this)"><span class="cap-copy">copiar</span><div class="cap-num">#28</div><div class="cap-title">Make Isagi — Blue Lock</div><div class="cap-text">make inspirada no isagi yoichi antes do live-action de blue lock 🔵💄
+
+paleta do isagi: azul + preto + pele limpa
+
+✦ base hidratada (jovem e fresca)
+✦ sombra azul esfumaçada
+✦ delineado preto fino
+✦ gloss transparente
+
+não é cosplay — é a essência do personagem.
+
+qual personagem de blue lock faço next?</div><div class="cap-ht">#bluelock #charactermake #isagi #makegeek #animemake #criadoradeconteudo #bluelockbr</div></div>
+  </div>
+</div>
+
+<!-- ══ REPURPOSE ══ -->
+<div id="repurpose" class="sec">
+  <div class="sh"><div class="sh-title">1 VÍDEO → <em>5+ CONTEÚDOS</em></div></div>
+  <div class="call c-green"><strong>Regra de ouro:</strong> você não cria conteúdo do zero pra cada plataforma. Você grava UMA VEZ e distribui de 5 formas diferentes. Isso multiplica seu alcance sem multiplicar o seu trabalho.</div>
+
+  <div class="sh" style="margin-top:24px"><div class="sh-title">O Fluxo de <em>Reaproveitamento</em></div></div>
+  <div class="rp-flow">
+    <div class="rp-row"><div class="rp-num">1</div><div class="rp-content"><h4>🎬 REEL ORIGINAL (IG) — versão completa 30-60s</h4><p>O conteúdo principal. Grava com qualidade. Posta no Instagram com capa customizada e caption completa.</p></div></div>
+    <div class="rp-row"><div class="rp-num">2</div><div class="rp-content"><h4>🎵 TIKTOK — mesmo vídeo SEM watermark</h4><p>Salva sem watermark no CapCut → posta no TikTok. Caption ligeiramente diferente (mais informal, mais "tiktok"). Mesmo esforço, 2x o alcance.</p></div></div>
+    <div class="rp-row"><div class="rp-num">3</div><div class="rp-content"><h4>📺 YOUTUBE SHORT — corte de 15-30s do melhor momento</h4><p>Pega o gancho ou o ponto mais impactante do Reel. Exporta como Short. Linka pro Reel completo nos comentários. Alimenta o canal sem esforço extra.</p></div></div>
+    <div class="rp-row"><div class="rp-num">4</div><div class="rp-content"><h4>📸 STORY — compartilha o Reel + enquete</h4><p>Posta o Reel nos Stories com texto "novo aqui ⤴️". Adiciona uma enquete ou caixinha relacionada ao tema do vídeo pra gerar engajamento extra.</p></div></div>
+    <div class="rp-row"><div class="rp-num">5</div><div class="rp-content"><h4>📖 CARROSSEL — transforma o conteúdo em slides</h4><p>Se o Reel é um ranking ou lista → vira carrossel. "3 manhwas" → 4 slides. "Tier list de games" → 6 slides. Carrossel tem vida útil maior que Reel.</p></div></div>
+    <div class="rp-row"><div class="rp-num">+</div><div class="rp-content"><h4>⚡ BÔNUS — reposta em 30 dias</h4><p>Todo Reel que performou bem: reposta nos Stories daqui a 30 dias com "quem não viu ainda". Alcança quem te seguiu depois. Custo: 30 segundos.</p></div></div>
+  </div>
+
+  <div class="sh" style="margin-top:28px"><div class="sh-title">Por Formato — <em>o que reutilizar</em></div></div>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Você criou</th><th>Também vira</th><th>Em quanto tempo</th></tr>
+      <tr><td>Reel de make (GRWM)</td><td>Short YT · TikTok · Story com enquete "qual personagem next?" · Carrossel passo a passo</td><td>+20 min</td></tr>
+      <tr><td>Tier list de games</td><td>TikTok · Carrossel (cada tier = slide) · Stories com votação</td><td>+15 min</td></tr>
+      <tr><td>Review de manhwa</td><td>Short YT · TikTok · Story com caixinha "me indica um"</td><td>+10 min</td></tr>
+      <tr><td>Unboxing blind box</td><td>TikTok · Short YT (momento da revelação) · Story "voltando em breve com mais"</td><td>+15 min</td></tr>
+      <tr><td>Hot take de livro</td><td>TikTok · Story com enquete "concorda?" · Thread no X/Twitter</td><td>+10 min</td></tr>
+      <tr><td>Day in the life</td><td>TikTok · Short YT (momento mais engraçado) · Story série "meu dia em 4 fotos"</td><td>+15 min</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ══ COLLAB TARGETS ══ -->
+<div id="collab" class="sec">
+  <div class="sh"><div class="sh-title">COLLAB TARGETS — <em>quem DM essa semana</em></div></div>
+  <div class="call c-pink"><strong>Como funciona:</strong> procura essas contas no Instagram. Antes de mandar DM, interage 2-3 vezes nos posts delas (comenta de verdade). Aí manda a DM. Converte muito mais.</div>
+  <div class="call c-lil" style="margin-top:-4px"><strong>DM Script:</strong> "Oi [nome]! 💜 Sigo seu conteúdo e vi que a gente tem público parecido — booktok/geek/games. Queria propor um story shoutout mútuo essa semana ou um Reel juntas. Topa? Meu perfil é @by.arwenn, [X]k seguidores, nicho geek/make/livros."</div>
+
+  <div class="sh" style="margin-top:20px"><div class="sh-title">📚 Booktok & <em>Literatura Geek</em></div></div>
+  <div class="creator-card"><div class="creator-avatar" style="background:rgba(196,168,255,0.1)">📚</div><div class="creator-info"><h4>Contas de BookTok BR — 800-5k seguidores</h4><p>Procura no Instagram: <strong>#booktokbrasil #booktokbr #leiturasfantasy #quartaasabr</strong><br>Perfis que postam sobre fantasy, romance, YA, listas de livros. Público idêntico ao seu.</p><div class="creator-tags"><span class="ctag ct-n">booktok</span><span class="ctag ct-b">fantasy</span><span class="ctag ct-p">romance</span></div><button class="dm-btn" onclick="alert('Procura no IG: busca #booktokbrasil → filtra por contas → segue quem tem 800-5k')">como encontrar</button></div></div>
+
+  <div class="creator-card"><div class="creator-avatar" style="background:rgba(255,63,164,0.1)">🎮</div><div class="creator-info"><h4>Game Girls BR — 500-3k seguidores</h4><p>Procura: <strong>#gamerbrasil #gamergirl #gamesgirlbr</strong><br>Creators que postam sobre games mobile, Nintendo. Conteúdo sobrepõe 80% com o seu.</p><div class="creator-tags"><span class="ctag ct-n">games</span><span class="ctag ct-n">mobile</span><span class="ctag ct-n">nintendo</span></div><button class="dm-btn" onclick="alert('Busca no IG: #gamergirl filtrado por Brasil → conta de 500-3k → engaja 2x antes do DM')">como encontrar</button></div></div>
+
+  <div class="creator-card"><div class="creator-avatar" style="background:rgba(0,255,225,0.08)">📺</div><div class="creator-info"><h4>Anime Girls BR — foco em Blue Lock</h4><p>Procura: <strong>#bluelockbrasil #animegirl #animebr</strong><br>Com o live-action em agosto, collab de Blue Lock agora vai bombar nos dois perfis.</p><div class="creator-tags"><span class="ctag ct-p">bluelock</span><span class="ctag ct-p">anime</span><span class="ctag ct-b">fandom</span></div><button class="dm-btn" onclick="alert('Agora: busca #bluelockbr no IG → contas de 500-5k → elas precisam de collab pra aproveitar o hype')">como encontrar</button></div></div>
+
+  <div class="creator-card"><div class="creator-avatar" style="background:rgba(255,209,102,0.08)">💄</div><div class="creator-info"><h4>Make Geek / Character Make</h4><p>Procura: <strong>#makegeek #charactermake #cosplaymake</strong><br>Creators de make que tenham nicho geek. Colaboração perfeita: ela faz a make, você indica o personagem.</p><div class="creator-tags"><span class="ctag ct-p">make</span><span class="ctag ct-b">geek</span><span class="ctag ct-n">character</span></div><button class="dm-btn" onclick="alert('Busca #charactermake no IG → filtra por conta BR 1-5k → o nicho é pequeno, todos se conhecem')">como encontrar</button></div></div>
+
+  <div class="creator-card"><div class="creator-avatar" style="background:rgba(155,114,245,0.1)">📖</div><div class="creator-info"><h4>Manhwa & Webtoon BR</h4><p>Procura: <strong>#manhwabrasil #manhwabr #webtoonbr</strong><br>Nicho pequeno no Brasil = todo collab tem mais impacto. Suas indicações da série "Manhwa da Segunda" combinam perfeitamente.</p><div class="creator-tags"><span class="ctag ct-b">manhwa</span><span class="ctag ct-n">webtoon</span><span class="ctag ct-b">comick</span></div><button class="dm-btn" onclick="alert('Busca #manhwabrasil → contas 200-2k → nicho pequeno: qualquer collab tem impacto grande')">como encontrar</button></div></div>
+
+  <div class="sh" style="margin-top:24px"><div class="sh-title">Calendário de <em>Collab</em></div></div>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Semana</th><th>Tipo de collab</th><th>Quem abordar</th><th>Formato</th></tr>
+      <tr><td>Sem 1 (9-15/jun)</td><td>Story shoutout mútuo</td><td>BookTok BR (mais fácil pra começar)</td><td>Story marcando uma à outra + menção</td></tr>
+      <tr><td>Sem 2 (16-22/jun)</td><td>Reel conjunto</td><td>Game Girl BR</td><td>"qual game recomendaria pra quem não joga?" — 2 perspectivas</td></tr>
+      <tr><td>Sem 3 (23-29/jun)</td><td>Story shoutout mútuo</td><td>Make Geek BR</td><td>Ela indica sua character make, você indica a make dela</td></tr>
+      <tr><td>Sem 4+ (jul)</td><td>Blue Lock collab</td><td>Anime Girl BR</td><td>Conteúdo conjunto sobre o live-action (agosto tá chegando)</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ══ BLUE LOCK WAVE ══ -->
+<div id="wave" class="sec">
+  <div class="sh"><div class="sh-title">🔵 BLUE LOCK WAVE — <em>plano de agosto</em></div></div>
+  <div class="call c-red"><strong>7 de agosto = live-action nos cinemas. Outubro = temporada 3.</strong> Essa é a maior janela de 2026. Fandoms de anime são os públicos que mais compartilham conteúdo na internet. Um Reel bom sobre Blue Lock nessa janela pode pegar 50-100k views.</div>
+
+  <div class="wave-week">
+    <div class="wave-week-h">AGORA — JUNHO <span class="wave-tag wt-ok">COMEÇAR JÁ</span></div>
+    <ul class="wave-list">
+      <li><span class="wi">🎬</span><div><strong>Reel:</strong> "Rin Itoshi é o personagem mais complexo de Blue Lock — análise"</div></li>
+      <li><span class="wi">🎬</span><div><strong>Reel:</strong> "fui assistir Blue Lock por causa do hype e 47 episódios depois tô aqui"</div></li>
+      <li><span class="wi">💄</span><div><strong>Reel:</strong> Character make do Rin Itoshi — cruza os fandoms de make + anime</div></li>
+      <li><span class="wi">📊</span><div><strong>Carrossel:</strong> "tier list dos personagens de Blue Lock — minha lista definitiva"</div></li>
+    </ul>
+  </div>
+
+  <div class="wave-week">
+    <div class="wave-week-h">JULHO — HYPE CRESCENDO <span class="wave-tag wt-ok">ACELERAR</span></div>
+    <ul class="wave-list">
+      <li><span class="wi">🎬</span><div><strong>Reel:</strong> "Isagi Yoichi — por que ele é o protagonista mais único do esporte anime"</div></li>
+      <li><span class="wi">💄</span><div><strong>Reel:</strong> Character make do Isagi (azul esfumaçado + base clean)</div></li>
+      <li><span class="wi">🎬</span><div><strong>Reel:</strong> "minha expectativa pro live-action de Blue Lock — personagem por personagem"</div></li>
+      <li><span class="wi">📊</span><div><strong>Carrossel:</strong> "o que esperar do arco Neo Egoist League (temporada 3)"</div></li>
+      <li><span class="wi">🎬</span><div><strong>Reel:</strong> "elenco do live-action de Blue Lock: aprovado ou reprovado?"</div></li>
+      <li><span class="wi">📱</span><div><strong>Story diário:</strong> countdown "X dias pro live-action de Blue Lock 🔵"</div></li>
+    </ul>
+  </div>
+
+  <div class="wave-week" style="border-color:rgba(255,64,96,0.3)">
+    <div class="wave-week-h">1-6 AGOSTO — SEMANA DO LANÇAMENTO <span class="wave-tag wt-urg">🔴 URGENTE</span></div>
+    <ul class="wave-list">
+      <li><span class="wi">📱</span><div><strong>Stories diários:</strong> countdown animado + hype + bastidores</div></li>
+      <li><span class="wi">🎬</span><div><strong>Reel (3 ago):</strong> "minha expectativa FINAL pro live-action" — com teoria/análise</div></li>
+      <li><span class="wi">🎬</span><div><strong>Reel (5 ago):</strong> "se eu fosse o diretor do live-action de Blue Lock, faria assim"</div></li>
+      <li><span class="wi">📺</span><div><strong>Live (6 ago, noite):</strong> "véspera do live-action — assistindo a T2 com vocês"</div></li>
+    </ul>
+  </div>
+
+  <div class="wave-week" style="border-color:rgba(255,64,96,0.4);background:rgba(255,64,96,0.03)">
+    <div class="wave-week-h">7 AGOSTO — DIA DO LANÇAMENTO 🔴 <span class="wave-tag wt-urg">MAIS IMPORTANTE DO ANO</span></div>
+    <ul class="wave-list">
+      <li><span class="wi">📱</span><div><strong>Stories em tempo real</strong> — indo pro cinema / reação / saindo do cinema</div></li>
+      <li><span class="wi">📺</span><div><strong>LIVE obrigatória (noite)</strong> — reação ao live-action, 2h+ de duração</div></li>
+      <li><span class="wi">🎬</span><div><strong>Reel imediato</strong> — posta até 2h depois de assistir. Gancho: "ELES [acertaram / erraram] tudo"</div></li>
+    </ul>
+  </div>
+
+  <div class="wave-week">
+    <div class="wave-week-h">8-14 AGOSTO — PÓS LANÇAMENTO <span class="wave-tag wt-ok">CAPITALIZAR</span></div>
+    <ul class="wave-list">
+      <li><span class="wi">🎬</span><div><strong>Reel:</strong> "review honesta do live-action de Blue Lock — sem spoiler maior"</div></li>
+      <li><span class="wi">📊</span><div><strong>Carrossel:</strong> "tudo que acertaram e erraram no live-action (com spoilers)"</div></li>
+      <li><span class="wi">💄</span><div><strong>Reel:</strong> Character make baseada no ator principal do live-action</div></li>
+      <li><span class="wi">🎬</span><div><strong>Reel:</strong> "Isagi no live-action vs anime — análise de personagem"</div></li>
+    </ul>
+  </div>
+
+  <div class="wave-week">
+    <div class="wave-week-h">OUTUBRO — TEMPORADA 3 <span class="wave-tag wt-ok">SEGUNDA WAVE</span></div>
+    <ul class="wave-list">
+      <li><span class="wi">🎬</span><div><strong>Reel:</strong> "temporada 3 de Blue Lock — o que esperar do arco Neo Egoist League"</div></li>
+      <li><span class="wi">📺</span><div><strong>Live:</strong> assistindo o ep 1 da T3 com os seguidores</div></li>
+      <li><span class="wi">🎬</span><div><strong>Reel semanal:</strong> reação a cada episódio novo (enquanto durar o hype)</div></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ══ SWIPE FILES ══ -->
+<div id="swipe" class="sec">
+  <div class="sh"><div class="sh-title">SWIPE FILES — <em>copiar e usar</em></div></div>
+  <div class="call c-lil"><strong>Swipe files</strong> são referências prontas pra usar. Copia, adapta pro seu nicho, posta. Sem precisar criar do zero.</div>
+
+  <div class="sh" style="margin-top:20px"><div class="sh-title">CTAs que <em>funcionam</em></div></div>
+  <div class="g2">
+    <div class="mini"><h4>💾 Pra gerar SAVES</h4><p>"salva esse vídeo pra quando precisar"<br>"salva que você vai querer achar depois"<br>"esse é o tipo de post que você agradece por ter salvo"<br>"manda pra quem tá procurando [coisa]"</p></div>
+    <div class="mini"><h4>💬 Pra gerar COMMENTS</h4><p>"comenta o seu favorito"<br>"discorda? vou nos comentários"<br>"qual você escolheria?"<br>"já passou por isso? comenta"<br>"me indica nos comentários"</p></div>
+    <div class="mini"><h4>📤 Pra gerar SHARES</h4><p>"manda pra amiga geek que precisa ver"<br>"marca quem você conhece que faz isso"<br>"compartilha com quem tá esperando isso"<br>"isso é muito real, manda pra alguém"</p></div>
+    <div class="mini"><h4>👤 Pra gerar FOLLOWS</h4><p>"me segue pra mais [nicho]"<br>"se você é [tipo de pessoa], você vai curtir daqui"<br>"toda [dia da semana] tem [conteúdo] aqui"<br>"se salvou, segue pra não perder os próximos"</p></div>
+  </div>
+
+  <div class="sh" style="margin-top:24px"><div class="sh-title">Fórmulas de <em>Caption</em></div></div>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Fórmula</th><th>Exemplo adaptado</th></tr>
+      <tr><td>Declaração polêmica + argumento</td><td>"Quarta Asa é melhor que Hunger Games. Violet é mais complexa, o mundo é mais rico, o romance é melhor. Discorda? Comenta."</td></tr>
+      <tr><td>Confissão + humor</td><td>"Calculei quanto gastei em Funkos esse ano. Precisei sentar. Tô bem. (Não tô.)"</td></tr>
+      <tr><td>Lista de benefícios + CTA</td><td>"3 motivos pra baixar [game]: ✦ visual cinematográfico ✦ historia real ✦ é de graça. Link na bio."</td></tr>
+      <tr><td>Problema + solução + resultado</td><td>"Batom que rasca o lábio às 14h. Testei [produto]. 8 horas depois, ainda na cara. Recomendo."</td></tr>
+      <tr><td>Número + transformação</td><td>"47 episódios depois. Fui por causa do hype. Fiquei por causa do Rin Itoshi."</td></tr>
+      <tr><td>POV + identificação</td><td>"POV: domingo com manhwa, café e chuveirinho. Tá ótimo aqui."</td></tr>
+    </table>
+  </div>
+
+  <div class="sh" style="margin-top:24px"><div class="sh-title">Stories que <em>sempre engajam</em></div></div>
+  <div class="g2">
+    <div class="mini"><h4>🗳 Enquetes (fazem toda semana)</h4><p>"Mario Kart ou Luigi's Mansion?"<br>"Livro ou manhwa?"<br>"Make natural ou dark?"<br>"[game A] ou [game B]?"<br>"Quer ver character make de quem?"</p></div>
+    <div class="mini"><h4>📦 Caixinha de perguntas</h4><p>"Me indica um manhwa"<br>"Me pergunta sobre [nicho]"<br>"Qual game você quer que eu jogue?"<br>"Me desafia a fazer character make de quem"</p></div>
+    <div class="mini"><h4>⏱ Stories de contagem</h4><p>Countdown pra postagem nova<br>Countdown pro Blue Lock (7 ago)<br>"Daqui X dias tem [conteúdo]"<br>Barra de progresso de uma série</p></div>
+    <div class="mini"><h4>🔁 Reposts que funcionam</h4><p>Repostar Reel com "novo aqui ⤴"<br>Print de comentário engraçado/relevante<br>Resposta de caixinha com contexto<br>"Seguidores me indicaram esse manhwa — li em 1 dia"</p></div>
+  </div>
+
+  <div class="sh" style="margin-top:24px"><div class="sh-title">Hacks de <em>crescimento que poucas usam</em></div></div>
+  <div class="card">
+    <table class="tbl">
+      <tr><th>Hack</th><th>Como fazer</th><th>Resultado esperado</th></tr>
+      <tr><td>Comentário isca</td><td>Nos 5 min após postar: comenta em Reels de creators grandes do seu nicho</td><td>Público delas clica no seu perfil por curiosidade</td></tr>
+      <tr><td>Segundo pico do dia</td><td>Posta Reel às 11h + carrossel/story às 19h (dois momentos de pico)</td><td>Alcança 2 janelas diferentes de audiência no mesmo dia</td></tr>
+      <tr><td>Resposta elaborada</td><td>Responde 1 comentário por dia como um mini-post (3-5 linhas)</td><td>Quem lê os comentários te descobre e segue</td></tr>
+      <tr><td>Hashtag timing</td><td>Usa hashtags com posts das últimas 24h (não saturadas)</td><td>Aparece no topo da hashtag por mais tempo</td></tr>
+      <tr><td>Repost estratégico</td><td>30 dias após um Reel bom, reposta nos Stories com "quem não viu ainda"</td><td>Seguidores novos consomem conteúdo antigo, sobe as métricas</td></tr>
+      <tr><td>Capa magnética</td><td>Capa do Reel: rosto em close + texto Bebas Neue 80pt + cor vibrante</td><td>+25-40% de CTR no feed vs capa genérica</td></tr>
+    </table>
+  </div>
+</div>
+
+</div><!-- /wrap -->
+<div class="toast" id="toast">✓ copiado!</div>
+<script>
+function show(id,btn){
+  document.querySelectorAll('.sec').forEach(s=>s.classList.remove('on'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  btn.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function copyCap(el){
+  const txt=el.querySelector('.cap-text').textContent.trim()+'\n\n'+el.querySelector('.cap-ht').textContent.trim();
+  navigator.clipboard.writeText(txt).catch(()=>{});
+  showToast();
+}
+function showToast(){
+  const t=document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2000);
+}
+</script>
+</body>
+</html>
